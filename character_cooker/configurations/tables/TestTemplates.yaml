@@ -9,6 +9,8 @@ Resources:
           AttributeType: "S"
         - AttributeName: "username"
           AttributeType: "S"
+#        - AttributeName: "dateModified"
+#          AttributeType: "S"
       KeySchema:
         - AttributeName: "templateId"
           KeyType: "HASH"
@@ -23,11 +25,13 @@ Resources:
               KeyType: "RANGE"
           Projection:
             ProjectionType: "KEYS_ONLY"
-        - IndexName: "CostIndex"
-          KeySchema:
-            - AttributeName: "clothingType"
-              KeyType: "HASH"
-            - AttributeName: "cost"
-              KeyType: "RANGE"
-          Projection:
-            ProjectionType: "KEYS_ONLY"
+#        - IndexName: "UsernameDateIndex"
+#          KeySchema:
+#            - AttributeName: "username"
+#              KeyType: "HASH"
+#            - AttributeName: "dateModified"
+#              KeyType: "RANGE"
+#          Projection:
+#            ProjectionType: "INCLUDE"
+#            NonKeyAttributes:
+#              - "title"
