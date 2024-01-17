@@ -26,4 +26,8 @@ public class AccountDao {
     public void saveAccount(Account account) {
         this.dynamoDBMapper.save(account);
     }
+
+    public void deleteAccount(Account account) {
+        this.dynamoDBMapper.delete(account);
+    }
 }

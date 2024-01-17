@@ -5,7 +5,7 @@ import org.junit.platform.commons.util.StringUtils;
 import java.util.regex.Pattern;
 
 public class TestGeneratorServiceUtils {
-    private static final Pattern INVALID_CHARACTER_PATTERN = Pattern.compile("[\"\'\\\\]");
+    private static final Pattern INVALID_CHARACTER_PATTERN = Pattern.compile("[\"\'\\\\ ]");
 
     static final int PLAYLIST_ID_LENGTH = 5;
 
