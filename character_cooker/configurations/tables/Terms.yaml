@@ -5,8 +5,21 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "termId"
           AttributeType: "S"
+        - AttributeName: "templateId"
+          AttributeType: "S"
+        - AttributeName: "dateCreated"
+          AttributeType: "S"
       KeySchema:
         - AttributeName: "termId"
           KeyType: "HASH"
       TableName: "LBC_Terms"
       BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "templateIdDateIndex"
+          KeySchema:
+            - AttributeName: "templateId"
+              KeyType: "HASH"
+            - AttributeName: "dateCreated"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
