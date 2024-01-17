@@ -1,6 +1,7 @@
 package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
+import com.amazon.ata.testGenerator.service.exceptions.AccountNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
@@ -17,7 +18,7 @@ public class AccountDao {
         Account account = this.dynamoDBMapper.load(Account.class, username);
 
         if (account == null) {
-            throw new RuntimeException("{Username: " + username + "} Not fond");
+            throw new AccountNotFoundException("{Username: " + username + "} Not fond");
         }
 
         return account;

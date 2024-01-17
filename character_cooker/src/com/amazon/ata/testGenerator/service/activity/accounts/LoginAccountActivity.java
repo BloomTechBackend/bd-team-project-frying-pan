@@ -45,7 +45,7 @@ public class LoginAccountActivity implements RequestHandler<LoginAccountRequest,
         }
 
         return LoginAccountResult.builder()
-                .withLogMessage("Account deletion successful")
+                .withLogMessage("Account login successful")
                 .build();
     }
 }

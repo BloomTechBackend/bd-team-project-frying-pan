@@ -2,6 +2,7 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
+import com.amazon.ata.testGenerator.service.exceptions.AccountNotFoundException;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.DeleteAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.DeleteAccountResult;
@@ -37,8 +38,12 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
         }
 
         // Populate account primary key
-        Account account = new Account();
-        account.setUsername(request.getUsername());
+        Account account = accountDao.getAccount(request.getUsername());
+
+        // Check password
+        if (request.getPassword().equals(account.getPassword())) {
+            throw new InvalidAttributeValueException("Incorrect Password");
+        }
 
         accountDao.deleteAccount(account);
 
