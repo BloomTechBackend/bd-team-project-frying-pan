@@ -93,16 +93,6 @@ their saved tests or create a new one from the main menu.
 # 6. API
 
 ## 6.1. Public Models
-
-```
-// TestModel
-
-String id;
-String name;
-String username;
-List<String> characters;
-```
-
 ```
 // AccountModel
 
@@ -110,16 +100,99 @@ String username;
 String password;
 ```
 
+```
+// TemplateModel
 
+String templateId;
+String title;
+String username;
+String dateModifided;
+List<String> termIds;
+```
+```
+// TermModel
+
+String termId;
+String romanization;
+String symbol;
+```
+
+## 6.2.1 Create Account Endpoint
+* Accepts the `POST` request to `/Accounts`
+* Accepts data to create a new account with a provided username, password, password confirmation. 
+* Returns the username to signal a successful account creation
+
+For security reasons:
+* Validate the username is at least 5 characters long
+  * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
+* Validates the username does not contain invalid characters: `" ' \` and spaces
+  * If the username contains any invalid characters, then throw an InvalidAttributeValueException 
+* Validates the username does not match an existing accounts' username
+  * If the username matches any existing account's username, then throw an InvalidAttributeValueException 
+* Validate the password is at least 5 characters long
+  * If the password contains less then 5 characters, then throw an InvalidAttributeValueException
+* Validates the password does not contain invalid characters: `" ' \` and spaces
+  * If the password contains any invalid characters, then throw an InvalidAttributeValueException 
+* Validates the password confirms with the confirmation password
+  * If the password does not match the confirmation password, then throw an 
+  InvalidAttributeValueException
+
+## 6.2.2 Login Account Endpoint
+* Accepts the `POST` request to `/Accounts/::username`
+* Accepts a username and password and retrieves the account data to verify the login attempt
+* Returns the username to signal a successful login attempt
+  * If the username is not found, then throw an AccountNotFoundAcception 
+
+For security reasons: 
+* Validates the username
+  * If the username contains any invalid characters, then throw an InvalidAttributeValueException
+  * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
+* Validates the password 
+  * If the password contains any invalid characters, then throw an InvalidAttributeValueException 
+  * If the password contains less then 5 characters, then throw an InvalidAttributeValueException
+  * If the password does not match the saved password, then throw an 
+  InvalidAttributeValueException
+
+## 6.2.3 Delete Account Endpoint
+* Accepts the `DELETE` request to `/Accounts/::username`
+* Accepts a given username and password and delete the corresponding account (after verifying the account information) 
+* Returns username to signal a successful delete attempt
+
+For security reasons: 
+* Validates the username does not contain invalid characters: `" ' \` and spaces
+  * If the username contains any invalid characters, then throw an InvalidAttributeValueException 
+* Validates the password does not contain invalid characters: `" ' \` and spaces
+  * If the password contains any invalid characters, then throw an InvalidAttributeValueException 
+* Validates the password matches with the saved password
+  * If the password does not match the saved password, then throw an 
+  InvalidAttributeValueException
+
+## 6.3.1 Open TestTemplate Endpoint
+
+## 6.3.2 Create TestTemplate Endpoint
+
+## 6.3.3 Update TestTemplate Endpoint
+
+## 6.3.4 Delete TestTemplate Endpoint
+
+## 6.3.5 Get Template By Date Endpoint 
+
+## 6.3.6 Get Template By Title Endpoint
+
+## 6.4.1 Get Term Endpoint
+
+## 6.5.1 Create Custom Term Endpoint
+## 6.5.1 Update Term Endpoint
+## 6.5.1 Delete Term Endpoint
+## 6.5.1 AddTermToTest Endpoint
+## 6.5.1 RemoveTermFromTest Endpoint
+
+## 6.5.3 Delete Term from Template Endpoint
+
+## 6.6.1 Generate Test Doc Yay~
+
+# OLD
 ## 6.2. *Create Test Endpoint*
-
-*Describe the behavior of the first endpoint you will build into your service
-API. This should include what data it requires, what data it returns, and how it
-will handle any known failure cases. You should also include a sequence diagram
-showing how a user interaction goes from user to website to service to database,
-and back. This first endpoint can serve as a template for subsequent endpoints.
-(If there is a significant difference on a subsequent endpoint, review that with
-your team before building it!)*
 
 * Accepts `POST` requests to `/tests`
 * Accepts data to create a new test with a provided name, automatically enters username.
