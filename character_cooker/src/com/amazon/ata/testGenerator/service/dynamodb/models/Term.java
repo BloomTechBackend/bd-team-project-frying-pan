@@ -98,7 +98,13 @@ public class Term {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Term term = (Term) o;
-        return added == term.added && Objects.equals(termId, term.termId) && Objects.equals(romanization, term.romanization) && Objects.equals(symbol, term.symbol) && Objects.equals(templateId, term.templateId) && Objects.equals(definition, term.definition) && Objects.equals(dateCreated, term.dateCreated) && Objects.equals(username, term.username);
+        return added == term.added && Objects.equals(termId, term.termId)
+                && Objects.equals(romanization, term.romanization)
+                && Objects.equals(symbol, term.symbol)
+                && Objects.equals(templateId, term.templateId)
+                && Objects.equals(definition, term.definition)
+                && Objects.equals(dateCreated, term.dateCreated)
+                && Objects.equals(username, term.username);
     }
 
     @Override

@@ -29,11 +29,13 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
      *
      * It returns a success message of the completion
      *
-     * If the provided username or password has invalid characters, throws an
+     * If the provided username or password has invalid characters, then throws an
      * InvalidAttributeValueException
      *
-     * If the password and confirmation password do not match, throws an
+     * If the password and confirmation password do not match, then throws an
      * InvalidAttributeValueException
+     *
+     * If the username is already taken, then throw an InvalidAttributeValueException
      *
      * @param request The Lambda Function input
      * @param context The Lambda execution environment context object.
@@ -43,26 +45,39 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
     public CreateAccountResult handleRequest(final CreateAccountRequest request, Context context) {
         log.info("Received CreateAccountRequest {}", request);
 
-        // validate username
-        if(!TestGeneratorServiceUtils.isValidString(request.getUsername())) {
+        // Validate username
+        if(!TestGeneratorServiceUtils.isValidUsername(request.getUsername())) {
             throw new InvalidAttributeValueException("Invalid Username!");
         }
-
-        // validate password
-        if(!TestGeneratorServiceUtils.isValidString(request.getPassword())
-        || !request.getPassword().equals(request.getPasswordConfirm())) {
+        // Validate password
+        if(!TestGeneratorServiceUtils.isValidPassword(request.getPassword())) {
             throw new InvalidAttributeValueException("Invalid Password");
+        }
+        // Validate Unique Username
+        Account accountChecker = accountDao.getAccount(request.getUsername());
+        if (accountChecker != null) {
+            throw new InvalidAttributeValueException("Username: "
+                    + request.getUsername() + " already exists!");
+        }
+
+        // Confirm Password
+        if(!request.getPassword().equals(request.getPasswordConfirm())) {
+            throw new InvalidAttributeValueException("Passwords does not match!");
         }
 
         // Populate account object
-        Account account = new Account();
-        account.setUsername(request.getUsername());
-        account.setPassword(request.getPassword());
+        Account newAccount = new Account();
+        newAccount.setUsername(request.getUsername());
+        newAccount.setPassword(request.getPassword());
 
-        accountDao.saveAccount(account);
+        accountDao.saveAccount(newAccount);
 
-        return CreateAccountResult.builder()
-                .withLogMessage("Account creation successful")
+        String message = "Create Account successful";
+        log.info(message);
+        CreateAccountResult result = CreateAccountResult.builder()
+                .withLogMessage(message)
+                .withUsername(newAccount.getUsername())
                 .build();
+        return result;
     }
 }

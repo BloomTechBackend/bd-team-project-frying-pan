@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class LoginAccountResult {
     private String logMessage;
+    private String username;
 
     public LoginAccountResult(String logMessage) {
         this.logMessage = logMessage;
@@ -11,6 +12,7 @@ public class LoginAccountResult {
 
     public LoginAccountResult(Builder builder) {
         this.logMessage = builder.logMessage;
+        this.username = builder.username;
     }
 
     public String getLogMessage() {
@@ -19,6 +21,15 @@ public class LoginAccountResult {
 
     public LoginAccountResult setLogMessage(String logMessage) {
         this.logMessage = logMessage;
+        return this;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public LoginAccountResult setUsername(String username) {
+        this.username = username;
         return this;
     }
 
@@ -41,9 +52,15 @@ public class LoginAccountResult {
 
     public static final class Builder {
         private String logMessage;
+        private String username;
 
         public Builder withLogMessage(String logMessage) {
             this.logMessage = logMessage;
+            return this;
+        }
+
+        public Builder withUsername(String username) {
+            this.username = username;
             return this;
         }
 

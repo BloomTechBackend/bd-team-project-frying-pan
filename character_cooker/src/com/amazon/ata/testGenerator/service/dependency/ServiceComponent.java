@@ -22,11 +22,11 @@ public interface ServiceComponent {
     CreateAccountActivity provideCreateAccountActivity();
     DeleteAccountActivity provideDeleteAccountActivity();
     LoginAccountActivity provideLoginAccountActivity();
-
-    CreateTestTemplateActivity provideCreateTestTemplateActivity();
-    DeleteTestTemplateActivity provideDeleteTestTemplateActivity();
-    GetTestTemplateActivity provideGetTestTemplateActivity();
-    UpdateTestTemplateActivity provideUpdateTestTemplateActivity();
-
-    GenerateTestActivity provideGenerateTestActivity();
+//
+//    CreateTestTemplateActivity provideCreateTestTemplateActivity();
+//    DeleteTestTemplateActivity provideDeleteTestTemplateActivity();
+//    GetTestTemplateActivity provideGetTestTemplateActivity();
+//    UpdateTestTemplateActivity provideUpdateTestTemplateActivity();
+//
+//    GenerateTestActivity provideGenerateTestActivity();
 }

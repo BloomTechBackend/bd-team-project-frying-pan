@@ -26,26 +26,27 @@ public class LoginAccountActivity implements RequestHandler<LoginAccountRequest,
     public LoginAccountResult handleRequest(final LoginAccountRequest request, Context context) {
         log.info("Received LoginAccountRequest {}", request);
 
-        // validate username value
-        if(!TestGeneratorServiceUtils.isValidString(request.getUsername())) {
+        // validate username
+        if(!TestGeneratorServiceUtils.isValidUsername(request.getUsername())) {
             throw new InvalidAttributeValueException("Invalid Username!");
         }
 
-        // validate password value
-        if(!TestGeneratorServiceUtils.isValidString(request.getPassword())) {
+        // validate password format
+        if(!TestGeneratorServiceUtils.isValidPassword(request.getPassword())) {
             throw new InvalidAttributeValueException("Invalid Password");
         }
 
-        // Load Account
+        // Find Account
         Account account = accountDao.getAccount(request.getUsername());
 
         // Check password
-        if (request.getPassword().equals(account.getPassword())) {
+        if (!request.getPassword().equals(account.getPassword())) {
             throw new InvalidAttributeValueException("Incorrect Password");
         }
 
         return LoginAccountResult.builder()
                 .withLogMessage("Account login successful")
+                .withUsername(account.getUsername())
                 .build();
     }
 }

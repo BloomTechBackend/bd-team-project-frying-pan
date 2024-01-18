@@ -2,7 +2,6 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
-import com.amazon.ata.testGenerator.service.exceptions.AccountNotFoundException;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.DeleteAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.DeleteAccountResult;
@@ -28,12 +27,12 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
         log.info("Received DeleteAccountRequest {}", request);
 
         // validate username
-        if(!TestGeneratorServiceUtils.isValidString(request.getUsername())) {
+        if(!TestGeneratorServiceUtils.isValidUsername(request.getUsername())) {
             throw new InvalidAttributeValueException("Invalid Username!");
         }
 
         // validate password
-        if(!TestGeneratorServiceUtils.isValidString(request.getPassword())) {
+        if(!TestGeneratorServiceUtils.isValidUsername(request.getPassword())) {
             throw new InvalidAttributeValueException("Invalid Password");
         }
 
