@@ -2,9 +2,8 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
-import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeChangeException;
+import com.amazon.ata.testGenerator.service.dynamodb.models.Status;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
-import com.amazon.ata.testGenerator.service.exceptions.UsernameAlreadyExistsException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.CreateAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.CreateAccountResult;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,18 +34,18 @@ public class CreateAccountActivityTest {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
+        String expectedStatus = Status.LOGGED_OUT.toString();
 
         Account account = new Account();
         account.setUsername(expectedUsername);
         account.setPassword(expectedPassword);
+        account.setStatus(expectedStatus);
 
         CreateAccountRequest request = CreateAccountRequest.builder()
                 .withUsername(expectedUsername)
                 .withPassword(expectedPassword)
                 .withPasswordConfirm(expectedPassword)
                 .build();
-
-
 
         // When
         CreateAccountResult result = createAccountActivity.handleRequest(request, null);

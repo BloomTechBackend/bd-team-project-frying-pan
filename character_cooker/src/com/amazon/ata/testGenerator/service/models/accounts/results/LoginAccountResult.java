@@ -5,6 +5,7 @@ import java.util.Objects;
 public class LoginAccountResult {
     private String logMessage;
     private String username;
+    private String status;
 
     public LoginAccountResult(String logMessage) {
         this.logMessage = logMessage;
@@ -13,6 +14,7 @@ public class LoginAccountResult {
     public LoginAccountResult(Builder builder) {
         this.logMessage = builder.logMessage;
         this.username = builder.username;
+        this.status = builder.status;
     }
 
     public String getLogMessage() {
@@ -33,17 +35,26 @@ public class LoginAccountResult {
         return this;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public LoginAccountResult setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LoginAccountResult that = (LoginAccountResult) o;
-        return Objects.equals(logMessage, that.logMessage);
+        return Objects.equals(logMessage, that.logMessage) && Objects.equals(username, that.username) && Objects.equals(status, that.status);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(logMessage);
+        return Objects.hash(logMessage, username, status);
     }
 
     public static Builder builder() {
@@ -53,6 +64,8 @@ public class LoginAccountResult {
     public static final class Builder {
         private String logMessage;
         private String username;
+        private String status;
+
 
         public Builder withLogMessage(String logMessage) {
             this.logMessage = logMessage;
@@ -61,6 +74,11 @@ public class LoginAccountResult {
 
         public Builder withUsername(String username) {
             this.username = username;
+            return this;
+        }
+
+        public Builder withStatus(String status) {
+            this.status = status;
             return this;
         }
 

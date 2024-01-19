@@ -5,8 +5,10 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "LBC_Accounts")
 public class Account {
+
     private String username;
     private String password;
+    private String status;
 
     public Account() {}
 
@@ -28,16 +30,30 @@ public class Account {
         this.password = password;
     }
 
+    @DynamoDBAttribute(attributeName = "status")
+    public String getStatus() {
+        return status;
+    }
+
+    public Account setStatus(String userStatus) {
+        this.status = userStatus;
+        return this;
+    }
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Account that = (Account) o;
-        return Objects.equals(username, that.username) && Objects.equals(password, that.password);
+        Account account = (Account) o;
+        return Objects.equals(username, account.username)
+                && Objects.equals(password, account.password)
+                && Objects.equals(status, account.status);
     }
 
     @Override
     public int hashCode() {
-        return java.util.Objects.hash(username, password);
+        return Objects.hash(username, password, status);
     }
 }

@@ -2,6 +2,7 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
+import com.amazon.ata.testGenerator.service.dynamodb.models.Status;
 import com.amazon.ata.testGenerator.service.exceptions.AccountNotFoundException;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.LoginAccountRequest;
@@ -34,10 +35,12 @@ public class LoginAccountActivityTest {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
+        String expectedStatus = Status.LOGGED_IN.toString();
 
         Account expectedAccount = new Account();
         expectedAccount.setUsername(expectedUsername);
         expectedAccount.setPassword(expectedPassword);
+        expectedAccount.setStatus(expectedStatus);
 
         LoginAccountRequest request = LoginAccountRequest.builder()
                 .withUsername(expectedUsername)
@@ -51,8 +54,11 @@ public class LoginAccountActivityTest {
 
         // Then
         verify(accountDao).getAccount(expectedUsername);
+        verify(accountDao).saveAccount(expectedAccount);
 
         assertEquals(expectedUsername, result.getUsername());
+        assertEquals(expectedStatus, result.getStatus());
+
     }
 
     // Throw Exceptions tests

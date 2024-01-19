@@ -2,8 +2,8 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
+import com.amazon.ata.testGenerator.service.dynamodb.models.Status;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
-import com.amazon.ata.testGenerator.service.exceptions.UsernameAlreadyExistsException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.CreateAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.CreateAccountResult;
 import com.amazon.ata.testGenerator.service.util.TestGeneratorServiceUtils;
@@ -70,6 +70,7 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
         Account newAccount = new Account();
         newAccount.setUsername(request.getUsername());
         newAccount.setPassword(request.getPassword());
+        newAccount.setStatus(Status.LOGGED_OUT.toString());
 
         accountDao.saveAccount(newAccount);
 

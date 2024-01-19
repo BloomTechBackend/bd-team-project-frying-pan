@@ -2,6 +2,7 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
+import com.amazon.ata.testGenerator.service.dynamodb.models.Status;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.LoginAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.LoginAccountResult;
@@ -44,9 +45,14 @@ public class LoginAccountActivity implements RequestHandler<LoginAccountRequest,
             throw new InvalidAttributeValueException("Incorrect Password");
         }
 
+        // Change status
+        account.setStatus(Status.LOGGED_IN.toString());
+        accountDao.saveAccount(account);
+
         return LoginAccountResult.builder()
                 .withLogMessage("Account login successful")
                 .withUsername(account.getUsername())
+                .withStatus(account.getStatus())
                 .build();
     }
 }
