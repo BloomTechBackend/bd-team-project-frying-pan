@@ -1,0 +1,229 @@
+{
+  "LBC_Terms": [
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h075"},
+          "romanization": {"S": "shu"},
+          "symbol": {"S": "しゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h076"},
+          "romanization": {"S": "sho"},
+          "symbol": {"S": "しょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h077"},
+          "romanization": {"S": "cha"},
+          "symbol": {"S": "ちゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h078"},
+          "romanization": {"S": "chu"},
+          "symbol": {"S": "ちゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h079"},
+          "romanization": {"S": "cho"},
+          "symbol": {"S": "ちょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h080"},
+          "romanization": {"S": "nya"},
+          "symbol": {"S": "にゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h081"},
+          "romanization": {"S": "nyu"},
+          "symbol": {"S": "にゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h082"},
+          "romanization": {"S": "nyo"},
+          "symbol": {"S": "にょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h083"},
+          "romanization": {"S": "hya"},
+          "symbol": {"S": "ひゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h084"},
+          "romanization": {"S": "hyu"},
+          "symbol": {"S": "ひゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h085"},
+          "romanization": {"S": "hyo"},
+          "symbol": {"S": "ひょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h086"},
+          "romanization": {"S": "mya"},
+          "symbol": {"S": "みゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h087"},
+          "romanization": {"S": "myu"},
+          "symbol": {"S": "みゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h088"},
+          "romanization": {"S": "myo"},
+          "symbol": {"S": "みょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h089"},
+          "romanization": {"S": "rya"},
+          "symbol": {"S": "りゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h090"},
+          "romanization": {"S": "ryu"},
+          "symbol": {"S": "りゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h091"},
+          "romanization": {"S": "ryo"},
+          "symbol": {"S": "りょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h092"},
+          "romanization": {"S": "gya"},
+          "symbol": {"S": "ぎゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h093"},
+          "romanization": {"S": "gyu"},
+          "symbol": {"S": "ぎゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h094"},
+          "romanization": {"S": "gyo"},
+          "symbol": {"S": "ぎょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h095"},
+          "romanization": {"S": "ja"},
+          "symbol": {"S": "じゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h096"},
+          "romanization": {"S": "ju"},
+          "symbol": {"S": "じゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h097"},
+          "romanization": {"S": "jo"},
+          "symbol": {"S": "じょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h098"},
+          "romanization": {"S": "ja"},
+          "symbol": {"S": "ぢゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h099"},
+          "romanization": {"S": "ju"},
+          "symbol": {"S": "ぢゅ"}
+        }
+      }
+    }
+  ]
+}

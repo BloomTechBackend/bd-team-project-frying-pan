@@ -1,7 +1,6 @@
 package com.amazon.ata.testGenerator.service.dynamodb.models;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.*;
-
 import java.util.Objects;
 
 @DynamoDBTable(tableName = "LBC_Terms")
@@ -75,7 +74,7 @@ public class Term {
         this.definition = definition;
     }
 
-    @DynamoDBAttribute(attributeName = "username")
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames ="usernameDateIndex", attributeName = "username")
     public String getUsername() {
         return username;
     }
@@ -98,17 +97,18 @@ public class Term {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Term term = (Term) o;
-        return added == term.added && Objects.equals(termId, term.termId)
+        return added == term.added
+                && Objects.equals(termId, term.termId)
                 && Objects.equals(romanization, term.romanization)
                 && Objects.equals(symbol, term.symbol)
                 && Objects.equals(templateId, term.templateId)
-                && Objects.equals(definition, term.definition)
                 && Objects.equals(dateCreated, term.dateCreated)
+                && Objects.equals(definition, term.definition)
                 && Objects.equals(username, term.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(termId, romanization, symbol, templateId, definition, dateCreated, username, added);
+        return Objects.hash(termId, romanization, symbol, templateId, dateCreated, definition, username, added);
     }
 }

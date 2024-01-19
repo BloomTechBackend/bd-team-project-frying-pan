@@ -47,7 +47,9 @@ public class TermModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TermModel termModel = (TermModel) o;
-        return Objects.equals(termId, termModel.termId) && Objects.equals(romanization, termModel.romanization) && Objects.equals(symbol, termModel.symbol);
+        return Objects.equals(termId, termModel.termId)
+                && Objects.equals(romanization, termModel.romanization)
+                && Objects.equals(symbol, termModel.symbol);
     }
 
     @Override

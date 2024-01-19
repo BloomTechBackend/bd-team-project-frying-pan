@@ -11,7 +11,8 @@ public class TestTemplate {
     private String title;
     private String username;
     private String dateModified;
-    private List<String> termIdList;
+    private List<String> hiraganaIdList;
+    private List<String> katakanaIdList;
 
     public TestTemplate() {}
 
@@ -52,13 +53,24 @@ public class TestTemplate {
         this.dateModified = dateModified;
     }
 
-    @DynamoDBAttribute(attributeName = "termIdList")
-    public List<String> getTermIdList() {
-        return termIdList;
+    @DynamoDBAttribute(attributeName = "hiraganaIdList")
+    public java.util.List<String> getHiraganaIdList() {
+        return hiraganaIdList;
     }
 
-    public void setTermIdList(List<String> termIdList) {
-        this.termIdList = termIdList;
+    public TestTemplate setHiraganaIdList(java.util.List<String> hiraganaIdList) {
+        this.hiraganaIdList = hiraganaIdList;
+        return this;
+    }
+
+    @DynamoDBAttribute(attributeName = "katakanaIdList")
+    public java.util.List<String> getKatakanaIdList() {
+        return katakanaIdList;
+    }
+
+    public TestTemplate setKatakanaIdList(java.util.List<String> katakanaIdList) {
+        this.katakanaIdList = katakanaIdList;
+        return this;
     }
 
     @Override
@@ -66,11 +78,16 @@ public class TestTemplate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TestTemplate that = (TestTemplate) o;
-        return Objects.equals(templateId, that.templateId) && Objects.equals(title, that.title) && Objects.equals(username, that.username) && Objects.equals(dateModified, that.dateModified) && Objects.equals(termIdList, that.termIdList);
+        return Objects.equals(templateId, that.templateId)
+                && Objects.equals(title, that.title)
+                && Objects.equals(username, that.username)
+                && Objects.equals(dateModified, that.dateModified)
+                && Objects.equals(hiraganaIdList, that.hiraganaIdList)
+                && Objects.equals(katakanaIdList, that.katakanaIdList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(templateId, title, username, dateModified, termIdList);
+        return Objects.hash(templateId, title, username, dateModified, hiraganaIdList, katakanaIdList);
     }
 }

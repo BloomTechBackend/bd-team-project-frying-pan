@@ -1,0 +1,52 @@
+{
+  "LBC_Accounts": [
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "RedApple"},
+          "password": {"S": "Apple12345!"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "GreenApple"},
+          "password": {"S": "1234567890"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "Andre"},
+          "password": {"S": "!@#$%^&*()"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "Bryan"},
+          "password": {"S": "EASY_PASSWORD"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "Candy"},
+          "password": {"S": "ApplesAreReallySweet"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "ToBeDelete"},
+          "password": {"S": "123456"}
+        }
+      }
+    }
+  ]
+}

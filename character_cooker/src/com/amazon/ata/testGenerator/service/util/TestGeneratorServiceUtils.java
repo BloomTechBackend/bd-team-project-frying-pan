@@ -19,10 +19,10 @@ public class TestGeneratorServiceUtils {
     static final int PASSWORD_LENGTH = 5;
 
     static final int TEMPLATE_ID_LENGTH = 6;
-    static final int TERM_ID_LENGTH = 5;
+    static final int CUSTOM_TERM_ID_LENGTH = 5;
+    static final int TERM_ID_LENGTH = 4;
 
     private TestGeneratorServiceUtils() {}
-
 
     // Validate Inputs
     // NOTE: extra validations are checked in the needed service class
@@ -70,7 +70,7 @@ public class TestGeneratorServiceUtils {
         return RandomStringUtils.randomAlphanumeric(TEMPLATE_ID_LENGTH);
     }
 
-    public static String generateTermId() {
-        return RandomStringUtils.randomAlphanumeric(TERM_ID_LENGTH);
+    public static String generateCustomTermId() {
+        return RandomStringUtils.randomAlphanumeric(CUSTOM_TERM_ID_LENGTH);
     }
 }
