@@ -22,6 +22,7 @@ public interface ServiceComponent {
     CreateAccountActivity provideCreateAccountActivity();
     DeleteAccountActivity provideDeleteAccountActivity();
     LoginAccountActivity provideLoginAccountActivity();
+    LogOutAccountActivity provideLogOutAccountActivity();
 //
 //    CreateTestTemplateActivity provideCreateTestTemplateActivity();
 //    DeleteTestTemplateActivity provideDeleteTestTemplateActivity();

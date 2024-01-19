@@ -35,12 +35,10 @@ public class Account {
         return status;
     }
 
-    public Account setStatus(String userStatus) {
-        this.status = userStatus;
+    public Account setStatus(String status) {
+        this.status = status;
         return this;
     }
-
-
 
     @Override
     public boolean equals(Object o) {

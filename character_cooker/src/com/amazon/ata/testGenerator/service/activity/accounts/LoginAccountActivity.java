@@ -50,7 +50,7 @@ public class LoginAccountActivity implements RequestHandler<LoginAccountRequest,
         accountDao.saveAccount(account);
 
         return LoginAccountResult.builder()
-                .withLogMessage("Account login successful")
+                .withLogMessage("Account Login Successful!")
                 .withUsername(account.getUsername())
                 .withStatus(account.getStatus())
                 .build();
