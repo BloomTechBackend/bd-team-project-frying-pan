@@ -82,7 +82,7 @@ public class TestGeneratorServiceUtilsTest {
     public void GenerateId_returnsId() {
         // When
         String templateId = generateTemplateId();
-        String termId = generateTermId();
+        String termId = generateCustomTermId();
 
         // Then
         assertTrue(StringUtils.isAlphanumeric(templateId));

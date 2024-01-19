@@ -7,13 +7,13 @@ public class CreateAccountRequest {
     private String password;
     private String passwordConfirm;
 
+    public CreateAccountRequest() {
+    }
+
     public CreateAccountRequest(String username, String password, String passwordConfirm) {
         this.username = username;
         this.password = password;
         this.passwordConfirm = passwordConfirm;
-    }
-
-    public CreateAccountRequest() {
     }
 
     public CreateAccountRequest(Builder builder) {

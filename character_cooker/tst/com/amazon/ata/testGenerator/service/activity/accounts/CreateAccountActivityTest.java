@@ -4,6 +4,7 @@ import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeChangeException;
 import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
+import com.amazon.ata.testGenerator.service.exceptions.UsernameAlreadyExistsException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.CreateAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.CreateAccountResult;
 import org.junit.jupiter.api.BeforeEach;

@@ -22,6 +22,12 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
         this.accountDao = accountDao;
     }
 
+    /**
+     *
+     * @param request The Lambda Function input
+     * @param context The Lambda execution environment context object.
+     * @return DeleteAccountResult
+     */
     @Override
     public DeleteAccountResult handleRequest(final DeleteAccountRequest request, Context context) {
         log.info("Received DeleteAccountRequest {}", request);

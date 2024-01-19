@@ -1,7 +1,9 @@
 package com.amazon.ata.testGenerator.service.dependency;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
-import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import dagger.Module;
@@ -14,10 +16,11 @@ public class DaoModule {
     @Singleton
     @Provides
     DynamoDBMapper provideDynamoDBMapper() {
-        return new DynamoDBMapper(AmazonDynamoDBClientBuilder
-                .standard()
+        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(
+                        new BasicAWSCredentials("", "")))
                 .withRegion(Regions.US_WEST_2)
-                .build());
+                .build();
+        return new DynamoDBMapper(client);
     }
-
 }

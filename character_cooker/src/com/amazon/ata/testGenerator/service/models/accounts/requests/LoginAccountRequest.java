@@ -6,12 +6,12 @@ public class LoginAccountRequest {
     private String username;
     private String password;
 
+    public LoginAccountRequest() {
+    }
+
     public LoginAccountRequest(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public LoginAccountRequest() {
     }
 
     public LoginAccountRequest(Builder builder) {

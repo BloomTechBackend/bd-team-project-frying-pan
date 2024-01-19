@@ -3,6 +3,8 @@ package com.amazon.ata.testGenerator.service.util;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 /**
@@ -58,7 +60,7 @@ public class TestGeneratorServiceUtils {
         if (StringUtils.isBlank(title)) {
             return false;
         }
-        if (title.length() == 0) {
+        if (title.isEmpty()) {
             return false;
         }
         return !INVALID_TITLE_PATTERN.matcher(title).find();
@@ -72,5 +74,11 @@ public class TestGeneratorServiceUtils {
 
     public static String generateCustomTermId() {
         return RandomStringUtils.randomAlphanumeric(CUSTOM_TERM_ID_LENGTH);
+    }
+
+    public static String getDate() {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        return currentDateTime.format(formatter);
     }
 }

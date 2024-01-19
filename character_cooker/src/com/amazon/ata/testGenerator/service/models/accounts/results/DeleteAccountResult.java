@@ -1,9 +1,13 @@
 package com.amazon.ata.testGenerator.service.models.accounts.results;
 
+import java.util.List;
 import java.util.Objects;
 
 public class DeleteAccountResult {
     private String logMessage;
+    private String username;
+    private List<String> templatesDeleted;
+    private List<String> termsDeleted;
 
     public DeleteAccountResult(String logMessage) {
         this.logMessage = logMessage;

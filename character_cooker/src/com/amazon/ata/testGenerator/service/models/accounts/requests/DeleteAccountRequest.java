@@ -6,12 +6,12 @@ public class DeleteAccountRequest {
     private String username;
     private String password;
 
+    public DeleteAccountRequest() {
+    }
+
     public DeleteAccountRequest(String username, String password) {
         this.username = username;
         this.password = password;
-    }
-
-    public DeleteAccountRequest() {
     }
 
     public DeleteAccountRequest(Builder builder) {
