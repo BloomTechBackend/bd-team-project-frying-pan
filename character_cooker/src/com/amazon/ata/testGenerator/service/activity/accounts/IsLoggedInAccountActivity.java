@@ -22,10 +22,9 @@ public class IsLoggedInAccountActivity implements RequestHandler<IsLoggedInAccou
 
     @Override
     public IsLoggedInAccountResult handleRequest(IsLoggedInAccountRequest request, Context context) {
+        log.info("Received IsLoggedInAccountRequest {}", request);
 
         Account account = accountDao.getAccount(request.getUsername());
-
-
 
         return IsLoggedInAccountResult.builder()
                 .withUsername(account.getUsername())

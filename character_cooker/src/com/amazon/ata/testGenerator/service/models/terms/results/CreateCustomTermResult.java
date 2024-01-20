@@ -27,7 +27,7 @@ public class CreateCustomTermResult {
     public static final class Builder {
         private TermModel term;
 
-        public Builder setTerm(TermModel term) {
+        public Builder withTerm(TermModel term) {
             this.term = term;
             return this;
         }

@@ -26,6 +26,7 @@ public class GetTestTemplateActivity implements RequestHandler <GetTestTemplateR
 
     @Override
     public GetTestTemplateResult handleRequest(GetTestTemplateRequest request, Context context) {
+        log.info("Received GetTestTemplateRequest {}", request);
 
         TestTemplate template = testTemplateDao.getTemplate(request.getTemplateId());
 

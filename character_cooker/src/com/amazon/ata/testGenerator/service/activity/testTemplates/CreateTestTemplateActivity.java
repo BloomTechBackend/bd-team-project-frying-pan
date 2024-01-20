@@ -28,6 +28,7 @@ public class CreateTestTemplateActivity implements RequestHandler<CreateTestTemp
 
     @Override
     public CreateTestTemplateResult handleRequest(CreateTestTemplateRequest request, Context context) {
+        log.info("Received CreateTestTemplateRequest {}", request);
 
         // Create Template
         TestTemplate template = new TestTemplate();

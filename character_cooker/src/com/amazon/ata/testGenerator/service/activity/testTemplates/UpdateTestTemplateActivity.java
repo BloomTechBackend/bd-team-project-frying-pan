@@ -27,6 +27,7 @@ public class UpdateTestTemplateActivity implements RequestHandler<UpdateTestTemp
 
     @Override
     public UpdateTestTemplateResult handleRequest(UpdateTestTemplateRequest request, Context context) {
+        log.info("Received UpdateTestTemplateRequest {}", request);
 
         // Create Template
         TestTemplate template = testTemplateDao.getTemplate(request.getTemplateId());

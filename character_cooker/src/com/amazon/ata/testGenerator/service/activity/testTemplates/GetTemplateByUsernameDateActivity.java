@@ -28,6 +28,7 @@ public class GetTemplateByUsernameDateActivity implements RequestHandler<GetTemp
 
     @Override
     public GetTemplateByUsernameDateResult handleRequest(GetTemplateByUsernameDateRequest request, Context context) {
+        log.info("Received GetTemplateByUsernameDateRequest {}", request);
 
         List<TestTemplate> templates = testTemplateDao.getTemplateByUserDate(request.getUsername());
 

@@ -24,6 +24,7 @@ public class LogOutAccountActivity implements RequestHandler<LogOutAccountReques
 
     @Override
     public LogOutAccountResult handleRequest(LogOutAccountRequest request, Context context) {
+        log.info("Received LogOutAccountRequest {}", request);
 
         Account account = accountDao.getAccount(request.getUsername());
 

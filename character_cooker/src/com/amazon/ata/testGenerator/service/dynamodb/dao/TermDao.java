@@ -1,6 +1,7 @@
 package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
+import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 
@@ -23,6 +24,11 @@ public class TermDao {
         }
 
         return term;
+    }
+
+    public boolean isIdUnique(String termId) {
+        Term term = this.dynamoDBMapper.load(Term.class, termId);
+        return term == null;
     }
 
     public Term saveTerm(Term term) {

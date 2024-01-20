@@ -27,6 +27,7 @@ public class GetTemplateByUsernameTitleActivity implements RequestHandler<GetTem
 
     @Override
     public GetTemplateByUsernameTitleResult handleRequest(GetTemplateByUsernameTitleRequest request, Context context) {
+        log.info("Received GetTemplateByUsernameTitleRequest {}", request);
 
         List<TestTemplate> templates = testTemplateDao.getTemplateByUserTitle(request.getUsername());
 
