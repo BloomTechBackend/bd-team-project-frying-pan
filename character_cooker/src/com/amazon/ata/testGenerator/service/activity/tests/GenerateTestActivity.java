@@ -1,4 +1,4 @@
-package com.amazon.ata.testGenerator.service.activity.terms;
+package com.amazon.ata.testGenerator.service.activity.tests;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.TermDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Term;

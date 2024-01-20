@@ -5,6 +5,8 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "LBC_Terms")
 public class Term {
+    public static final String USERNAME_DATE_INDEX = "UserDateIndex";
+    public static final String TEMPLATE_DATE_INDEX = "templateIdDateIndex";
 
     // Included in Hiragana and Katakana
     private String termId;
@@ -47,7 +49,7 @@ public class Term {
         this.symbol = symbol;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexNames ="templateIdDateIndex", attributeName = "templateId")
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames = TEMPLATE_DATE_INDEX, attributeName = "templateId")
     public String getTemplateId() {
         return templateId;
     }
@@ -56,7 +58,8 @@ public class Term {
         this.templateId = definition;
     }
 
-    @DynamoDBIndexRangeKey(globalSecondaryIndexNames ="templateIdDateIndex", attributeName = "dateCreated")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexNames = {TEMPLATE_DATE_INDEX, USERNAME_DATE_INDEX}
+            , attributeName = "dateCreated")
     public String getDateCreated() {
         return dateCreated;
     }
@@ -74,7 +77,7 @@ public class Term {
         this.definition = definition;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexNames ="usernameDateIndex", attributeName = "username")
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames = USERNAME_DATE_INDEX, attributeName = "username")
     public String getUsername() {
         return username;
     }

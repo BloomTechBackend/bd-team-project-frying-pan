@@ -2,6 +2,7 @@ package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -34,11 +35,25 @@ public class TermDao {
     }
 
     public List<Term> getTermsByUser(String username) {
-        return null;
+        Term term = new Term();
+        term.setUsername(username);
+        DynamoDBQueryExpression<Term> queryExpression = new DynamoDBQueryExpression<Term>()
+                .withIndexName(Term.USERNAME_DATE_INDEX)
+                .withConsistentRead(false)
+                .withHashKeyValues(term);
+
+        return dynamoDBMapper.query(Term.class, queryExpression);
     }
 
     public List<Term> getTermsByTemplate(String templateId) {
-        return null;
+        Term term = new Term();
+        term.setUsername(templateId);
+        DynamoDBQueryExpression<Term> queryExpression = new DynamoDBQueryExpression<Term>()
+                .withIndexName(Term.TEMPLATE_DATE_INDEX)
+                .withConsistentRead(false)
+                .withHashKeyValues(term);
+
+        return dynamoDBMapper.query(Term.class, queryExpression);
     }
 
 

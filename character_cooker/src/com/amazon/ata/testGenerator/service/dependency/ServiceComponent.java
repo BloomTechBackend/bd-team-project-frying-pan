@@ -1,13 +1,10 @@
 package com.amazon.ata.testGenerator.service.dependency;
 
 import com.amazon.ata.testGenerator.service.activity.accounts.*;
-import com.amazon.ata.testGenerator.service.activity.terms.GenerateTestActivity;
-import com.amazon.ata.testGenerator.service.activity.testTemplates.CreateTestTemplateActivity;
-import com.amazon.ata.testGenerator.service.activity.testTemplates.DeleteTestTemplateActivity;
-import com.amazon.ata.testGenerator.service.activity.testTemplates.GetTestTemplateActivity;
-import com.amazon.ata.testGenerator.service.activity.testTemplates.UpdateTestTemplateActivity;
+import com.amazon.ata.testGenerator.service.activity.testTemplates.*;
+import com.amazon.ata.testGenerator.service.activity.tests.GenerateTestActivity;
+import com.amazon.ata.testGenerator.service.models.testTemplates.results.GetTemplateByUsernameTitleResult;
 import dagger.Component;
-import dagger.Module;
 
 import javax.inject.Singleton;
 
@@ -23,11 +20,15 @@ public interface ServiceComponent {
     DeleteAccountActivity provideDeleteAccountActivity();
     LoginAccountActivity provideLoginAccountActivity();
     LogOutAccountActivity provideLogOutAccountActivity();
-//
-//    CreateTestTemplateActivity provideCreateTestTemplateActivity();
-//    DeleteTestTemplateActivity provideDeleteTestTemplateActivity();
-//    GetTestTemplateActivity provideGetTestTemplateActivity();
-//    UpdateTestTemplateActivity provideUpdateTestTemplateActivity();
-//
+    IsLoggedInAccountActivity provideIsLoggedInAccountActivity();
+
+    CreateTestTemplateActivity provideCreateTestTemplateActivity();
+    DeleteTestTemplateActivity provideDeleteTestTemplateActivity();
+    GetTestTemplateActivity provideGetTestTemplateActivity();
+    UpdateTestTemplateActivity provideUpdateTestTemplateActivity();
+
+    GetTemplateByUsernameTitleActivity  provideGetTemplateByUsernameTitleActivity();
+    GetTemplateByUsernameDateActivity provideGetTemplateByUsernameDateActivity();
+
     GenerateTestActivity provideGenerateTestActivity();
 }

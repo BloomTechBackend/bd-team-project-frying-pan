@@ -1,18 +1,12 @@
 package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
-import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
 import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
-import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import javax.inject.Inject;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import static com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate.USERNAME_DATE_INDEX;
-import static com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate.USERNAME_TITLE_INDEX;
+import java.util.List;
 
 public class TestTemplateDao {
     private final DynamoDBMapper dynamoDBMapper;
@@ -47,7 +41,7 @@ public class TestTemplateDao {
         TestTemplate template = new TestTemplate();
         template.setUsername(username);
         DynamoDBQueryExpression<TestTemplate> queryExpression = new DynamoDBQueryExpression<TestTemplate>()
-                .withIndexName(USERNAME_TITLE_INDEX)
+                .withIndexName(TestTemplate.USERNAME_TITLE_INDEX)
                 .withConsistentRead(false)
                 .withHashKeyValues(template);
 
@@ -58,7 +52,7 @@ public class TestTemplateDao {
         TestTemplate template = new TestTemplate();
         template.setUsername(username);
         DynamoDBQueryExpression<TestTemplate> queryExpression = new DynamoDBQueryExpression<TestTemplate>()
-                .withIndexName(USERNAME_DATE_INDEX)
+                .withIndexName(TestTemplate.USERNAME_DATE_INDEX)
                 .withConsistentRead(false)
                 .withHashKeyValues(template);
 
