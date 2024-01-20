@@ -109,6 +109,10 @@ public class GenerateTestRequest {
                 title);
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public static final class Builder {
         private List<String> hiraganaIds;
         private List<String> katakanaIds;

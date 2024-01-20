@@ -27,8 +27,10 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
     @Override
     public GenerateTestResult handleRequest(GenerateTestRequest request, Context context) {
 
-        String title = "Test";
-        if (!request.getTitle().isEmpty()) {
+        String title;
+        if (request.getTitle() == null || request.getTitle().isEmpty()) {
+            title = "Test";
+        } else {
             title = request.getTitle();
         }
 
@@ -68,7 +70,7 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
         for (int i = 0; i < ids.size(); i++) {
             Term term = termDao.getTerm(ids.get(i));
             questions.append(String.format("%d.%s  _____\n", i + 1, term.getRomanization()));
-            answers.append(String.format("%d.%s  %s\n", i + 1, term.getRomanization(), term.getSymbol()));
+            answers.append(String.format("%d.%s  _____  %s\n", i + 1, term.getRomanization(), term.getSymbol()));
         }
 
         return TestModel.builder()

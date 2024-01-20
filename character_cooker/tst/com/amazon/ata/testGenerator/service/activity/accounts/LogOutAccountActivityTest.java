@@ -32,7 +32,7 @@ public class LogOutAccountActivityTest {
 
     // Success Run Tests:
     @Test
-    public void handleRequest_loginAccount_returnsUsername() {
+    public void handleRequest_loOutAccount_returnsUsername() {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
@@ -64,7 +64,7 @@ public class LogOutAccountActivityTest {
 
     // Throw Exceptions tests
     @Test
-    public void handleRequest_loginAccount_InvalidUsername() {
+    public void handleRequest_logOutAccount_InvalidUsername() {
         // Given
         String expectedUsername = "expected\\Username";
         String expectedPassword = "expectedPassword125";

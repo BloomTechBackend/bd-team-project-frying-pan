@@ -5,6 +5,7 @@ import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class TestTemplateDao {
     private final DynamoDBMapper dynamoDBMapper;
@@ -30,5 +31,15 @@ public class TestTemplateDao {
 
     public void deleteTemplate(String templateId) {
 
+    }
+
+    public List<TestTemplate> getTemplateByUserTitle (String username) {
+
+        return null;
+    }
+
+    public List<TestTemplate> getTemplateByUserDate (String username) {
+
+        return null;
     }
 }
