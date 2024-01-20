@@ -6,9 +6,7 @@ public class CreateAccountResult {
     private String logMessage;
     private String username;
 
-    public CreateAccountResult(String logMessage) {
-        this.logMessage = logMessage;
-    }
+    public CreateAccountResult() {}
 
     public CreateAccountResult(Builder builder) {
         this.logMessage = builder.logMessage;
@@ -19,18 +17,16 @@ public class CreateAccountResult {
         return logMessage;
     }
 
-    public CreateAccountResult setLogMessage(String logMessage) {
+    public void setLogMessage(String logMessage) {
         this.logMessage = logMessage;
-        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public CreateAccountResult setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
     @Override

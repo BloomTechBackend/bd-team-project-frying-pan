@@ -26,7 +26,7 @@ public class AccountDao {
         return account;
     }
 
-    public void isLoggedIn(String username) {
+    public boolean isLoggedIn(String username) {
         Account account = this.dynamoDBMapper.load(Account.class, username);
 
         if (account == null) {
@@ -37,6 +37,7 @@ public class AccountDao {
             throw new UnauthorizedAccessException("User access denied. \nPlease log in to access this feature.");
         }
 
+        return false;
     }
 
     public void saveAccount(Account account) {

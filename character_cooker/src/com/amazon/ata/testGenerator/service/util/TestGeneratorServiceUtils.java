@@ -81,7 +81,4 @@ public class TestGeneratorServiceUtils {
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         return currentDateTime.format(formatter);
     }
-
-
-
 }

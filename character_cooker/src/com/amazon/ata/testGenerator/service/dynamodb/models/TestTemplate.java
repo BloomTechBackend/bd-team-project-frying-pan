@@ -7,6 +7,9 @@ import java.util.Objects;
 
 @DynamoDBTable(tableName = "LBC_Terms")
 public class TestTemplate {
+    public static final String USERNAME_TITLE_INDEX= "UsernameTitleIndex";
+    public static final String USERNAME_DATE_INDEX = "UsernameDateIndex";
+
     private String templateId;
     private String title;
     private String username;
@@ -25,7 +28,7 @@ public class TestTemplate {
         this.templateId = templateId;
     }
 
-    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "UsernameTitleIndex", attributeName = "title")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = USERNAME_TITLE_INDEX, attributeName = "title")
     public String getTitle() {
         return title;
     }
@@ -34,7 +37,7 @@ public class TestTemplate {
         this.title = title;
     }
 
-    @DynamoDBIndexHashKey(globalSecondaryIndexNames = {"UsernameTitleIndex", "UsernameDateIndex"}
+    @DynamoDBIndexHashKey(globalSecondaryIndexNames = {USERNAME_TITLE_INDEX, USERNAME_DATE_INDEX}
             , attributeName = "username")
     public String getUsername() {
         return username;
@@ -44,7 +47,7 @@ public class TestTemplate {
         this.username = username;
     }
 
-    @DynamoDBIndexRangeKey(globalSecondaryIndexName = "UsernameDateIndex", attributeName = "dateModified")
+    @DynamoDBIndexRangeKey(globalSecondaryIndexName = USERNAME_DATE_INDEX, attributeName = "dateModified")
     public String getDateModified() {
         return dateModified;
     }

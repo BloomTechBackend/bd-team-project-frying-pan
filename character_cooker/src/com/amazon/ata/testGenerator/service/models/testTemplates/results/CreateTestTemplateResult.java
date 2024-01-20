@@ -25,6 +25,4 @@ public class CreateTestTemplateResult {
             return new CreateTestTemplateResult(this);
         }
     }
-
-
 }

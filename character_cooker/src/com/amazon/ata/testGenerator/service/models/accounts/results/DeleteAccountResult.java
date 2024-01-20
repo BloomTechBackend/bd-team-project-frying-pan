@@ -9,9 +9,7 @@ public class DeleteAccountResult {
     private List<String> templatesDeleted;
     private List<String> termsDeleted;
 
-    public DeleteAccountResult(String logMessage) {
-        this.logMessage = logMessage;
-    }
+    public DeleteAccountResult() {}
 
     public DeleteAccountResult(Builder builder) {
         this.logMessage = builder.logMessage;

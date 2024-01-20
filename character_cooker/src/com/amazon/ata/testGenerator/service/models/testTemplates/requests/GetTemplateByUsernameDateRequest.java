@@ -1,18 +1,14 @@
-package com.amazon.ata.testGenerator.service.models.accounts.requests;
+package com.amazon.ata.testGenerator.service.models.testTemplates.requests;
 
 import java.util.Objects;
 
-public class LogOutAccountRequest {
+public class GetTemplateByUsernameDateRequest {
     private String username;
 
-    public LogOutAccountRequest() {
+    public GetTemplateByUsernameDateRequest() {
     }
 
-    public LogOutAccountRequest(String username, String password) {
-        this.username = username;
-    }
-
-    public LogOutAccountRequest(Builder builder) {
+    public GetTemplateByUsernameDateRequest(Builder builder) {
         this.username = builder.username;
     }
 
@@ -28,7 +24,7 @@ public class LogOutAccountRequest {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LogOutAccountRequest that = (LogOutAccountRequest) o;
+        GetTemplateByUsernameDateRequest that = (GetTemplateByUsernameDateRequest) o;
         return Objects.equals(username, that.username);
     }
 
@@ -49,8 +45,9 @@ public class LogOutAccountRequest {
             return this;
         }
 
-        public LogOutAccountRequest build() {
-            return new LogOutAccountRequest(this);
+        public GetTemplateByUsernameDateRequest build() {
+            return new GetTemplateByUsernameDateRequest(this);
         }
     }
+
 }

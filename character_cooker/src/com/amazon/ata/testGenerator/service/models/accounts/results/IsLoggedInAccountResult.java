@@ -2,14 +2,14 @@ package com.amazon.ata.testGenerator.service.models.accounts.results;
 
 import java.util.Objects;
 
-public class LogOutAccountResult {
+public class IsLoggedInAccountResult {
     private String logMessage;
     private String username;
     private String status;
 
-    public LogOutAccountResult() {}
+    public IsLoggedInAccountResult() {}
 
-    public LogOutAccountResult(Builder builder) {
+    public IsLoggedInAccountResult(Builder builder) {
         this.logMessage = builder.logMessage;
         this.username = builder.username;
         this.status = builder.status;
@@ -19,7 +19,7 @@ public class LogOutAccountResult {
         return logMessage;
     }
 
-    public LogOutAccountResult setLogMessage(String logMessage) {
+    public IsLoggedInAccountResult setLogMessage(String logMessage) {
         this.logMessage = logMessage;
         return this;
     }
@@ -28,7 +28,7 @@ public class LogOutAccountResult {
         return username;
     }
 
-    public LogOutAccountResult setUsername(String username) {
+    public IsLoggedInAccountResult setUsername(String username) {
         this.username = username;
         return this;
     }
@@ -37,7 +37,7 @@ public class LogOutAccountResult {
         return status;
     }
 
-    public LogOutAccountResult setStatus(String status) {
+    public IsLoggedInAccountResult setStatus(String status) {
         this.status = status;
         return this;
     }
@@ -46,7 +46,7 @@ public class LogOutAccountResult {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LogOutAccountResult that = (LogOutAccountResult) o;
+        IsLoggedInAccountResult that = (IsLoggedInAccountResult) o;
         return Objects.equals(logMessage, that.logMessage) && Objects.equals(username, that.username) && Objects.equals(status, that.status);
     }
 
@@ -80,8 +80,8 @@ public class LogOutAccountResult {
             return this;
         }
 
-        public LogOutAccountResult build() {
-            return new LogOutAccountResult(this);
+        public IsLoggedInAccountResult build() {
+            return new IsLoggedInAccountResult(this);
         }
     }
 }

@@ -29,8 +29,8 @@ public class TermDao {
         return term;
     }
 
-    public void deleteTerm(String termId) {
-        this.dynamoDBMapper.delete(termId);
+    public void deleteTerm(Term term) {
+        this.dynamoDBMapper.delete(term);
     }
 
     public List<Term> getTermsByUser(String username) {

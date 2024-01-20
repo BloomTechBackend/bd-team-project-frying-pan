@@ -29,63 +29,56 @@ public class GenerateTestRequest {
         return hiraganaIds;
     }
 
-    public GenerateTestRequest setHiraganaIds(List<String> hiraganaIds) {
+    public void setHiraganaIds(List<String> hiraganaIds) {
         this.hiraganaIds = hiraganaIds;
-        return this;
     }
 
     public List<String> getKatakanaIds() {
         return katakanaIds;
     }
 
-    public GenerateTestRequest setKatakanaIds(List<String> katakanaIds) {
+    public void setKatakanaIds(List<String> katakanaIds) {
         this.katakanaIds = katakanaIds;
-        return this;
     }
 
     public List<String> getCustomIds() {
         return customIds;
     }
 
-    public GenerateTestRequest setCustomIds(List<String> customIds) {
+    public void setCustomIds(List<String> customIds) {
         this.customIds = customIds;
-        return this;
     }
 
     public boolean isRandomHiragana() {
         return isRandomHiragana;
     }
 
-    public GenerateTestRequest setRandomHiragana(boolean randomHiragana) {
+    public void setRandomHiragana(boolean randomHiragana) {
         isRandomHiragana = randomHiragana;
-        return this;
     }
 
     public boolean isRandomKatakana() {
         return isRandomKatakana;
     }
 
-    public GenerateTestRequest setRandomKatakana(boolean randomKatakana) {
+    public void setRandomKatakana(boolean randomKatakana) {
         isRandomKatakana = randomKatakana;
-        return this;
     }
 
     public boolean isRandomCustom() {
         return isRandomCustom;
     }
 
-    public GenerateTestRequest setRandomCustom(boolean randomCustom) {
+    public void setRandomCustom(boolean randomCustom) {
         isRandomCustom = randomCustom;
-        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public GenerateTestRequest setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     @Override

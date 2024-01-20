@@ -6,47 +6,56 @@ import java.util.Objects;
 public class CreateTestTemplateRequest {
     private String title;
     private String username;
-    private List<String> termIdList;
+    private List<String> hiraganaIdList;
+    private List<String> katakanaIdList;
 
     public CreateTestTemplateRequest() {}
 
-    public CreateTestTemplateRequest(String title, String username, String dateModified, List<String> termIdList) {
+    public CreateTestTemplateRequest(String title, String username, String dateModified,
+                                     List<String> hiraganaIdList, List<String> katakanaIdList) {
         this.title = title;
         this.username = username;
-        this.termIdList = termIdList;
+        this.hiraganaIdList = hiraganaIdList;
+        this.katakanaIdList = katakanaIdList;
     }
 
     public CreateTestTemplateRequest(Builder builder) {
         this.title = builder.title;
         this.username = builder.username;
-        this.termIdList = builder.termIdList;
+        this.hiraganaIdList = builder.hiraganaIdList;
+        this.katakanaIdList = builder.katakanaIdList;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public CreateTestTemplateRequest setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public CreateTestTemplateRequest setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
-    public List<String> getTermIdList() {
-        return termIdList;
+    public List<String> getHiraganaIdList() {
+        return hiraganaIdList;
     }
 
-    public CreateTestTemplateRequest setTermIdList(List<String> termIdList) {
-        this.termIdList = termIdList;
-        return this;
+    public void setHiraganaIdList(List<String> hiraganaIdList) {
+        this.hiraganaIdList = hiraganaIdList;
+    }
+
+    public List<String> getKatakanaIdList() {
+        return katakanaIdList;
+    }
+
+    public void setKatakanaIdList(List<String> katakanaIdList) {
+        this.katakanaIdList = katakanaIdList;
     }
 
     @Override
@@ -54,12 +63,12 @@ public class CreateTestTemplateRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreateTestTemplateRequest that = (CreateTestTemplateRequest) o;
-        return Objects.equals(title, that.title) && Objects.equals(username, that.username) && Objects.equals(termIdList, that.termIdList);
+        return Objects.equals(title, that.title) && Objects.equals(username, that.username) && Objects.equals(hiraganaIdList, that.hiraganaIdList) && Objects.equals(katakanaIdList, that.katakanaIdList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, username, termIdList);
+        return Objects.hash(title, username, hiraganaIdList, katakanaIdList);
     }
 
     public static Builder builder() {return new Builder();}
@@ -67,7 +76,8 @@ public class CreateTestTemplateRequest {
     public static final class Builder {
         private String title;
         private String username;
-        private List<String> termIdList;
+        private List<String> hiraganaIdList;
+        private List<String> katakanaIdList;
 
         public Builder withTitle(String title) {
             this.title = title;
@@ -79,8 +89,13 @@ public class CreateTestTemplateRequest {
             return this;
         }
 
-        public Builder withTermIdList(List<String> termIdList) {
-            this.termIdList = termIdList;
+        public Builder withHiraganaIdList(List<String> hiraganaIdList) {
+            this.hiraganaIdList = hiraganaIdList;
+            return this;
+        }
+
+        public Builder withKatakanaIdList(List<String> katakanaIdList) {
+            this.katakanaIdList = katakanaIdList;
             return this;
         }
 

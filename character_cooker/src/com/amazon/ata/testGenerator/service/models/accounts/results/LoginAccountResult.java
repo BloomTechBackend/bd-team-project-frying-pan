@@ -7,8 +7,8 @@ public class LoginAccountResult {
     private String username;
     private String status;
 
-    public LoginAccountResult(String logMessage) {
-        this.logMessage = logMessage;
+    public LoginAccountResult() {
+
     }
 
     public LoginAccountResult(Builder builder) {

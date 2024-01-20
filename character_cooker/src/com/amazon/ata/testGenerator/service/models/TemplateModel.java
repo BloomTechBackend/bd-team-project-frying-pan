@@ -8,17 +8,18 @@ public class TemplateModel {
     private String title;
     private String username;
     private String dateModified;
-    private List<String> termIdList;
+    private List<String> hiraganaIdList;
+    private List<String> katakanaIdList;
 
-    public TemplateModel() {
-    }
+    public TemplateModel() {}
 
     public TemplateModel(Builder builder) {
         this.templateId = builder.templateId;
         this.title = builder.title;
         this.username = builder.username;
         this.dateModified = builder.dateModified;
-        this.termIdList = builder.termIdList;
+        this.hiraganaIdList = builder.hiraganaIdList;
+        this.katakanaIdList = builder.katakanaIdList;
     }
 
     public String getTemplateId() {
@@ -57,12 +58,21 @@ public class TemplateModel {
         return this;
     }
 
-    public List<String> getTermIdList() {
-        return termIdList;
+    public List<String> getHiraganaIdList() {
+        return hiraganaIdList;
     }
 
-    public TemplateModel setTermIdList(List<String> termIdList) {
-        this.termIdList = termIdList;
+    public TemplateModel setHiraganaIdList(List<String> hiraganaIdList) {
+        this.hiraganaIdList = hiraganaIdList;
+        return this;
+    }
+
+    public List<String> getKatakanaIdList() {
+        return katakanaIdList;
+    }
+
+    public TemplateModel setKatakanaIdList(List<String> katakanaIdList) {
+        this.katakanaIdList = katakanaIdList;
         return this;
     }
 
@@ -71,23 +81,12 @@ public class TemplateModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TemplateModel that = (TemplateModel) o;
-        return Objects.equals(templateId, that.templateId) && Objects.equals(title, that.title) && Objects.equals(username, that.username) && Objects.equals(dateModified, that.dateModified) && Objects.equals(termIdList, that.termIdList);
+        return Objects.equals(templateId, that.templateId) && Objects.equals(title, that.title) && Objects.equals(username, that.username) && Objects.equals(dateModified, that.dateModified) && Objects.equals(hiraganaIdList, that.hiraganaIdList) && Objects.equals(katakanaIdList, that.katakanaIdList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(templateId, title, username, dateModified, termIdList);
-    }
-
-    @Override
-    public String toString() {
-        return "TemplateModel{" +
-                "templateId='" + templateId + '\'' +
-                ", title='" + title + '\'' +
-                ", username='" + username + '\'' +
-                ", dateModified='" + dateModified + '\'' +
-                ", termIdList=" + termIdList +
-                '}';
+        return Objects.hash(templateId, title, username, dateModified, hiraganaIdList, katakanaIdList);
     }
 
     public static Builder builder() {
@@ -99,7 +98,9 @@ public class TemplateModel {
         private String title;
         private String username;
         private String dateModified;
-        private List<String> termIdList;
+        private List<String> hiraganaIdList;
+        private List<String> katakanaIdList;
+
 
         public Builder withTemplateId(String templateId) {
             this.templateId = templateId;
@@ -121,8 +122,13 @@ public class TemplateModel {
             return this;
         }
 
-        public Builder withTermIdList(List<String> termIdList) {
-            this.termIdList = termIdList;
+        public Builder withHiraganaIdList(List<String> hiraganaIdList) {
+            this.hiraganaIdList = hiraganaIdList;
+            return this;
+        }
+
+        public Builder withKatakanaIdList(List<String> katakanaIdList) {
+            this.katakanaIdList = katakanaIdList;
             return this;
         }
 

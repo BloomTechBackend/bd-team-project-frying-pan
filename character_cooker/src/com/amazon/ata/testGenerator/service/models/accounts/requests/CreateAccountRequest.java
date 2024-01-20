@@ -26,27 +26,24 @@ public class CreateAccountRequest {
         return username;
     }
 
-    public CreateAccountRequest setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public CreateAccountRequest setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
-        return this;
     }
 
     public String getPasswordConfirm() {
         return passwordConfirm;
     }
 
-    public CreateAccountRequest setPasswordConfirm(String passwordConfirm) {
+    public void setPasswordConfirm(String passwordConfirm) {
         this.passwordConfirm = passwordConfirm;
-        return this;
     }
 
     @Override

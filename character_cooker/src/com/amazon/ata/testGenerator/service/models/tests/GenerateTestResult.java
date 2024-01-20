@@ -24,36 +24,32 @@ public class GenerateTestResult {
         return title;
     }
 
-    public GenerateTestResult setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public TestModel getHiraganaTest() {
         return hiraganaTest;
     }
 
-    public GenerateTestResult setHiraganaTest(TestModel hiraganaTest) {
+    public void setHiraganaTest(TestModel hiraganaTest) {
         this.hiraganaTest = hiraganaTest;
-        return this;
     }
 
     public TestModel getKatakanaTest() {
         return katakanaTest;
     }
 
-    public GenerateTestResult setKatakanaTest(TestModel katakanaTest) {
+    public void setKatakanaTest(TestModel katakanaTest) {
         this.katakanaTest = katakanaTest;
-        return this;
     }
 
     public TestModel getCustomTest() {
         return customTest;
     }
 
-    public GenerateTestResult setCustomTest(TestModel customTest) {
+    public void setCustomTest(TestModel customTest) {
         this.customTest = customTest;
-        return this;
     }
 
     @Override
