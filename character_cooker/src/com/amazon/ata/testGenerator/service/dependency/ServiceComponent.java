@@ -29,5 +29,5 @@ public interface ServiceComponent {
 //    GetTestTemplateActivity provideGetTestTemplateActivity();
 //    UpdateTestTemplateActivity provideUpdateTestTemplateActivity();
 //
-//    GenerateTestActivity provideGenerateTestActivity();
+    GenerateTestActivity provideGenerateTestActivity();
 }

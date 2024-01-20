@@ -4,6 +4,7 @@ import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class TermDao {
     private final DynamoDBMapper dynamoDBMapper;
@@ -22,4 +23,23 @@ public class TermDao {
 
         return term;
     }
+
+    public Term saveTerm(Term term) {
+        this.dynamoDBMapper.save(term);
+        return term;
+    }
+
+    public void deleteTerm(String termId) {
+        this.dynamoDBMapper.delete(termId);
+    }
+
+    public List<Term> getTermsByUser(String username) {
+        return null;
+    }
+
+    public List<Term> getTermsByTemplate(String templateId) {
+        return null;
+    }
+
+
 }
