@@ -40,17 +40,6 @@ public class TermDao {
         this.dynamoDBMapper.delete(term);
     }
 
-    public List<Term> getTermsByUser(String username) {
-        Term term = new Term();
-        term.setUsername(username);
-        DynamoDBQueryExpression<Term> queryExpression = new DynamoDBQueryExpression<Term>()
-                .withIndexName(Term.USERNAME_DATE_INDEX)
-                .withConsistentRead(false)
-                .withHashKeyValues(term);
-
-        return dynamoDBMapper.query(Term.class, queryExpression);
-    }
-
     public List<Term> getTermsByTemplate(String templateId) {
         Term term = new Term();
         term.setUsername(templateId);
@@ -62,5 +51,15 @@ public class TermDao {
         return dynamoDBMapper.query(Term.class, queryExpression);
     }
 
+    public List<Term> getTermsByUser(String username) {
+        Term term = new Term();
+        term.setUsername(username);
+        DynamoDBQueryExpression<Term> queryExpression = new DynamoDBQueryExpression<Term>()
+                .withIndexName(Term.USERNAME_DATE_INDEX)
+                .withConsistentRead(false)
+                .withHashKeyValues(term);
+
+        return dynamoDBMapper.query(Term.class, queryExpression);
+    }
 
 }
