@@ -32,7 +32,7 @@ public class LogOutAccountActivityTest {
 
     // Success Run Tests:
     @Test
-    public void handleRequest_loOutAccount_returnsUsername() {
+    public void handleRequest_logOutAccount_returnsUsername() {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
@@ -67,7 +67,6 @@ public class LogOutAccountActivityTest {
     public void handleRequest_logOutAccount_InvalidUsername() {
         // Given
         String expectedUsername = "expected\\Username";
-        String expectedPassword = "expectedPassword125";
 
         LogOutAccountRequest request = LogOutAccountRequest.builder()
                 .withUsername(expectedUsername)

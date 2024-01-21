@@ -18,7 +18,6 @@ public class Term {
     private String dateCreated;
     private String definition;
     private String username;
-    private boolean added;
 
     public Term() {}
 
@@ -86,22 +85,12 @@ public class Term {
         this.username = username;
     }
 
-    @DynamoDBAttribute(attributeName = "added")
-    public boolean isAdded() {
-        return added;
-    }
-
-    public void setAdded(boolean added) {
-        this.added = added;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Term term = (Term) o;
-        return added == term.added
-                && Objects.equals(termId, term.termId)
+        return Objects.equals(termId, term.termId)
                 && Objects.equals(romanization, term.romanization)
                 && Objects.equals(symbol, term.symbol)
                 && Objects.equals(templateId, term.templateId)
@@ -112,6 +101,6 @@ public class Term {
 
     @Override
     public int hashCode() {
-        return Objects.hash(termId, romanization, symbol, templateId, dateCreated, definition, username, added);
+        return Objects.hash(termId, romanization, symbol, templateId, dateCreated, definition, username);
     }
 }

@@ -32,6 +32,8 @@ public class CreateCustomTermActivity implements RequestHandler<CreateCustomTerm
         term.setSymbol(request.getSymbol());
         term.setUsername(request.getUsername());
         term.setTemplateId(request.getTemplateId());
+        term.setDefinition(request.getDefinition());
+
         term.setDateCreated(TestGeneratorServiceUtils.getDate());
 
         // Generate Unique Term Id

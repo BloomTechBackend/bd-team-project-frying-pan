@@ -5,10 +5,10 @@ import java.util.Objects;
 public class CreateCustomTermRequest {
     private String romanization;
     private String symbol;
-
     private String templateId;
     private String username;
-    private String date;
+
+    private String definition;
 
     public CreateCustomTermRequest() {}
 
@@ -17,15 +17,7 @@ public class CreateCustomTermRequest {
         this.symbol = builder.symbol;
         this.templateId = builder.templateId;
         this.username = builder.username;
-        this.date = builder.date;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
+        this.definition = builder.definition;
     }
 
     public String getRomanization() {
@@ -60,17 +52,26 @@ public class CreateCustomTermRequest {
         this.username = username;
     }
 
+    public String getDefinition() {
+        return definition;
+    }
+
+    public void setDefinition(String definition) {
+        this.definition = definition;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CreateCustomTermRequest that = (CreateCustomTermRequest) o;
-        return Objects.equals(romanization, that.romanization) && Objects.equals(symbol, that.symbol) && Objects.equals(templateId, that.templateId) && Objects.equals(username, that.username) && Objects.equals(date, that.date);
+        return Objects.equals(romanization, that.romanization) && Objects.equals(symbol, that.symbol) && Objects.equals(templateId, that.templateId)
+                && Objects.equals(username, that.username);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(romanization, symbol, templateId, username, date);
+        return Objects.hash(romanization, symbol, templateId, username);
     }
 
     public static Builder builder() {
@@ -79,10 +80,9 @@ public class CreateCustomTermRequest {
     public static final class Builder {
         private String romanization;
         private String symbol;
-
         private String templateId;
         private String username;
-        private String date;
+        private String definition;
 
         public Builder withRomanization(String romanization) {
             this.romanization = romanization;
@@ -104,8 +104,8 @@ public class CreateCustomTermRequest {
             return this;
         }
 
-        public Builder withDate(String date) {
-            this.date = date;
+        public Builder withDefinition(String definition) {
+            this.definition = definition;
             return this;
         }
 
