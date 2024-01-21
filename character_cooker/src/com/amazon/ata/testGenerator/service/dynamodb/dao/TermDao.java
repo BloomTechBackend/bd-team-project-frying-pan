@@ -1,7 +1,6 @@
 package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
-import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 
@@ -31,9 +30,8 @@ public class TermDao {
         return term == null;
     }
 
-    public Term saveTerm(Term term) {
+    public void saveTerm(Term term) {
         this.dynamoDBMapper.save(term);
-        return term;
     }
 
     public void deleteTerm(Term term) {
