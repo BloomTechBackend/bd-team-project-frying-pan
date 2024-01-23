@@ -33,11 +33,12 @@ public class AccountDao {
             throw new AccountNotFoundException("{Username: " + username + "} Not fond");
         }
 
-        if (!account.getStatus().equals(Status.LOGGED_IN.toString())) {
+        if (account.getStatus().equals(Status.LOGGED_IN.toString())) {
+            return true;
+        } else {
             throw new UnauthorizedAccessException("User access denied. \nPlease log in to access this feature.");
         }
 
-        return false;
     }
 
     public void saveAccount(Account account) {

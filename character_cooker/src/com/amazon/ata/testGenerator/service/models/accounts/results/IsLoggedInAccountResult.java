@@ -6,6 +6,7 @@ public class IsLoggedInAccountResult {
     private String logMessage;
     private String username;
     private String status;
+    private boolean isLoggedIn;
 
     public IsLoggedInAccountResult() {}
 
@@ -13,46 +14,39 @@ public class IsLoggedInAccountResult {
         this.logMessage = builder.logMessage;
         this.username = builder.username;
         this.status = builder.status;
+        this.isLoggedIn = builder.isLoggedIn;
     }
 
     public String getLogMessage() {
         return logMessage;
     }
 
-    public IsLoggedInAccountResult setLogMessage(String logMessage) {
+    public void setLogMessage(String logMessage) {
         this.logMessage = logMessage;
-        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public IsLoggedInAccountResult setUsername(String username) {
+    public void setUsername(String username) {
         this.username = username;
-        return this;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public IsLoggedInAccountResult setStatus(String status) {
+    public void setStatus(String status) {
         this.status = status;
-        return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        IsLoggedInAccountResult that = (IsLoggedInAccountResult) o;
-        return Objects.equals(logMessage, that.logMessage) && Objects.equals(username, that.username) && Objects.equals(status, that.status);
+    public boolean isLoggedIn() {
+        return isLoggedIn;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(logMessage, username, status);
+    public void setLoggedIn(boolean loggedIn) {
+        isLoggedIn = loggedIn;
     }
 
     public static Builder builder() {
@@ -63,6 +57,7 @@ public class IsLoggedInAccountResult {
         private String logMessage;
         private String username;
         private String status;
+        private boolean isLoggedIn;
 
 
         public Builder withLogMessage(String logMessage) {
@@ -77,6 +72,11 @@ public class IsLoggedInAccountResult {
 
         public Builder withStatus(String status) {
             this.status = status;
+            return this;
+        }
+
+        public Builder withLoggedIn(boolean loggedIn) {
+            isLoggedIn = loggedIn;
             return this;
         }
 

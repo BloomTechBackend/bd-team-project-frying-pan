@@ -31,7 +31,42 @@ public class LoginAccountActivityTest {
 
     // Success Run Tests:
     @Test
-    public void handleRequest_loginAccount_returnsUsername() {
+    public void handleRequest_accountLoggedOut_returnsUserLoggedIn() {
+        // Given
+        String expectedUsername = "expectedUsername";
+        String expectedPassword = "expectedPassword125";
+        String expectedStatus = Status.LOGGED_IN.toString();
+
+        Account retrievedAccount = new Account();
+        retrievedAccount.setUsername(expectedUsername);
+        retrievedAccount.setPassword(expectedPassword);
+        retrievedAccount.setStatus(Status.LOGGED_OUT.toString());
+
+        Account expectedAccount = new Account();
+        expectedAccount.setUsername(expectedUsername);
+        expectedAccount.setPassword(expectedPassword);
+        expectedAccount.setStatus(expectedStatus);
+
+        LoginAccountRequest request = LoginAccountRequest.builder()
+                .withUsername(expectedUsername)
+                .withPassword(expectedPassword)
+                .build();
+
+        // Username is found
+        when(accountDao.getAccount(expectedUsername)).thenReturn(retrievedAccount);
+        // When
+        LoginAccountResult result = loginAccountActivity.handleRequest(request, null);
+
+        // Then
+        verify(accountDao).getAccount(expectedUsername);
+        verify(accountDao).saveAccount(expectedAccount);
+
+        assertEquals(expectedUsername, result.getUsername());
+        assertEquals(expectedStatus, result.getStatus());
+    }
+
+    @Test
+    public void handleRequest_accountLoggedIn_returnsUserLoggedIn() {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
