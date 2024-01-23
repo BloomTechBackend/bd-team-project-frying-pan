@@ -2,6 +2,7 @@ package com.amazon.ata.testGenerator.service.activity.terms;
 
 import com.amazon.ata.testGenerator.service.dynamodb.dao.TermDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
+import com.amazon.ata.testGenerator.service.helpers.TermTestHelper;
 import com.amazon.ata.testGenerator.service.models.terms.requests.CreateCustomTermRequest;
 import com.amazon.ata.testGenerator.service.models.terms.results.CreateCustomTermResult;
 
@@ -69,7 +70,7 @@ public class CreateCustomTermActivityTest {
         // Then
         String expectedTermId = result.getTerm().getTermId();
 
-        verify(termDao).saveTerm(isA(Term.class));
+        verify(termDao).saveTerm(isA(Term.class)); // we don't know the date
 
         assertEquals(expectedRomaji, result.getTerm().getRomanization());
         assertEquals(expectedSymbol, result.getTerm().getSymbol());

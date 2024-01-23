@@ -1,6 +1,7 @@
 package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
+import com.amazon.ata.testGenerator.service.exceptions.TermNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 
@@ -19,7 +20,7 @@ public class TermDao {
         Term term = this.dynamoDBMapper.load(Term.class, termId);
 
         if (term == null) {
-            throw new RuntimeException("{termId: " + termId + "} Not fond");
+            throw new TermNotFoundException("{termId: " + termId + "} Not fond");
         }
 
         return term;
