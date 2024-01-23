@@ -63,6 +63,7 @@ public class LoginAccountActivityTest {
 
         assertEquals(expectedUsername, result.getUsername());
         assertEquals(expectedStatus, result.getStatus());
+
     }
 
     @Test
@@ -98,7 +99,7 @@ public class LoginAccountActivityTest {
 
     // Throw Exceptions tests
     @Test
-    public void handleRequest_loginAccount_InvalidUsername() {
+    public void handleRequest_invalidUsername_throwsInvalidAttributeValueException() {
         // Given
         String expectedUsername = "expected\\Username";
         String expectedPassword = "expectedPassword125";
@@ -115,7 +116,7 @@ public class LoginAccountActivityTest {
     }
 
     @Test
-    public void handleRequest_loginAccount_InvalidPassword() {
+    public void handleRequest_invalidPassword_throwsInvalidAttributeValueException() {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "cat";
@@ -132,7 +133,7 @@ public class LoginAccountActivityTest {
     }
 
     @Test
-    public void handleRequest_loginAccount_AccountNotFoundException() {
+    public void handleRequest_userNotFound_AccountNotFoundException() {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
@@ -151,7 +152,7 @@ public class LoginAccountActivityTest {
     }
 
     @Test
-    public void handleRequest_loginAccount_PasswordNotConfirmed() {
+    public void handleRequest_incorrectPassword_throwsInvalidAttributeValueException() {
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
         String incorrectPassword = "incorrectPassword";

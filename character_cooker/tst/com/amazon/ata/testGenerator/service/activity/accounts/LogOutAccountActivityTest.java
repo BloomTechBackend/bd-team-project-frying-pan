@@ -32,7 +32,7 @@ public class LogOutAccountActivityTest {
 
     // Success Run Tests:
     @Test
-    public void handleRequest_logOutAccount_returnsUsername() {
+    public void handleRequest_AccountLoggedIn_returnsUserLoggedOut() {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
@@ -64,9 +64,24 @@ public class LogOutAccountActivityTest {
 
     // Throw Exceptions tests
     @Test
-    public void handleRequest_logOutAccount_InvalidUsername() {
+    public void handleRequest_invalidUsername_throwsInvalidAttributeValueException() {
         // Given
         String expectedUsername = "expected\\Username";
+
+        LogOutAccountRequest request = LogOutAccountRequest.builder()
+                .withUsername(expectedUsername)
+                .build();
+
+        // When
+        // Then
+        assertThrows(InvalidAttributeValueException.class,
+                () -> logOutAccountActivity.handleRequest(request, null));
+    }
+
+    @Test
+    public void handleRequest_userNotFound_AccountNotFoundException() {
+        // Given
+        String expectedUsername = "expectedUsername";
 
         LogOutAccountRequest request = LogOutAccountRequest.builder()
                 .withUsername(expectedUsername)
@@ -79,5 +94,6 @@ public class LogOutAccountActivityTest {
         assertThrows(AccountNotFoundException.class,
                 () -> logOutAccountActivity.handleRequest(request, null));
     }
+
 
 }

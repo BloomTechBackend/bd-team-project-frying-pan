@@ -3,8 +3,10 @@ package com.amazon.ata.testGenerator.service.activity.accounts;
 import com.amazon.ata.testGenerator.service.dynamodb.dao.AccountDao;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Status;
+import com.amazon.ata.testGenerator.service.exceptions.InvalidAttributeValueException;
 import com.amazon.ata.testGenerator.service.models.accounts.requests.LogOutAccountRequest;
 import com.amazon.ata.testGenerator.service.models.accounts.results.LogOutAccountResult;
+import com.amazon.ata.testGenerator.service.util.TestGeneratorServiceUtils;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +27,11 @@ public class LogOutAccountActivity implements RequestHandler<LogOutAccountReques
     @Override
     public LogOutAccountResult handleRequest(LogOutAccountRequest request, Context context) {
         log.info("Received LogOutAccountRequest {}", request);
+
+        // validate username
+        if(!TestGeneratorServiceUtils.isValidUsername(request.getUsername())) {
+            throw new InvalidAttributeValueException("Invalid Username!");
+        }
 
         Account account = accountDao.getAccount(request.getUsername());
 
