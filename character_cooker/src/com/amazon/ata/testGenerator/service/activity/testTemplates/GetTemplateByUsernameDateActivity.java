@@ -6,7 +6,6 @@ import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
 import com.amazon.ata.testGenerator.service.models.TemplateModel;
 import com.amazon.ata.testGenerator.service.models.testTemplates.requests.GetTemplateByUsernameDateRequest;
 import com.amazon.ata.testGenerator.service.models.testTemplates.results.GetTemplateByUsernameDateResult;
-import com.amazon.ata.testGenerator.service.models.testTemplates.results.GetTemplateByUsernameTitleResult;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
