@@ -37,7 +37,7 @@ public class UpdateTestTemplateActivity implements RequestHandler<UpdateTestTemp
         template.setKatakanaIdList(request.getKatakanaIdList());
         template.setDateModified(TestGeneratorServiceUtils.getDate());
 
-        testTemplateDao.saveTemplate(template);
+        template = testTemplateDao.saveTemplate(template);
 
         // Convert to Model
         TemplateModel templateModel = ModelConverter.toTemplateModel(template);

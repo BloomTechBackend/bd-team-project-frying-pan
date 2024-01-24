@@ -32,6 +32,8 @@ public class CreateTestTemplateActivityTest {
         createTestTemplateActivity = new CreateTestTemplateActivity(testTemplateDao);
     }
 
+    // Success Run Tests:
+
     @Test
     public void handlerRequest_saveWithTermList_returnsTemplateModel() {
         // GIVEN

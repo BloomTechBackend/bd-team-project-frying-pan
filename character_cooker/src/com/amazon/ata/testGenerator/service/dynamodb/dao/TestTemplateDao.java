@@ -1,6 +1,7 @@
 package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
+import com.amazon.ata.testGenerator.service.exceptions.TestTemplateNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
 
@@ -19,7 +20,7 @@ public class TestTemplateDao {
     public TestTemplate getTemplate(String templateId) {
         TestTemplate template = this.dynamoDBMapper.load(TestTemplate.class, templateId);
         if (template == null) {
-            throw new RuntimeException("{testTemplateId: " + templateId + "} Not fond");
+            throw new TestTemplateNotFoundException("{testTemplateId: " + templateId + "} Not fond");
         }
         return template;
     }
@@ -29,8 +30,9 @@ public class TestTemplateDao {
         return template == null;
     }
 
-    public void saveTemplate(TestTemplate template) {
+    public TestTemplate saveTemplate(TestTemplate template) {
         this.dynamoDBMapper.save(template);
+        return template;
     }
 
     public void deleteTemplate(TestTemplate template) {

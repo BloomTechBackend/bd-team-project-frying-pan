@@ -36,12 +36,12 @@ public class LogOutAccountActivityTest {
         // Given
         String expectedUsername = "expectedUsername";
         String expectedPassword = "expectedPassword125";
-        String expectedStatus = Status.LOGGED_IN.toString();
+        String expectedStatus = Status.LOGGED_OUT.toString();
 
         Account expectedAccount = new Account();
         expectedAccount.setUsername(expectedUsername);
         expectedAccount.setPassword(expectedPassword);
-        expectedAccount.setStatus(expectedStatus);
+        expectedAccount.setStatus(Status.LOGGED_IN.toString());
 
         LogOutAccountRequest request = LogOutAccountRequest.builder()
                 .withUsername(expectedUsername)
@@ -59,7 +59,7 @@ public class LogOutAccountActivityTest {
         verify(accountDao).saveAccount(expectedAccount);
 
         assertEquals(expectedUsername, result.getUsername());
-        assertEquals(Status.LOGGED_OUT.toString(), result.getStatus());
+        assertEquals(expectedStatus, result.getStatus());
     }
 
     // Throw Exceptions tests
@@ -79,7 +79,7 @@ public class LogOutAccountActivityTest {
     }
 
     @Test
-    public void handleRequest_userNotFound_AccountNotFoundException() {
+    public void handleRequest_userDoesNotExist_AccountNotFoundException() {
         // Given
         String expectedUsername = "expectedUsername";
 
