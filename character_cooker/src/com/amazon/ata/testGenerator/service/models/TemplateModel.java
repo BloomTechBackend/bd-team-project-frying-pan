@@ -107,7 +107,7 @@ public class TemplateModel {
             return this;
         }
 
-        public Builder setTitle(String title) {
+        public Builder withTitle(String title) {
             this.title = title;
             return this;
         }

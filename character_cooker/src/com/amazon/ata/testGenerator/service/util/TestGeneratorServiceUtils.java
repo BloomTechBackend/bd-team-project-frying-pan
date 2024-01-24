@@ -17,12 +17,12 @@ public class TestGeneratorServiceUtils {
     private static final Pattern INVALID_ACCOUNT_PATTERN = Pattern.compile("[\"\'\\\\ ]");
     private static final Pattern INVALID_TITLE_PATTERN = Pattern.compile("[\"\'\\\\]");
 
-    static final int USERNAME_LENGTH = 5;
-    static final int PASSWORD_LENGTH = 5;
+    public static final int USERNAME_LENGTH = 5;
+    public static final int PASSWORD_LENGTH = 5;
 
-    static final int TEMPLATE_ID_LENGTH = 6;
-    static final int CUSTOM_TERM_ID_LENGTH = 5;
-    static final int TERM_ID_LENGTH = 4;
+    public static final int TEMPLATE_ID_LENGTH = 6;
+    public static final int CUSTOM_TERM_ID_LENGTH = 5;
+    public static final int TERM_ID_LENGTH = 4;
 
     private TestGeneratorServiceUtils() {}
 

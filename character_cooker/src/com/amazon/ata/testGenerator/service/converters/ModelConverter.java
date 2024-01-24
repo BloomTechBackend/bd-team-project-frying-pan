@@ -10,6 +10,7 @@ public class ModelConverter {
     public static TemplateModel toTemplateModel(TestTemplate template) {
         return TemplateModel.builder()
                 .withTemplateId(template.getTemplateId())
+                .withTitle(template.getTitle())
                 .withUsername(template.getUsername())
                 .withHiraganaIdList(template.getHiraganaIdList())
                 .withKatakanaIdList(template.getKatakanaIdList())
