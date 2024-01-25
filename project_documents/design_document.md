@@ -67,15 +67,18 @@ U6. I want to generate my test in a provided order (default in order, shuffled);
 
 ### 4.1. In Scope
 
-* Creating, retrieving, editing, or deleting a test
-* Generate a test in a providing order
+* Creating accounts to log in and log out. 
+* Creating, retrieving, editing, or deleting a teste template
+* Creating and deleting custom terms
+* Generate Writing tests with the characters listed in order or in random order
 
 ### 4.2. Out of Scope
 
-* Allow users to add their own characters to the list
+* Allow users to automatically grade their test answers
+  * There is an answer sheet that users can manuelly compare 
 * Allow users to edit the layout of the generated tests
-* The ability to search for other tests made by other users
-* The ability to share tests between users
+* The ability to search for templates made by other users
+* The ability to share template between users
 
 # 5. Proposed Architecture Overview
 
@@ -125,72 +128,152 @@ String symbol;
 For security reasons:
 * Validate the username is at least 5 characters long
   * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
-* Validates the username does not contain invalid characters: `" ' \` and spaces
+* Validate the username does not contain invalid characters: `" ' \` and spaces
   * If the username contains any invalid characters, then throw an InvalidAttributeValueException 
-* Validates the username does not match an existing accounts' username
-  * If the username matches any existing account's username, then throw an InvalidAttributeValueException 
+* Validate the username does not match an existing accounts' username
+  * If the username matches any existing account's username, then throw an InvalidAttributeValueException
 * Validate the password is at least 5 characters long
   * If the password contains less then 5 characters, then throw an InvalidAttributeValueException
-* Validates the password does not contain invalid characters: `" ' \` and spaces
+* Validate the password does not contain invalid characters: `" ' \` and spaces
   * If the password contains any invalid characters, then throw an InvalidAttributeValueException 
-* Validates the password confirms with the confirmation password
+* Validate the password confirms with the confirmation password
   * If the password does not match the confirmation password, then throw an 
   InvalidAttributeValueException
 
 ## 6.2.2 Login Account Endpoint
-* Accepts the `POST` request to `/Accounts/::username`
-* Accepts a username and password and retrieves the account data to verify the login attempt
-* Returns the username to signal a successful login attempt
+* Accepts the `PUT` request to `/Accounts/::username`
+* Accepts a username and password to update the account status to logged in
+* Returns the username and updated log in status
   * If the username is not found, then throw an AccountNotFoundAcception 
 
 For security reasons: 
-* Validates the username
-  * If the username contains any invalid characters, then throw an InvalidAttributeValueException
+* Validate the username
   * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
+  * If the username contains any invalid characters (`" ' \` and spaces), then throw an InvalidAttributeValueException 
 * Validates the password 
-  * If the password contains any invalid characters, then throw an InvalidAttributeValueException 
   * If the password contains less then 5 characters, then throw an InvalidAttributeValueException
+  * If the password contains any invalid characters (`" ' \` and spaces), then throw an InvalidAttributeValueException 
   * If the password does not match the saved password, then throw an 
   InvalidAttributeValueException
 
-## 6.2.3 Delete Account Endpoint
-* Accepts the `DELETE` request to `/Accounts/::username`
-* Accepts a given username and password and delete the corresponding account (after verifying the account information) 
-* Returns username to signal a successful delete attempt
+## 6.2.3 Log Out Account Endpoint
+* Accepts the `PUT` request to `/Accounts/::username`
+* Accepts a username to update the account status to logged out
+* Returns the username and updated log out status
+  * If the username is not found, then throw an AccountNotFoundAcception 
 
 For security reasons: 
-* Validates the username does not contain invalid characters: `" ' \` and spaces
+* Validate the username
+  * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
+  * If the username contains any invalid characters (`" ' \` and spaces), then throw an InvalidAttributeValueException 
+
+## 6.2.4 Delete Account Endpoint
+* Accepts the `DELETE` request to `/Accounts/::username`
+* Accepts a username and password, verifies both entires and delete the corresponding Account
+  * Test templates and custom terms made by the user will also be deleted 
+* Returns username a list of the deleted resources to signal a successful delete attempt
+  * If the username or the password do not match, then throw an InvalidAttributeValueException 
+
+For security reasons: 
+* Validates the username
+  * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
+  * If the username contains any invalid characters (`" ' \` and spaces), then throw an InvalidAttributeValueException 
+* Validates the password 
+  * If the password contains less then 5 characters, then throw an InvalidAttributeValueException
+  * If the password contains any invalid characters (`" ' \` and spaces), then throw an 
+
+## 6.2.5 Is Logged In Account Endpoint ***
+* Accepts the `GET` request to `/Accounts/::username`
+* Accepts a username and verifies the log in status of the user
+* Returns the username and boolean
+  * If the username is not found, then throw an AccountNotFoundAcception 
+  * If the user is not logged in, throw an UnauthorizedAccessException 
+
+For security reasons: 
+* Validate the username
+  * If the username contains less then 5 characters, then throw an InvalidAttributeValueException
   * If the username contains any invalid characters, then throw an InvalidAttributeValueException 
-* Validates the password does not contain invalid characters: `" ' \` and spaces
-  * If the password contains any invalid characters, then throw an InvalidAttributeValueException 
-* Validates the password matches with the saved password
-  * If the password does not match the saved password, then throw an 
-  InvalidAttributeValueException
 
 ## 6.3.1 Open TestTemplate Endpoint
+* Accepts a `GET` request to `/TestTemplate/::templateId`
+* Accepts a template ID
+* Returns the corresponding template
+  * If the given template ID is not found, then throw a TemplateNotFoundException 
 
 ## 6.3.2 Create TestTemplate Endpoint
+* Accepts a `POST` request to `/TestTemplates`
+* Accepts data to create a new Template with a provided title, username and list of term IDs
+  * If there is not a list of terms, then save an emtpy list
+* Return the new template with a unique template Id and date provided by the Test Generator  Service 
+
+For security reasons: 
+* Validates the title does not contain invalid characters: `" ' \`
+  * If the password contains any invalid characters, then throw an InvalidAttributeValueException
+  * Note: The Title can have spaces
 
 ## 6.3.3 Update TestTemplate Endpoint
+* Accepts a `PUT` request to `/TestTemplates/::templateId`
+* Accepts data to update a template including a template ID, title, username and term Id list 
+* Returns the update template
+For security reasons: 
+* Validates the title does not contain invalid characters: `" ' \`
+  * If the password contains any invalid characters, then throw an InvalidAttributeValueException
+  * Note: The Title can have spaces
 
 ## 6.3.4 Delete TestTemplate Endpoint
+* Accepts a `DELETE` request to `/TestTemplates/::templateId`
+* Accepts a template ID to delete the corresponding template
+  * Custom made terms associted with the test will also be deleted and returned
+* Returns the template ID, and title
+  * If custom made terms deleted, their romanization and symbol(s) are returned
 
-## 6.3.5 Get Template By Date Endpoint 
+## 6.3.5 Get Template By Username Date Endpoint
+* Accepts a `GET` request to `/TestTemplate/::username`
+* Accepts a username to retrieve all templates with the username
+* Return the list of templates from a user sorted by date 
 
-## 6.3.6 Get Template By Title Endpoint
+## 6.3.6 Get Template By Username Title Endpoint
+* Accepts a `GET` request to `/TestTemplate/::username`
+* Accepts a username to retrieve all templates with the username
+* Return the list of templates from a user sorted by date 
 
-## 6.4.1 Get Term Endpoint
+## 6.4.1 Create Custom Term Endpoint (Add Custom Term to Template)
+* Accepts a `POST` request to `/Terms`
+* Accepts data to create a new custom term with a provided romanization, symbol(s), template ID and username
+  * Optional definition field
+* Return the new term with a unique Term ID and date provided by the Test Generator  Service 
 
-## 6.5.1 Create Custom Term Endpoint
-## 6.5.1 Update Term Endpoint
-## 6.5.1 Delete Term Endpoint
-## 6.5.1 AddTermToTest Endpoint
-## 6.5.1 RemoveTermFromTest Endpoint
+## 6.4.2 Delete Custom Term Endpoint (Removes Custom Term from Template)
+* Accepts a `DELETE` request to `/Terms/::termId`
+* Accepts a term ID to delete the corresponding custom term
+  * Optional definition field
+* Return the deleted  
 
-## 6.5.3 Delete Term from Template Endpoint
+## 6.4.3 Get Terms By Template Date Endpoint
+* Accepts a `GET` request to `/Terms/::templateId`
+* Accepts a template ID to retrieves all custom terms associated with the template
+* Returns a list of term, sorted by date. 
 
-## 6.6.1 Generate Test Doc Yay~
+## 6.4.4 Get Terms By Username Date Endpoint
+* Accepts a `GET` request to `/Terms/::templateId`
+* Accepts a username to retrieves all custom terms associated with the username
+* Returns a list of term, sorted by date. 
 
+For security reasons:
+* we will validate the username  
+
+## 6.4.1 Delete Term Endpoint
+* Accepts a `DELETE` request to `/Terms/::termId`
+* Accepts a term ID to delete the corresponding term in the table
+* Return the term
+
+## 6.5.1 Update Term Endpoint - not included for now
+
+## 6.5.1 Generate Test Doc Yay~
+* Accepts a `GET` request to `/Terms/::termId`
+* Accepts a list of termIds to retrieve
+  * Optional parameter for the order for the termIds: In order or in random order
+* Return the test 
 # OLD
 ## 6.2. *Create Test Endpoint*
 
@@ -238,20 +321,33 @@ may be helpful to first think of what objects your service will need, then
 translate that to a table structure, like with the *`Playlist` POJO* versus the
 `playlists` table in the Unit 3 project.*
 
-### 7.1. `tests`
-
-```
-id // partition key, string
-name // string
-username // string
-characterList // number
-```
-
-### 7.2. `accounts`
-
+## 7.1. `Accounts`
 ```
 username // partition key, string
 password // string
+status // string
+```
+
+## 7.2 `TestTemplate`
+```
+templateId // partition key, string
+title // string
+username // string
+dateModified // string
+hiraganaIdList // List
+katakanaIdList // List
+```
+
+## 7.3 `Term`
+```
+termId // partition key, string
+romanization // string
+symbol // string
+
+templateId // string
+username // string
+dateCreated // string
+definition // string
 ```
 
 # 8. Pages
