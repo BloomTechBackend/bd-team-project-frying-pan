@@ -72,12 +72,7 @@ public class DeleteCustomTermActivityTest {
     @Test
     public void handleRequest_CustomTermDoesNotExists_throwTermNotFoundException() {
         // GIVEN
-        String expectedRomaji = "aka";
-        String expectedSymbol = "あか";
         String expectedTermId = "H0001";
-        String expectedUsername = "CandyApple";
-        String expectTemplateId = "CAt001";
-        String expectedDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
         DeleteCustomTermRequest request = DeleteCustomTermRequest.builder()
                 .withTermId(expectedTermId)
