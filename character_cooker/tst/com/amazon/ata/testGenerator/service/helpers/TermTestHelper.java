@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TermTestHelper {
 
-    private static final String[] romanization = new String[] {"a", "i", "u", "e", "o"};
-    private static final String[] symbols = new String[] {"あ", "い", "う", "え", "お"};
-    private static final String[] ids = new String[] {"000", "001", "002", "003", "004"};
+    public static final String[] romanization = new String[] {"a", "i", "u", "e", "o"};
+    public static final String[] symbols = new String[] {"あ", "い", "う", "え", "お"};
+    public static final String[] ids = new String[] {"000", "001", "002", "003", "004"};
 
     public static List<Term> generateTermsList (int size, String templateId, String username, String date) {
         List<Term> terms = new ArrayList<>();
