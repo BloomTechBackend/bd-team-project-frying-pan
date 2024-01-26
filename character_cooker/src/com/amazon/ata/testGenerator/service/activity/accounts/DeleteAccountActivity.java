@@ -35,8 +35,6 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
         this.termDao = termDao;
     }
 
-    @Inject
-
     /**
      *
      * @param request The Lambda Function input
@@ -56,8 +54,9 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
         }
         // Populate account primary key
         Account account = accountDao.getAccount(request.getUsername());
+
         // Check password
-        if (request.getPassword().equals(account.getPassword())) {
+        if (!request.getPassword().equals(account.getPassword())) {
             throw new InvalidAttributeValueException("Incorrect Password");
         }
         accountDao.deleteAccount(account);
