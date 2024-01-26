@@ -39,13 +39,13 @@ public class DeleteTestTemplateActivity implements RequestHandler<DeleteTestTemp
         testTemplateDao.deleteTemplate(template);
         TemplateModel templateModel = ModelConverter.toTemplateModel(template);
 
-        List<Term> terms = termDao.getTermsByTemplate(request.getTemplateId());
-
         List<TermModel> termModels = new ArrayList<>();
-
-        for (Term term : terms) {
-            termDao.deleteTerm(term);
-            termModels.add(ModelConverter.toTermModel(term));
+        List<Term> terms = termDao.getTermsByTemplate(request.getTemplateId());
+        if (terms != null) {
+            for (Term term : terms) {
+                termDao.deleteTerm(term);
+                termModels.add(ModelConverter.toTermModel(term));
+            }
         }
 
         return DeleteTestTemplateResult.builder()

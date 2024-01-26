@@ -61,19 +61,24 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
         }
         accountDao.deleteAccount(account);
 
-        List<TestTemplate> templates = testTemplateDao.getTemplateByUserTitle(request.getUsername());
         List<TemplateModel> templateModels = new ArrayList<>();
-        for (TestTemplate template : templates) {
-            testTemplateDao.deleteTemplate(template);
-            templateModels.add(ModelConverter.toTemplateModel(template));
+        List<TermModel> termModels = new ArrayList<>();
+        List<TestTemplate> templates = testTemplateDao.getTemplateByUserTitle(request.getUsername());
+        if (templates != null) {
+            for (TestTemplate template : templates) {
+                testTemplateDao.deleteTemplate(template);
+                templateModels.add(ModelConverter.toTemplateModel(template));
+            }
+
+            List<Term> terms = termDao.getTermsByUser(request.getUsername());
+            if (terms != null) {
+                for (Term term : terms) {
+                    termDao.deleteTerm(term);
+                    termModels.add(ModelConverter.toTermModel(term));
+                }
+            }
         }
 
-        List<Term> terms = termDao.getTermsByUser(request.getUsername());
-        List<TermModel> termModels = new ArrayList<>();
-        for (Term term : terms) {
-            termDao.deleteTerm(term);
-            termModels.add(ModelConverter.toTermModel(term));
-        }
 
         return DeleteAccountResult.builder()
                 .withLogMessage("Account deletion successful")
