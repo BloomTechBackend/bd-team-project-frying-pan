@@ -8,6 +8,11 @@ import com.amazon.ata.testGenerator.service.models.accounts.requests.CreateAccou
 import com.amazon.ata.testGenerator.service.models.accounts.results.CreateAccountResult;
 import com.amazon.ata.testGenerator.service.util.TestGeneratorServiceUtils;
 
+import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +28,10 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
     public CreateAccountActivity(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
+
+//    public CreateAccountActivity() {
+//        this.accountDao = new AccountDao(new DynamoDBMapper((AmazonDynamoDB) ((AmazonDynamoDBClientBuilder) ((AmazonDynamoDBClientBuilder) AmazonDynamoDBClientBuilder.standard().withCredentials(DefaultAWSCredentialsProviderChain.getInstance())).withRegion(Regions.US_WEST_2)).build()));
+//    }
 
     /**
      * This method handles the incoming request by creating a new account
