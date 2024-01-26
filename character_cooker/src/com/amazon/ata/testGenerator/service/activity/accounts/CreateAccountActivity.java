@@ -74,12 +74,9 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
 
         accountDao.saveAccount(newAccount);
 
-        String message = "Create Account successful";
-        log.info(message);
-        CreateAccountResult result = CreateAccountResult.builder()
-                .withLogMessage(message)
+        return CreateAccountResult.builder()
+                .withLogMessage("Create Account Successful!")
                 .withUsername(newAccount.getUsername())
                 .build();
-        return result;
     }
 }
