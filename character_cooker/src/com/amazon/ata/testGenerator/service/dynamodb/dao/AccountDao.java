@@ -2,6 +2,7 @@ package com.amazon.ata.testGenerator.service.dynamodb.dao;
 
 import com.amazon.ata.testGenerator.service.dynamodb.models.Account;
 import com.amazon.ata.testGenerator.service.dynamodb.models.Status;
+import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
 import com.amazon.ata.testGenerator.service.exceptions.AccountNotFoundException;
 import com.amazon.ata.testGenerator.service.exceptions.UnauthorizedAccessException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
@@ -24,6 +25,11 @@ public class AccountDao {
         }
 
         return account;
+    }
+
+    public boolean isIdUnique(String username) {
+        Account account = this.dynamoDBMapper.load(Account.class, username);
+        return account == null;
     }
 
     public boolean isLoggedIn(String username) {
