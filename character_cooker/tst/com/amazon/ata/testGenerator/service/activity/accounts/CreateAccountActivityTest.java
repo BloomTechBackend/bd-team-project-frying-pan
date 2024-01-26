@@ -47,6 +47,8 @@ public class CreateAccountActivityTest {
                 .withPasswordConfirm(expectedPassword)
                 .build();
 
+        when(accountDao.isIdUnique(request.getUsername())).thenReturn(true);
+
         // When
         CreateAccountResult result = createAccountActivity.handleRequest(request, null);
 
@@ -110,7 +112,7 @@ public class CreateAccountActivityTest {
                 .build();
 
         // Username is taken already
-        when(accountDao.getAccount(expectedUsername)).thenReturn(account);
+        when(accountDao.isIdUnique(request.getUsername())).thenReturn(false);
         // When
         // Then
         assertThrows(InvalidAttributeValueException.class,
@@ -130,7 +132,7 @@ public class CreateAccountActivityTest {
                 .withPasswordConfirm(wrongPassword)
                 .build();
 
-        when(accountDao.getAccount(expectedUsername)).thenReturn(null);
+        when(accountDao.isIdUnique(request.getUsername())).thenReturn(true);
         // When
         // Then
         assertThrows(InvalidAttributeValueException.class,

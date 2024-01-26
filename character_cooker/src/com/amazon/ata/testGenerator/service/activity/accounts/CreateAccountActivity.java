@@ -55,8 +55,7 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
             throw new InvalidAttributeValueException("Invalid Password");
         }
         // Validate Unique Username
-        Account accountChecker = accountDao.getAccount(request.getUsername());
-        if (accountChecker != null) {
+        if (!accountDao.isIdUnique(request.getUsername())) {
             throw new InvalidAttributeValueException("Username: "
                     + request.getUsername() + " already exists!");
         }
