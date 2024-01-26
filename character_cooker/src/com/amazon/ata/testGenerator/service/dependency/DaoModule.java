@@ -17,8 +17,7 @@ public class DaoModule {
     @Provides
     DynamoDBMapper provideDynamoDBMapper() {
         AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(
-                        new BasicAWSCredentials("", "")))
+                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("", "")))
                 .withRegion(Regions.US_WEST_2)
                 .build();
         return new DynamoDBMapper(client);
