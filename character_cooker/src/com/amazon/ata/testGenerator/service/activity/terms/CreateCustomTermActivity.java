@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 public class CreateCustomTermActivity implements RequestHandler<CreateCustomTermRequest, CreateCustomTermResult> {
     private final Logger log = LogManager.getLogger();
-    private TermDao termDao;
+    private final TermDao termDao;
 
     @Inject
     public CreateCustomTermActivity(TermDao termDao) {

@@ -23,9 +23,9 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
         this.termDao = termDao;
     }
 
-
     @Override
     public GenerateTestResult handleRequest(GenerateTestRequest request, Context context) {
+        log.info("Received GenerateTestRequest {}", request);
 
         String title;
         if (request.getTitle() == null || request.getTitle().isEmpty()) {
