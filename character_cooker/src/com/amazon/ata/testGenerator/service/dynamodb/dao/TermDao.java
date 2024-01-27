@@ -4,9 +4,11 @@ import com.amazon.ata.testGenerator.service.dynamodb.models.Term;
 import com.amazon.ata.testGenerator.service.exceptions.TermNotFoundException;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBQueryExpression;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.Map;
 
 public class TermDao {
     private final DynamoDBMapper dynamoDBMapper;
@@ -40,23 +42,22 @@ public class TermDao {
     }
 
     public List<Term> getTermsByTemplate(String templateId) {
-        Term term = new Term();
-        term.setUsername(templateId);
         DynamoDBQueryExpression<Term> queryExpression = new DynamoDBQueryExpression<Term>()
                 .withIndexName(Term.TEMPLATE_DATE_INDEX)
                 .withConsistentRead(false)
-                .withHashKeyValues(term);
+                .withKeyConditionExpression("templateId = :templateId") // Define the key condition expression
+                .withExpressionAttributeValues(Map.of(":templateId", new AttributeValue().withS(templateId)));
+
 
         return dynamoDBMapper.query(Term.class, queryExpression);
     }
 
     public List<Term> getTermsByUser(String username) {
-        Term term = new Term();
-        term.setUsername(username);
         DynamoDBQueryExpression<Term> queryExpression = new DynamoDBQueryExpression<Term>()
                 .withIndexName(Term.USERNAME_DATE_INDEX)
                 .withConsistentRead(false)
-                .withHashKeyValues(term);
+                .withKeyConditionExpression("username = :username") // Define the key condition expression
+                .withExpressionAttributeValues(Map.of(":username", new AttributeValue().withS(username)));
 
         return dynamoDBMapper.query(Term.class, queryExpression);
     }

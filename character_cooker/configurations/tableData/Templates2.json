@@ -3,9 +3,9 @@
     {
       "PutRequest": {
         "Item": {
-          "templateId": {"S": "hjk001"},
+          "templateId": {"S": "000004"},
           "title": {"S": "hiragana a section"},
-          "username": {"S": "Andre"},
+          "username": {"S": "userTemp1"},
           "dateModified": {"S": "2024-01-26T12:01:00"},
           "hiraganaIdList": {"L": [{"S": "h001"}, {"S": "h002"}, {"S": "h003"}, {"S": "h004"}, {"S": "h005"}]},
           "katakanaIdList": {"L": []}
@@ -15,9 +15,9 @@
     {
       "PutRequest": {
         "Item": {
-          "templateId": {"S": "hjk002"},
+          "templateId": {"S": "000005"},
           "title": {"S": "hiragana ka section"},
-          "username": {"S": "Andre"},
+          "username": {"S": "toBeDeleted"},
           "dateModified": {"S": "2024-01-26T12:02:00"},
           "hiraganaIdList": {"L": []},
           "katakanaIdList": {"L": [{"S": "h001"}, {"S": "h002"}, {"S": "h003"}, {"S": "h004"}, {"S": "h005"}]}
@@ -27,9 +27,9 @@
     {
       "PutRequest": {
         "Item": {
-          "templateId": {"S": "qwerty1"},
+          "templateId": {"S": "000006"},
           "title": {"S": "hiragana a section"},
-          "username": {"S": "Bryan"},
+          "username": {"S": "ToBeDeleted"},
           "dateModified": {"S": "2024-01-26T12:01:00"},
           "hiraganaIdList": {"L": [{"S": "h001"}, {"S": "h002"}, {"S": "h003"}, {"S": "h004"}, {"S": "h005"}]},
           "katakanaIdList": {"L": []}

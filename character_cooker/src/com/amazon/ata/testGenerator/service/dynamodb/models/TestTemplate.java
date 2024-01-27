@@ -5,7 +5,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import java.util.List;
 import java.util.Objects;
 
-@DynamoDBTable(tableName = "LBC_Terms")
+@DynamoDBTable(tableName = "LBC_TestTemplates")
 public class TestTemplate {
     public static final String USERNAME_TITLE_INDEX= "UsernameTitleIndex";
     public static final String USERNAME_DATE_INDEX = "UsernameDateIndex";
