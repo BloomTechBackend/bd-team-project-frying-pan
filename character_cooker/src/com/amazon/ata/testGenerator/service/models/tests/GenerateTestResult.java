@@ -99,4 +99,14 @@ public class GenerateTestResult {
             return new GenerateTestResult(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "GenerateTestResult{" +
+                "title='" + title + '\'' +
+                ", hiraganaTest=" + hiraganaTest +
+                ", katakanaTest=" + katakanaTest +
+                ", customTest=" + customTest +
+                '}';
+    }
 }

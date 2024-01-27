@@ -87,4 +87,13 @@ public class TestModel {
             return new TestModel(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "TestModel{" +
+                "title='" + title + '\'' +
+                ", testQuestions='" + testQuestions + '\'' +
+                ", testAnswers='" + testAnswers + '\'' +
+                '}';
+    }
 }
