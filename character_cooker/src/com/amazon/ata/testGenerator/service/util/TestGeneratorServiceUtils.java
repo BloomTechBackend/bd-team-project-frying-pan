@@ -78,7 +78,7 @@ public class TestGeneratorServiceUtils {
 
     public static String getDate() {
         LocalDateTime currentDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         return currentDateTime.format(formatter);
     }
 }

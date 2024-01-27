@@ -1,0 +1,40 @@
+{
+  "LBC_TestTemplate": [
+    {
+      "PutRequest": {
+        "Item": {
+          "templateId": {"S": "a1b2c3"},
+          "title": {"S": "hiragana a section"},
+          "username": {"S": "Andre"},
+          "dateModified": {"S": "2024-01-26T23:38:00"},
+          "hiraganaIdList": {"S": "ぢょ"},
+          "katakanaIdList": {"S": "ぢょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "templateId": {"S": "a1b2c3"},
+          "title": {"S": "hiragana ka section"},
+          "username": {"S": "Andre"},
+          "dateModified": {"S": "ぢょ"},
+          "hiraganaIdList": {"S": "ぢょ"},
+          "katakanaIdList": {"S": "ぢょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "templateId": {"S": "jd83la"},
+          "title": {"S": "jo"},
+          "username": {"S": "ぢょ"},
+          "dateModified": {"S": "ぢょ"},
+          "hiraganaIdList": {"S": "ぢょ"},
+          "katakanaIdList": {"S": "ぢょ"}
+        }
+      }
+    }
+  ]
+}

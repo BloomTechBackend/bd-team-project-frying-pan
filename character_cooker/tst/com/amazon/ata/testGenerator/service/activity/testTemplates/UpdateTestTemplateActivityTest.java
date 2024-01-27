@@ -5,6 +5,7 @@ import com.amazon.ata.testGenerator.service.dynamodb.models.TestTemplate;
 import com.amazon.ata.testGenerator.service.exceptions.TestTemplateNotFoundException;
 import com.amazon.ata.testGenerator.service.models.testTemplates.requests.UpdateTestTemplateRequest;
 import com.amazon.ata.testGenerator.service.models.testTemplates.results.UpdateTestTemplateResult;
+import com.amazon.ata.testGenerator.service.util.TestGeneratorServiceUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -41,7 +42,7 @@ public class UpdateTestTemplateActivityTest {
         String expectedUsername = "expectedUsername";
         List<String> expectedIds1 = Arrays.asList(new String[] {"H000", "H001", "H002","H003","H004"});
         List<String> expectedIds2 = Arrays.asList(new String[] {"K000", "K001", "K002","K003","K004"});
-        String startingDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String startingDate = TestGeneratorServiceUtils.getDate();
 
         TestTemplate startingTemplate = new TestTemplate();
         startingTemplate.setTemplateId(expectedTemplateId);
