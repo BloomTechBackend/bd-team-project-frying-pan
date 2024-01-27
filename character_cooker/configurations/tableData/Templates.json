@@ -3,10 +3,10 @@
     {
       "PutRequest": {
         "Item": {
-          "templateId": {"S": "a1b2c3"},
+          "templateId": {"S": "hjk001"},
           "title": {"S": "hiragana a section"},
           "username": {"S": "Andre"},
-          "dateModified": {"S": "2024-01-26T23:38:00"},
+          "dateModified": {"S": "2024-01-26T12:01:00"},
           "hiraganaIdList": {"S": "ぢょ"},
           "katakanaIdList": {"S": "ぢょ"}
         }
@@ -15,10 +15,10 @@
     {
       "PutRequest": {
         "Item": {
-          "templateId": {"S": "a1b2c3"},
+          "templateId": {"S": "hjk002"},
           "title": {"S": "hiragana ka section"},
           "username": {"S": "Andre"},
-          "dateModified": {"S": "ぢょ"},
+          "dateModified": {"S": "2024-01-26T12:02:00"},
           "hiraganaIdList": {"S": "ぢょ"},
           "katakanaIdList": {"S": "ぢょ"}
         }
@@ -27,10 +27,10 @@
     {
       "PutRequest": {
         "Item": {
-          "templateId": {"S": "jd83la"},
-          "title": {"S": "jo"},
-          "username": {"S": "ぢょ"},
-          "dateModified": {"S": "ぢょ"},
+          "templateId": {"S": "qwerty1"},
+          "title": {"S": "hiragana a section"},
+          "username": {"S": "Bryan"},
+          "dateModified": {"S": "2024-01-26T12:01:00"},
           "hiraganaIdList": {"S": "ぢょ"},
           "katakanaIdList": {"S": "ぢょ"}
         }

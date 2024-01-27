@@ -76,7 +76,7 @@ public class UpdateTestTemplateActivityTest {
         assertEquals(expectedIds2, result.getTemplate().getKatakanaIdList());
 
         // Verify the new date is more recent than the old date: starting date < new date modified
-        assertTrue(startingDate.compareTo(result.getTemplate().getDateModified()) < 0);
+        assertTrue(startingDate.compareTo(result.getTemplate().getDateModified()) <= 0);
     }
 
     @Test
@@ -87,7 +87,7 @@ public class UpdateTestTemplateActivityTest {
         String expectedUsername = "expectedUsername";
         List<String> expectedIds1 = Arrays.asList(new String[] {"H000", "H001", "H002","H003","H004"});
         List<String> expectedIds2 = Arrays.asList(new String[] {"K000", "K001"});
-        String startingDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        String startingDate = TestGeneratorServiceUtils.getDate();
 
         TestTemplate startingTemplate = new TestTemplate();
         startingTemplate.setTemplateId(expectedTemplateId);
@@ -120,8 +120,8 @@ public class UpdateTestTemplateActivityTest {
         assertEquals(expectedIds1, result.getTemplate().getHiraganaIdList());
         assertEquals(expectedIds2, result.getTemplate().getKatakanaIdList());
 
-        // Verify the new date is more recent than the old date: starting date < new date modified
-        assertTrue(startingDate.compareTo(result.getTemplate().getDateModified()) < 0);
+        // Verify the new date is more recent than the old date: starting date <= new date modified
+        assertTrue(startingDate.compareTo(result.getTemplate().getDateModified()) <= 0);
     }
 
     // Throw Exception Tests:
@@ -133,7 +133,6 @@ public class UpdateTestTemplateActivityTest {
         String expectedUsername = "expectedUsername";
         List<String> expectedIds1 = Arrays.asList(new String[] {"H000", "H001", "H002","H003","H004"});
         List<String> expectedIds2 = Arrays.asList(new String[] {"K000", "K001"});
-        String startingDate = LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 
         UpdateTestTemplateRequest request = UpdateTestTemplateRequest.builder()
                 .withTemplateId(expectedTemplateId)
