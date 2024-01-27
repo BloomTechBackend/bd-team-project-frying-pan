@@ -29,9 +29,10 @@ public class CreateAccountActivity implements RequestHandler<CreateAccountReques
         this.accountDao = accountDao;
     }
 
-//    public CreateAccountActivity() {
-//        this.accountDao = new AccountDao(new DynamoDBMapper((AmazonDynamoDB) ((AmazonDynamoDBClientBuilder) ((AmazonDynamoDBClientBuilder) AmazonDynamoDBClientBuilder.standard().withCredentials(DefaultAWSCredentialsProviderChain.getInstance())).withRegion(Regions.US_WEST_2)).build()));
-//    }
+    public CreateAccountActivity() {
+        this.accountDao = new AccountDao(new DynamoDBMapper((AmazonDynamoDB) ((AmazonDynamoDBClientBuilder) ((AmazonDynamoDBClientBuilder)
+                AmazonDynamoDBClientBuilder.standard().withCredentials(DefaultAWSCredentialsProviderChain.getInstance())).withRegion(Regions.US_WEST_2)).build()));
+    }
 
     /**
      * This method handles the incoming request by creating a new account
