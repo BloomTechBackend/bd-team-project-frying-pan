@@ -3,6 +3,9 @@ package com.amazon.ata.testGenerator.service.models.terms.requests;
 public class DeleteCustomTermRequest {
     private String termId;
 
+    public DeleteCustomTermRequest() {
+    }
+
     public DeleteCustomTermRequest(Builder builder) {
         this.termId = builder.termId;
     }

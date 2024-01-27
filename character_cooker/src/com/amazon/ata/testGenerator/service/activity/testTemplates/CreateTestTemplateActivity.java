@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 
 public class CreateTestTemplateActivity implements RequestHandler<CreateTestTemplateRequest, CreateTestTemplateResult> {
     private final Logger log = LogManager.getLogger();
@@ -29,14 +30,23 @@ public class CreateTestTemplateActivity implements RequestHandler<CreateTestTemp
     @Override
     public CreateTestTemplateResult handleRequest(CreateTestTemplateRequest request, Context context) {
         log.info("Received CreateTestTemplateRequest {}", request);
-
         // Create Template
         TestTemplate template = new TestTemplate();
         template.setTitle(request.getTitle());
         template.setUsername(request.getUsername());
-        template.setHiraganaIdList(request.getHiraganaIdList());
-        template.setKatakanaIdList(request.getKatakanaIdList());
         template.setDateModified(TestGeneratorServiceUtils.getDate());
+
+        if (request.getHiraganaIdList() == null) {
+            template.setHiraganaIdList(new ArrayList<>());
+        } else {
+            template.setHiraganaIdList(request.getHiraganaIdList());
+        }
+
+        if (request.getKatakanaIdList() == null) {
+            template.setKatakanaIdList(new ArrayList<>());
+        } else {
+            template.setKatakanaIdList(request.getKatakanaIdList());
+        }
 
         // Create Unique Template ID
         String id;
