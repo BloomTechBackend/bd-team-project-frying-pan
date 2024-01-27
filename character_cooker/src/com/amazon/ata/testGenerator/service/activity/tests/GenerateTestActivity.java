@@ -37,7 +37,7 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
         // Call CreateTestModel 3 times
         TestModel hiragana = createTestModel(request.getHiraganaIds(), request.isRandomHiragana(), "Hiragana");
         TestModel katakana = createTestModel(request.getKatakanaIds(), request.isRandomKatakana(), "Katakana");
-        TestModel custom = createTestModel(request.getCustomIds(), request.isRandomCustom(), "Hiragana");
+        TestModel custom = createTestModel(request.getCustomIds(), request.isRandomCustom(), "Custom");
 
         return GenerateTestResult.builder()
                 .withTitle(title)
