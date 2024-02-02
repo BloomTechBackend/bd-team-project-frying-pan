@@ -10,6 +10,16 @@ body {
   height: 100%;
 }
 
+
+header {
+  margin: 0;
+  color:yellow;
+  padding: 30px;
+  font: 24px;
+  background-color: cornflowerblue;
+  width: 100%;
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
@@ -45,4 +55,59 @@ body {
   border: 1px solid #ccc;
   border-top: none;
   height: 100%;
+}
+
+#Editor {
+  /* terms container */
+  .terms{
+    margin: 2.5%;
+    display: flex;
+    justify-content:space-evenly;
+    background-color:lightgreen;
+  }
+
+  .termTable{
+    margin: 10px;
+    border-collapse: collapse;
+    padding: 10px;
+    font-size: 16px;
+    max-height: fit-content;
+    width: 20%;
+    table-layout: fixed;
+  }
+
+  .termTable th {
+    border: solid 1px black;
+    background-color: skyblue;
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+  }
+
+  .termTable td {
+    border: solid 1px black;
+    background-color: whitesmoke;
+    padding: 10px;
+    font-size: 16px;
+    color: blue;
+    height: fit-content;
+  }
+
+  .termTable td .symbol {
+    display:none;
+  }
+
+  .termTable td:hover {
+    span.romaji {
+        display:none;
+    }
+    span.symbol {
+        display:inline;
+    }
+    background:lightblue;
+  }
+
+  .termTable input[type="checkbox"] {
+    transform: scale(1.25);
+  }
 }

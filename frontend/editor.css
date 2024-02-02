@@ -93,11 +93,6 @@ td .symbol {
     background:lightblue;
 }
 
-input{
-    margin: 10px;  
-    size-adjust: 10px;  
-}
-
 .terms input[type="checkbox"] {
     transform: scale(1.25);
 }

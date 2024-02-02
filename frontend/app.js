@@ -28,3 +28,39 @@ function toggleMenu(isLoggedIn) {
   document.getElementById('menu-after-login').style.display = isLoggedIn ? 'block' : 'none';
 }
 
+
+// Check if the user is logged in, then display signned accessible features 
+window.onload = async function(evt) { 
+  evt.preventDefault();
+
+  const account = {
+    "username": username
+  }
+
+  const json = JSON.stringify(account);
+  const url = 'https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/' + Candy + '/status';
+  
+
+  axios.get('http://localhost:8080/contacts/')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+    toggleMenu(response.data.status);
+  })
+  .catch(function(error) {
+    toggleMenu(false);
+    console.log(error);
+  })
+
+  // try {
+  //   const response = await axios.get('https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/' + Candy + '/status');
+  //   // Handle success
+  //   console.log(response.data); 
+  //   toggleMenu(response.data.status);
+  //   alert(response.data.status)
+  //   window.location.reload()
+  // } catch (error) {
+  //   // Handle 
+  //   toggleMenu(response.data.false);
+  // }
+}
