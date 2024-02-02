@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" /> -->
+    <link rel="stylesheet" href="editor.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="editor.js" defer></script>
+    <title>Character Cooker: Editor</title>
+  </head>
+  <body>
+    <header>
+      <h1 id="title"> Character Cooker</h1>
+      <div class="account">
+        <button >Create Account</button>
+        <button >Login</button> 
+      </div>
+    </header>
+    <main>
+      <div class="heading">
+        <h2>Editor</h2>
+        <p id="demo"></p>
+      </div>
+      <div>
+        <form id="template-form">
+          <div class="actions">
+            <input type="text" name="title" placeholder="title" form="template-form">
+            <button>Generate Test</button>
+          </div>
+          <div id="tablesContainer" class="terms">
+            <table id="hiraganaTerm" class="termTable">
+              <tr>
+                <th>Hiragana</th>
+              </tr>
+              <!-- fast selector -->
+              <tr>
+                <th>
+                  <input type="checkbox" id="allHiragana" class="hiragana" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allHiragana">All</label>
+                  <input type="checkbox" id="allHiraganaExtra" class="hiragana extra" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allHiraganExtra">All Extras:</label>
+                </th>
+              </tr>
+              <!-- base -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana0">
+                    <label for="hiragana0">
+                    <span class="romaji">a · i · u · e · o</span>
+                    <span class="symbol">あ · い · う · え · お</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana1">
+                    <label for="hiragana1">
+                    <span class="romaji">ka · ki · ku · ke · ko</span>
+                    <span class="symbol">か · き · く · け · こ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana2">
+                    <label for="hiragana2">
+                    <span class="romaji">sa · shi · su · se · so</span>
+                    <span class="symbol">さ · し · す · せ · そ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana3">
+                    <label for="hiragana3">
+                    <span class="romaji">ta · chi · tsu · te · to</span>
+                    <span class="symbol">た · ち · つ · て · と</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana4">
+                    <label for="hiragana4">
+                    <span class="romaji">na · ni · nu · ne · no</span>
+                    <span class="symbol">な · に · ぬ · ね · の</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana5">
+                    <label for="hiragana5">
+                    <span class="romaji">ha · hi · fu · he · ho</span>
+                    <span class="symbol">は · ひ · ふ · へ · ほ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana6">
+                    <label for="hiragana6">
+                    <span class="romaji">ma · mi · mu · me · mo</span>
+                    <span class="symbol">ま · み · む · め · も</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana7">
+                    <label for="hiragana7">
+                    <span class="romaji">ya · yu · yo</span>
+                    <span class="symbol">や · ゆ · よ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana8">
+                    <label for="hiragana7">
+                    <span class="romaji">ra · ri · ru · re · ro</span>
+                    <span class="symbol">ら · り · る · れ · ろ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana" id="hiragana9">
+                    <label class="romaji" for="hiragana9">
+                    <span class="romaji">wa · wo · n</span>
+                    <span class="symbol">わ · を · ん</span></label>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- dakuten -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana extra" id="hiragana10">
+                    <label class="romaji" for="hiragana10">
+                    <span class="romaji">ga · gi · gu · ge · go</span>
+                    <span class="symbol">が · ぎ · ぐ · げ · ご</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana extra" id="hiragana11">
+                    <label class="romaji" for="hiragana11">
+                    <span class="romaji">za · ji · zu · ze · zo</span>
+                    <span class="symbol">ざ · じ · ず · ぜ · ぞ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana extra" id="hiragana12">
+                    <label class="romaji" for="hiragana12">
+                    <span class="romaji">da · ji · zu · de · do</span>
+                    <span class="symbol">だ · ぢ · づ · で · ど</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana extra" id="hiragana13">
+                    <label class="romaji" for="hiragana13">
+                    <span class="romaji">ba · bi · bu · be · bo</span>
+                    <span class="symbol">ば · び · ぶ · べ · ぼ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana extra" id="hiragana14">
+                    <label class="romaji" for="hiragana14">
+                    <span class="romaji">pa · pi · pu · pe · po</span>
+                    <span class="symbol">ぱ · ぴ · ぷ · ぺ · ぽ</span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- yoon -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana15" class="hiragana extra">
+                    <label for="hiragana15">
+                    <span class="romaji">kya · kyu · kyo</span>
+                    <span class="symbol">きゃ · きゅ · きょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana16" class="hiragana extra">
+                    <label for="hiragana16">
+                    <span class="romaji">sha · shu · sho</span>
+                    <span class="symbol">しゃ · しゅ · しょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana17" class="hiragana extra">
+                    <label for="hiragana17">
+                    <span class="romaji">cha · chu · cho</span>
+                    <span class="symbol">ちゃ · ちゅ · ちょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana18" class="hiragana extra">
+                    <label for="hiragana18">
+                    <span class="romaji">nya · nyu · nyo</span>
+                    <span class="symbol">にゃ · にゅ · にょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana19" class="hiragana extra">
+                    <label for="hiragana19">
+                    <span class="romaji">hya · hyu · hyo</span>
+                    <span class="symbol">ひゃ · ひゅ · ひょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana20" class="hiragana extra">
+                    <label for="hiragana20">
+                    <span class="romaji">mya · myu · myo</span>
+                    <span class="symbol">みゃ · みゅ · みょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana21" class="hiragana extra">
+                    <label for="hiragana21">
+                    <span class="romaji">rya · ryu · ryo</span>
+                    <span class="symbol">りゃ · りゅ · りょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana22" class="hiragana extra">
+                    <label for="hiragana22">
+                    <span class="romaji">gya · gyu · gyo</span>
+                    <span class="symbol">ぎゃ · ぎゅ · ぎょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana23" class="hiragana extra">
+                    <label for="hiragana23">
+                    <span class="romaji">ja · ju · jo</span>
+                    <span class="symbol">じゃ · じゅ · じょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana24" class="hiragana extra">  
+                    <label for="hiragana24">  
+                    <span class="romaji">dya · dyu · dyo</span>  
+                    <span class="symbol">ぢゃ · ぢゅ · ぢょ</span>  
+                    </label>  
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana25" class="hiragana extra">  
+                    <label for="hiragana25">  
+                    <span class="romaji">bya · byu · byo</span>  
+                    <span class="symbol">びゃ · びゅ · びょ</span>  
+                    </label>  
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana26" class="hiragana extra">  
+                    <label for="hiragana26">  
+                    <span class="romaji">pya · pyu · pyo</span>  
+                    <span class="symbol">ぴゃ · ぴゅ · ぴょ</span>  
+                    </label>  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="katakanaTable" class="termTable">
+              <tr>
+                <th>
+                  Katakana
+                </th>
+              </tr>
+              <tr>
+                <!-- fast selector -->
+                <th>
+                  <input type="checkbox" id="allKatakana" class="katakana" onchange="toggleAllCheckboxes(this)" />
+                  <label for="all">All</label>
+                  <input type="checkbox" id="allKatakanaExtra" class="katakana extra" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allKatakanaExtra">All Extras:</label>
+                </th>
+              </tr>
+              <!-- base -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana0">
+                    <label for="katakana0">
+                    <span class="romaji">a · i · u · e · o</span>
+                    <span class="symbol">ア · イ · ウ · エ · オ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana1">
+                    <label for="katakana1">
+                    <span class="romaji">ka · ki · ku · ke · ko</span>
+                    <span class="symbol">カ · キ · ク · ケ · コ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana2">
+                    <label for="katakana2">
+                    <span class="romaji">sa · shi · su · se · so</span>
+                    <span class="symbol">サ · シ · ス · セ · ソ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana3">
+                    <label for="katakana3">
+                    <span class="romaji">ta · chi · tsu · te · to</span>
+                    <span class="symbol">タ · チ · ツ · テ · ト</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana4">
+                    <label for="katakana4">
+                    <span class="romaji">na · ni · nu · ne · no</span>
+                    <span class="symbol">ナ · ニ · ヌ · ネ · ノ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana5">
+                    <label for="katakana5">
+                    <span class="romaji">ha · hi · fu · he · ho</span>
+                    <span class="symbol">ハ · ヒ · フ · ヘ · ホ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana" id="katakana6">
+                    <label for="katakana6">
+                    <span class="romaji">ma · mi · mu · me · mo</span>
+                    <span class="symbol">マ · ミ · ム · メ · モ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)">
+                    <input type= "checkbox" class= "katakana" id= "katakana7">
+                    <label for= "katakana7">
+                    <span class= "romaji">ya · yu · yo</span> 
+                    <span class= "symbol">ヤ · ユ · ヨ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" class= "katakana" id= "katakana8"> 
+                    <label for= "katakana8"> 
+                    <span class= "romaji">ra · ri · ru · re · ro</span> 
+                    <span class= "symbol">ラ · リ · ル · レ · ロ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" class= "katakana" id= "katakana9"> 
+                    <label for= "katakana9"> 
+                    <span class= "romaji"> wa · wo · n</span> 
+                    <span class= "symbol">ワ · ヲ · ン</span> 
+                    </label> 
+                  </td>
+                </tr>
+              </tbody>
+              <!-- dakuten -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana10">
+                    <label for="katakana10">
+                    <span class="romaji">ga · gi · gu · ge · go</span>
+                    <span class="symbol">ガ · ギ · グ · ゲ · ゴ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana11">
+                    <label for="katakana11">
+                    <span class="romaji">za · ji · zu · ze · zo</span>
+                    <span class="symbol">ザ · ジ · ズ · ゼ · ゾ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana12">
+                    <label for="katakana12">
+                    <span class="romaji">da · ji · zu · de · do</span>
+                    <span class="symbol">ダ · ヂ · ヅ · デ · ド</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana13">
+                    <label for="katakana13">
+                    <span class="romaji">ba · bi · bu · be · bo</span>
+                    <span class="symbol">バ · ビ · ブ · ベ · ボ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana14">
+                    <label for="katakana14">
+                    <span class="romaji">pa · pi · pu · pe · po</span>
+                    <span class="symbol">パ · ピ · プ · ペ · ポ</span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- yoon -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana15">
+                    <label for="katakana15">
+                    <span class="romaji">kya · kyu · kyo</span>
+                    <span class="symbol">キャ · キュ · キョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana16">
+                    <label for="katakana16">
+                    <span class="romaji">sha · shu · sho</span>
+                    <span class="symbol">シャ · シュ · ショ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana17">
+                    <label for="katakana17">
+                    <span class="romaji">cha · chu · cho</span>
+                    <span class="symbol">チャ · チュ · チョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana18">
+                    <label for="katakana18">
+                    <span class="romaji">nya · nyu · nyo</span>
+                    <span class="symbol">ニャ · ニュ · ニョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana19">
+                    <label for="katakana19">
+                    <span class="romaji">hya · hyu · hyo</span>
+                    <span class="symbol">ヒャ · ヒュ · ヒョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana20">
+                    <label for="katakana20">
+                    <span class="romaji">mya · myu · myo</span>
+                    <span class="symbol">ミャ · ミュ · ミョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana21">
+                    <label for="katakana21">
+                    <span class="romaji">rya · ryu · ryo</span>
+                    <span class="symbol">リャ · リュ · リョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana extra" id="katakana22">
+                    <label for="katakana22">
+                    <span class="romaji">gya · gyu · gyo</span>
+                    <span class="symbol">ギャ · ギュ · ギョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)">
+                    <input type= "checkbox" id= "katakana23" class= "katakana extra">  
+                    <label for= "katakana23">  
+                    <span class= "romaji">ja ju jo</span>  
+                    <span class= "symbol">ジャ ジュ ジョ</span>  
+                    </label>  
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" id= "katakana24" class= "katakana extra"> 
+                    <label for= "katakana24"> 
+                    <span class= "romaji">dya dyu dyo</span> 
+                    <span class= "symbol">ヂャ ヂュ ヂョ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" id= "katakana25" class= "katakana extra"> 
+                    <label for= "katakana25"> 
+                    <span class= "romaji">bya byu byo</span> 
+                    <span class= "symbol">ビャ ビュ ビョ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" id= "katakana26" class= "katakana extra"> 
+                    <label for= "katakana26"> 
+                    <span class= "romaji">pya pyu pyo</span> 
+                    <span class= "symbol">ピャ ピュ ピョ</span> 
+                    </label> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+
+      </div>
+    </main>
+    <footer>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+* {
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0%;
+    /* overflow-y: scroll;  */
+}
+
+header {
+    margin: 0;
+    color:yellow;
+    padding: 30px;
+    font: 24px;
+    background-color: cornflowerblue;
+    width: 100%;
+}
+
+header:hover {
+    color:red;
+}
+
+.account{
+    display: flex;
+    justify-content: flex-end;
+}
+
+main {
+    margin: 0%;
+    background-color:lightgray; 
+}
+
+h2 {
+    padding: 20px;
+}
+
+.actions{
+    display: flex;
+    justify-content:flex-end;
+}
+
+button {
+    margin: 10px;
+    font-size: 14px;
+}
+
+/* terms container */
+.terms{
+    margin: 2.5%;
+    display: flex;
+    justify-content:space-evenly;
+    background-color:lightgreen;
+}
+
+.terms .termTable{
+    margin: 10px;
+    border-collapse: collapse;
+    padding: 10px;
+    font-size: 16px;
+    max-height: fit-content;
+    width: 20%;
+    table-layout: fixed;
+}
+
+.terms th {
+    border: solid 1px black;
+    background-color: skyblue;
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+}
+
+.terms td {
+    border: solid 1px black;
+    background-color: whitesmoke;
+    padding: 10px;
+    font-size: 16px;
+    color: blue;
+}
+
+td .symbol {
+    display:none;
+}
+
+.terms td:hover {
+    span.romaji {
+        display:none;
+    }
+    span.symbol {
+        display:inline;
+    }
+    background:lightblue;
+}
+
+input{
+    margin: 10px;  
+    size-adjust: 10px;  
+}
+
+.terms input[type="checkbox"] {
+    transform: scale(1.25);
+}
+
+/* table label {
+    border: solid red 1px;
+} */

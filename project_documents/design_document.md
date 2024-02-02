@@ -224,8 +224,7 @@ For security reasons:
 * Accepts a `DELETE` request to `/TestTemplates/::templateId`
 * Accepts a template ID to delete the corresponding template
   * Custom made terms associted with the test will also be deleted and returned
-* Returns the template ID, and title
-  * If custom made terms deleted, their romanization and symbol(s) are returned
+* Returns the deleted template (and deleted custom made terms if deleted).
 
 ## 6.3.5 Get Template By Username Date Endpoint
 * Accepts a `GET` request to `/TestTemplate/::username`
@@ -260,7 +259,7 @@ For security reasons:
 * Returns a list of term, sorted by date. 
 
 For security reasons:
-* we will validate the username  
+* we will validate the username 
 
 ## 6.4.1 Delete Term Endpoint
 * Accepts a `DELETE` request to `/Terms/::termId`
@@ -274,17 +273,19 @@ For security reasons:
 * Accepts a list of termIds to retrieve
   * Optional parameter for the order for the termIds: In order or in random order
 * Return the test 
+
+
+
+
 # OLD
 ## 6.2. *Create Test Endpoint*
-
 * Accepts `POST` requests to `/tests`
 * Accepts data to create a new test with a provided name, automatically enters username.
 * Returns the new tests including the unique test ID assigned by the Japanese-Test-Service
 * We will validate test names that do not contain invalid characters: `“ ‘ \`
   * If the test names contain any invalid characters, throw an `InvalidAttributeValueException`
 
-
-*(repeat, but you can use shorthand here, indicating what is different, likely
+(repeat, but you can use shorthand here, indicating what is different, likely
 primarily the data in/out and error conditions. If the sequence diagram is
 nearly identical, you can say in a few words how it is the same/different from
 the first endpoint)*
