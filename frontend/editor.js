@@ -44,7 +44,6 @@ function toggleAllCheckboxes(source) {
 
 // toggle by clicking table data box
 document.addEventListener('DOMContentLoaded', function () {
-  let parentTable = source.closest('table'); 
   const tablesContainer = document.getElementById('tablesContainer');
 
   tablesContainer.addEventListener('click', function (e) {
