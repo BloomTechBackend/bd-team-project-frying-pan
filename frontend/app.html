@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" /> -->
+        <link rel="stylesheet" href="app.css" >
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="app.js" defer></script>
+        <script src="login.js" defer></script>
+        <script src="register.js" defer></script>
+
+        <title>Character Cooker</title>
+    </head>
+    <body>
+      <header>
+        <h1 id="title"> Character Cooker</h1>
+      </header>
+
+      <!-- Tab Links -->
+      <nav>
+        <!-- Tabs visible before login -->
+        <div id="menu-before-login" class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Editor')">Editor</button>
+          <button class="tablinks" onclick="openTab(event, 'Test')">Test</button>
+          <button class="tablinks" onclick="openTab(event, 'Register')">Register</button>
+          <button class="tablinks" onclick="openTab(event, 'Login')">Login</button>
+        </div>
+      
+        <!-- Tabs visible after login -->
+        <div id="menu-after-login" class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Editor')">Editor</button>
+          <button class="tablinks" onclick="openTab(event, 'Test')">Test</button>
+          <button class="tablinks" onclick="openTab(event, 'Templates')">Templates</button>
+          <button class="tablinks" onclick="openTab(event, 'Account')">Account</button>
+        </div>
+      </nav>
+
+      <!-- Tab Content -->
+      <div id="Editor" class="tabcontent">
+        <h3>Editor</h3>
+        <p>Editor content goes here...</p>
+      </div>
+
+      <div id="Test" class="tabcontent">
+        <h3>Test</h3>
+        <p>Test content goes here...</p>
+      </div>
+
+      <div id="Register" class="tabcontent">
+        <h3>Register</h3>
+        <form id="register-form">
+          <div class="container">
+            <label for="username"><b>Username</b></label>
+            <input id="username" type="text" placeholder="Enter Username" name="username" required>
+        
+            <label for="password"><b>Password</b></label>
+            <input id="password" type="password" placeholder="Enter Password" name="password" required>
+            
+            <label for="password-repeat"><b>Password Repeat</b></label>
+            <input id="passwordConfirm" type="password" placeholder="Repeat Password" name="password-repeat" required>
+
+            <button type="submit">register</button>
+          </div>
+      </form>  
+      </div>
+
+      <div id="Login" class="tabcontent">
+        <h3>Login</h3>
+        <form id="login-form">
+            <div class="container">
+              <label for="username"><b>Username</b></label>
+              <input id="usr" type="text" placeholder="Enter Username" name="username" required>
+          
+              <label for="password"><b>Password</b></label>
+              <input id="psd" type="password" placeholder="Enter Password" name="password" required>
+
+              <button type="submit">Login</button>
+            </div>
+        </form>      
+      </div>
+
+      <div id="Templates" class="tabcontent">
+        <h3>Templates</h3>
+        <p>Templates content goes here...</p>
+      </div>
+    
+      <div id="Account" class="tabcontent">
+        <h3>Templates</h3>
+        <p>Templates content goes here...</p>
+      </div>
+
+    </body>
+</html>
