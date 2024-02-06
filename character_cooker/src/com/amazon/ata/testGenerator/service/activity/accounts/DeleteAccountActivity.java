@@ -49,8 +49,8 @@ public class DeleteAccountActivity implements RequestHandler<DeleteAccountReques
             throw new InvalidAttributeValueException("Invalid Username!");
         }
         // validate password
-        if(!TestGeneratorServiceUtils.isValidUsername(request.getPassword())) {
-            throw new InvalidAttributeValueException("Invalid Password");
+        if(!TestGeneratorServiceUtils.isValidPassword(request.getPassword())) {
+            throw new InvalidAttributeValueException("Invalid Password!");
         }
         // Populate account primary key
         Account account = accountDao.getAccount(request.getUsername());
