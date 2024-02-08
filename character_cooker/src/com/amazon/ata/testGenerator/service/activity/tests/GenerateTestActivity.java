@@ -36,8 +36,11 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
 
         // Call CreateTestModel 3 times
         TestModel hiragana = createTestModel(request.getHiraganaIds(), request.isRandomHiragana(), "Hiragana");
+        log.info("Log Hiragana Test Model {}" , hiragana);
         TestModel katakana = createTestModel(request.getKatakanaIds(), request.isRandomKatakana(), "Katakana");
+        log.info("Log Katakana Test Model {}" , katakana);
         TestModel custom = createTestModel(request.getCustomIds(), request.isRandomCustom(), "Custom");
+        log.info("Log Custom Test Model {}" , custom);
 
         return GenerateTestResult.builder()
                 .withTitle(title)
@@ -55,7 +58,7 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
      * @param isRandom optional parameter the user selects for the characters order
      * @return
      */
-    private TestModel createTestModel(List<String> ids, boolean isRandom, String title) {
+    public TestModel createTestModel(List<String> ids, boolean isRandom, String title) {
         if (ids == null || ids.isEmpty()) {
             return null;
         }
