@@ -13,6 +13,12 @@ public class TestModel {
 
     }
 
+    public TestModel(String title, String testQuestions, String testAnswers) {
+        this.title = title;
+        this.testQuestions = testQuestions;
+        this.testAnswers = testAnswers;
+    }
+
     public TestModel(Builder builder) {
         this.title = builder.title;
         this.testQuestions = builder.testQuestions;
@@ -23,27 +29,24 @@ public class TestModel {
         return title;
     }
 
-    public TestModel setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this;
     }
 
     public String getTestQuestions() {
         return testQuestions;
     }
 
-    public TestModel setTestQuestions(String testQuestions) {
+    public void setTestQuestions(String testQuestions) {
         this.testQuestions = testQuestions;
-        return this;
     }
 
     public String getTestAnswers() {
         return testAnswers;
     }
 
-    public TestModel setTestAnswers(String testAnswers) {
+    public void setTestAnswers(String testAnswers) {
         this.testAnswers = testAnswers;
-        return this;
     }
 
     @Override
