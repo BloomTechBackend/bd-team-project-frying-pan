@@ -35,11 +35,11 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
         }
 
         // Call CreateTestModel 3 times
-        TestModel hiragana = createTestModel(request.getHiraganaIds(), request.isRandomHiragana(), "Hiragana");
+        TestModel hiragana = createTestModel(request.getHiraganaIds(), request.isHiraganaRandom(), "Hiragana");
         log.info("Log Hiragana Test Model {}" , hiragana);
-        TestModel katakana = createTestModel(request.getKatakanaIds(), request.isRandomKatakana(), "Katakana");
+        TestModel katakana = createTestModel(request.getKatakanaIds(), request.isKatakanaRandom(), "Katakana");
         log.info("Log Katakana Test Model {}" , katakana);
-        TestModel custom = createTestModel(request.getCustomIds(), request.isRandomCustom(), "Custom");
+        TestModel custom = createTestModel(request.getCustomIds(), request.isCustomRandom(), "Custom");
         log.info("Log Custom Test Model {}" , custom);
 
         return GenerateTestResult.builder()
@@ -56,14 +56,13 @@ public class GenerateTestActivity implements RequestHandler<GenerateTestRequest,
      *
      * @param ids list of test ids to generate
      * @param isRandom optional parameter the user selects for the characters order
-     * @return
+     * @return a string of answers and a string of questions
      */
     public TestModel createTestModel(List<String> ids, boolean isRandom, String title) {
         if (ids == null || ids.isEmpty()) {
             return null;
         }
 
-        //
         if (isRandom) {
             Collections.shuffle(ids);
         }
