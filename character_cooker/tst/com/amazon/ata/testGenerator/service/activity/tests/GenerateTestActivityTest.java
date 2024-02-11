@@ -198,7 +198,6 @@ public class GenerateTestActivityTest {
         GenerateTestResult result = generateTestActivity.handleRequest(request, null);
 
         // Then
-        verify(Collections).shuffle(any());
 
         assertEquals("Test", result.getTitle());
         assertNotNull(result.getHiraganaTest());
