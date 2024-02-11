@@ -3,100 +3,86 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0%;
-    /* overflow-y: scroll;  */
-}
+#Editor {   
 
-header {
-    margin: 0;
-    color:yellow;
-    padding: 30px;
-    font: 24px;
-    background-color: cornflowerblue;
-    width: 100%;
-}
+    /* terms container */
+    .tablesContainer{
+        margin: 0%;
+        display: flex;
+        justify-content:space-evenly;
+        align-items: flex-start; /* Align items to the start of the cross axis */
+        background-color:lightgreen;
+    }
+    
+    .termTable{
+        margin-top: 5%;
+        margin-bottom: 10%;
+        border-collapse: collapse;
+        padding: 10px;
+        font-size: 16px;
+        height: auto;
+        table-layout: fixed;
+        width: 18%;
+    }
+    
+    .termTable th {
+        border: solid 1px black;
+        background-color: skyblue;
+        padding: 10px;
+        font-size: 16px;
+        color: black;
+    }
 
-header:hover {
-    color:red;
-}
-
-.account{
-    display: flex;
-    justify-content: flex-end;
-}
-
-main {
-    margin: 0%;
-    background-color:lightgray; 
-}
-
-h2 {
-    padding: 20px;
-}
-
-.actions{
-    display: flex;
-    justify-content:flex-end;
-}
-
-button {
-    margin: 10px;
-    font-size: 14px;
-}
-
-/* terms container */
-.terms{
-    margin: 2.5%;
-    display: flex;
-    justify-content:space-evenly;
-    background-color:lightgreen;
-}
-
-.terms .termTable{
-    margin: 10px;
-    border-collapse: collapse;
-    padding: 10px;
-    font-size: 16px;
-    max-height: fit-content;
-    width: 20%;
-    table-layout: fixed;
-}
-
-.terms th {
-    border: solid 1px black;
-    background-color: skyblue;
-    padding: 10px;
-    font-size: 16px;
-    color: black;
-}
-
-.terms td {
-    border: solid 1px black;
-    background-color: whitesmoke;
-    padding: 10px;
-    font-size: 16px;
-    color: blue;
-}
-
-td .symbol {
-    display:none;
-}
-
-.terms td:hover {
-    span.romaji {
+    .termTable tr {
+        height: 40px;
+    }
+    
+    .termTable td {
+        border: solid 1px black;
+        background-color: whitesmoke;
+        padding: 10px;
+        font-size: 16px;
+        color: blue;
+        height: auto;
+    }
+    
+    td .symbol {
         display:none;
     }
-    span.symbol {
-        display:inline;
+    
+    .termTable td:hover {
+        span.romaji {
+            display:none;
+        }
+        span.symbol {
+            display:inline;
+        }
+        background:lightblue;
     }
-    background:lightblue;
+    
+    .terms input{
+        transform: scale(1.25);
+    }
+    
+    .terms label {
+        padding-left: 5px;
+        padding-right: 10px;
+    }
 }
 
-.terms input[type="checkbox"] {
-    transform: scale(1.25);
+.actions {
+    display: flex; /* Enable flex layout */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: flex-start;
+    border-top: solid black 1px;
+    border: 3px solid #f1f1f1;
 }
 
-/* table label {
-    border: solid red 1px;
-} */
+.actions input,
+.actions button {
+  /* Optional: Style your input and buttons */
+  margin: 20px;
+  padding: 8px;
+  font-size: 16px;
+  width: auto;
+}

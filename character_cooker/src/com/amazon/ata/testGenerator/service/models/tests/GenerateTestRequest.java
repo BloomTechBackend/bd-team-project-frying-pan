@@ -130,18 +130,18 @@ public class GenerateTestRequest {
             return this;
         }
 
-        public Builder withRandomHiragana(boolean randomHiragana) {
-            isRandomHiragana = randomHiragana;
+        public Builder withRandomHiragana(boolean isRandomHiragana) {
+            this.isRandomHiragana = isRandomHiragana;
             return this;
         }
 
-        public Builder withRandomKatakana(boolean randomKatakana) {
-            isRandomKatakana = randomKatakana;
+        public Builder withRandomKatakana(boolean isRandomKatakana) {
+            this.isRandomKatakana = isRandomKatakana;
             return this;
         }
 
-        public Builder withRandomCustom(boolean randomCustom) {
-            isRandomCustom = randomCustom;
+        public Builder withRandomCustom(boolean isRandomCustom) {
+            this.isRandomCustom = isRandomCustom;
             return this;
         }
 
