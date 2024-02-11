@@ -11,8 +11,11 @@ import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 import static org.testng.AssertJUnit.*;
@@ -195,6 +198,8 @@ public class GenerateTestActivityTest {
         GenerateTestResult result = generateTestActivity.handleRequest(request, null);
 
         // Then
+        verify(Collections).shuffle(any());
+
         assertEquals("Test", result.getTitle());
         assertNotNull(result.getHiraganaTest());
         assertNull(result.getKatakanaTest());
