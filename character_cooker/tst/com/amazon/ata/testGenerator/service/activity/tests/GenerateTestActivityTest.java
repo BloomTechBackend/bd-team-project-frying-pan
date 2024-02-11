@@ -174,4 +174,34 @@ public class GenerateTestActivityTest {
         assertEquals(result.getHiraganaTest().getTestQuestions(), result.getKatakanaTest().getTestQuestions());
         assertEquals(result.getHiraganaTest().getTestAnswers(), result.getKatakanaTest().getTestAnswers());
     }
+
+    // Success Run Tests:
+    @Test
+    public void handleRequest_generateRandomTest_returnRandomHiraganaTest() {
+        // Givem
+
+        GenerateTestRequest request = GenerateTestRequest.builder()
+                .withHiraganaIds(Arrays.asList(ids))
+                .withRandomHiragana(true)
+                .build();
+
+        when(termDao.getTerm(request.getHiraganaIds().get(0))).thenReturn(terms.get(0));
+        when(termDao.getTerm(request.getHiraganaIds().get(1))).thenReturn(terms.get(1));
+        when(termDao.getTerm(request.getHiraganaIds().get(2))).thenReturn(terms.get(2));
+        when(termDao.getTerm(request.getHiraganaIds().get(3))).thenReturn(terms.get(3));
+        when(termDao.getTerm(request.getHiraganaIds().get(4))).thenReturn(terms.get(4));
+
+        // When
+        GenerateTestResult result = generateTestActivity.handleRequest(request, null);
+
+        // Then
+        assertEquals("Test", result.getTitle());
+        assertNotNull(result.getHiraganaTest());
+        assertNull(result.getKatakanaTest());
+        assertNull(result.getCustomTest());
+
+        System.out.println(result.getHiraganaTest().getTitle());
+        System.out.println(result.getHiraganaTest().getTestQuestions());
+        System.out.println(result.getHiraganaTest().getTestAnswers());
+    }
 }

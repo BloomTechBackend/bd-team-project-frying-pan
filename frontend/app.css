@@ -1,15 +1,12 @@
 * {
   box-sizing: border-box;
-}
-html {
-  margin: 0%;
-  height: 100%;
-}
-body {
-  margin: 0%;
-  height: 100%;
+  /* border: red dotted 1px; */
 }
 
+html, body {
+  margin: 0%;
+  height: 100%;
+}
 
 header {
   margin: 0;
@@ -36,6 +33,7 @@ header {
   cursor: pointer;
   padding: 14px 16px;
   transition: 0.3s;
+  font-size:large;
 }
 
 /* Change background color of buttons on hover */
@@ -46,68 +44,77 @@ header {
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #ccc;
+  font-weight:bold;
 }
 
 /* Style the tab content */
 .tabcontent {
   display: none;
-  padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+  padding: 0px;
   height: 100%;
 }
 
-#Editor {
-  /* terms container */
-  .terms{
-    margin: 2.5%;
-    display: flex;
-    justify-content:space-evenly;
-    background-color:lightgreen;
+.tabcontent h3 {
+  padding: 10px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  position: fixed; /* Stay in place  display: none; */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  padding-top: 60px;
+
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+  }
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Extra styles for the cancel button */
+  .cancelbtn {
+    width: auto;
+    background-color: #f44336;
   }
 
-  .termTable{
+  label {
     margin: 10px;
-    border-collapse: collapse;
-    padding: 10px;
-    font-size: 16px;
-    max-height: fit-content;
-    width: 20%;
-    table-layout: fixed;
   }
 
-  .termTable th {
-    border: solid 1px black;
-    background-color: skyblue;
-    padding: 10px;
-    font-size: 16px;
-    color: black;
-  }
+}
 
-  .termTable td {
-    border: solid 1px black;
-    background-color: whitesmoke;
-    padding: 10px;
-    font-size: 16px;
-    color: blue;
-    height: fit-content;
-  }
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  width:fit-content;
+  padding: 10px;
+}
 
-  .termTable td .symbol {
-    display:none;
-  }
+.modal .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-  .termTable td:hover {
-    span.romaji {
-        display:none;
-    }
-    span.symbol {
-        display:inline;
-    }
-    background:lightblue;
-  }
-
-  .termTable input[type="checkbox"] {
-    transform: scale(1.25);
-  }
+.field {
+  margin: 10px;
 }
