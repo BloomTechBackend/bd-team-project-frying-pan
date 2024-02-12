@@ -70,7 +70,7 @@ public class GenerateTestActivityTest {
 
         GenerateTestRequest request = GenerateTestRequest.builder()
                 .withHiraganaIds(Arrays.asList(ids))
-                .withRandomHiragana(false)
+                .withIsHiraganaRandom(false)
                 .build();
 
         when(termDao.getTerm(request.getHiraganaIds().get(0))).thenReturn(terms.get(0));
@@ -99,7 +99,7 @@ public class GenerateTestActivityTest {
         GenerateTestRequest request = GenerateTestRequest.builder()
                 .withTitle(customTitle)
                 .withCustomIds(Arrays.asList(ids))
-                .withRandomCustom(false)
+                .withIsRandomCustom(false)
                 .build();
 
         when(termDao.getTerm(request.getCustomIds().get(0))).thenReturn(terms.get(0));
@@ -130,11 +130,11 @@ public class GenerateTestActivityTest {
         GenerateTestRequest request = GenerateTestRequest.builder()
                 .withTitle(title)
                 .withHiraganaIds(Arrays.asList(ids))
-                .withRandomHiragana(false)
+                .withIsHiraganaRandom(false)
                 .withKatakanaIds(Arrays.asList(ids))
-                .withRandomKatakana(false)
+                .withIsKatakanaRandom(false)
                 .withCustomIds(Arrays.asList(ids))
-                .withRandomCustom(false)
+                .withIsRandomCustom(false)
                 .build();
 
         when(termDao.getTerm(request.getHiraganaIds().get(0))).thenReturn(terms.get(0));
@@ -185,7 +185,7 @@ public class GenerateTestActivityTest {
 
         GenerateTestRequest request = GenerateTestRequest.builder()
                 .withHiraganaIds(Arrays.asList(ids))
-                .withRandomHiragana(true)
+                .withIsHiraganaRandom(true)
                 .build();
 
         when(termDao.getTerm(request.getHiraganaIds().get(0))).thenReturn(terms.get(0));

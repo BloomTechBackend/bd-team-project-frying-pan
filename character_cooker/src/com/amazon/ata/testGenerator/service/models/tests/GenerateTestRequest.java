@@ -60,30 +60,27 @@ public class GenerateTestRequest {
     }
 
     public boolean isHiraganaRandom() {
-        return isHiraganaRandom;
+        return this.isHiraganaRandom;
     }
 
-    public GenerateTestRequest setHiraganaRandom(boolean hiraganaRandom) {
-        isHiraganaRandom = hiraganaRandom;
-        return this;
+    public void setHiraganaRandom(boolean hiraganaRandom) {
+        this.isHiraganaRandom = hiraganaRandom;
     }
 
     public boolean isKatakanaRandom() {
-        return isKatakanaRandom;
+        return this.isKatakanaRandom;
     }
 
-    public GenerateTestRequest setKatakanaRandom(boolean katakanaRandom) {
-        isKatakanaRandom = katakanaRandom;
-        return this;
+    public void setKatakanaRandom(boolean katakanaRandom) {
+        this.isKatakanaRandom = katakanaRandom;
     }
 
     public boolean isCustomRandom() {
-        return isCustomRandom;
+        return this.isCustomRandom;
     }
 
-    public GenerateTestRequest setCustomRandom(boolean customRandom) {
-        isCustomRandom = customRandom;
-        return this;
+    public void setCustomRandom(boolean customRandom) {
+        this.isCustomRandom = customRandom;
     }
 
     public String getTitle() {
