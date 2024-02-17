@@ -13,8 +13,6 @@
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script src="app.js" defer></script>
         <script src="editor.js" defer></script>
-
-
         <title>Character Cooker</title>
     </head>
     <body>
@@ -25,20 +23,14 @@
       <!-- Tab Links -->
       <nav>
         <!-- Tabs visible before login -->
-        <div id="menu-before-login" class="tab beforeLogin" >
+        <div id="menu" class="tab">
           <button class="tablinks" onclick="openTab(event, 'Editor')" id="editorBTN">Editor</button>
           <button class="tablinks" onclick="openTab(event, 'Test')" id = "testBTN">Test</button>
-          <button class="tablinks" onclick="openTab(event, 'Register')" id="registerBTN">Register</button>
-          <button class="tablinks" onclick="openTab(event, 'Login')" id="loginBTN">Login</button>
-          <button class="tablinks" onclick="toggleVisibilityOnLogin(true)">afterLogin2</button>
-        </div>
-      
-        <!-- Tabs visible after login -->
-        <div id="menu-after-login" class="tab afterLogin">
-          <button class="tablinks" onclick="openTab(event, 'Editor')">Editor</button>
-          <button class="tablinks" onclick="openTab(event, 'Test')">Test</button>
-          <button class="tablinks" onclick="openTab(event, 'Templates')">Templates</button>
-          <button class="tablinks" onclick="openTab(event, 'Account')" id="accountBTN">Account</button>
+          <button class="tablinks beforeLogin" onclick="openTab(event, 'Register')" id="registerBTN">Register</button>
+          <button class="tablinks beforeLogin" onclick="openTab(event, 'Login')" id="loginBTN">Login</button>
+          <button class="tablinks afterLogin" onclick="openTab(event, 'Templates')" id="templatesBTN">Templates</button>
+          <button class="tablinks afterLogin" onclick="openTab(event, 'Account')" id="accountBTN">Account</button>
+          <!-- <button class="tablinks" onclick="toggleCurUsername()">toggleLogin</button> -->
         </div>
       </nav>
 
@@ -47,14 +39,14 @@
         <h3>Editor</h3>
         <form id="editor-form">
           <div class="actions">
-            <input id="title" type="text" name="title" placeholder="title" form="template-form"/>
+            <input id="title" itype="text" name="title" placeholder="title" form="template-form"/>
             <button type="button" onclick="openModal('genTestModal')">Generate Test</button>
-            <button type="button" >Save Test</button>
-            <button type="button" >Close Test</button>
-            <button type="button" onclick="openModal('customTermModal')">Add Custom Term</button>
-            <button type="button" onclick="deleteCustomTerm()">Delete Custom Term</button>
-            <button type="button" onclick="testTemplate1()">temp Generate</button>
-
+            <button type="button" class="afterLogin" onclick="updateTemplate()">Save Test</button>
+            <button type="button" class="afterLogin" onclick="closeTemplate()">Close Test</button>
+            <button type="button" class="afterLogin" onclick="openModal('customTermModal')">Add Custom Term</button>
+            <button type="button" class="afterLogin" onclick="deleteCustomTerm()">Delete Custom Term</button>
+            <!-- <button type="button" onclick="testTemplate1()">temp Generate</button> -->
+            <!-- <button type="button" onclick="getCustomTermsByStaticTemplateId()">exampleCustomTerms</button> -->
           </div>
           <div id="editorTables" class="tablesContainer">
             <table id="hiraganaTable" class="termTable">
@@ -139,7 +131,7 @@
                 <tr>
                   <td>
                     <input type="checkbox" class="hiragana term" id="hiragana8" value="h8">
-                    <label for="hiragana7">
+                    <label for="hiragana8">
                     <span class="romaji">ra · ri · ru · re · ro</span>
                     <span class="symbol">ら · り · る · れ · ろ</span>
                     </label>
@@ -580,22 +572,24 @@
                 </tr>
               </tbody>
             </table>
-            <table id="customTable" class="termTable">
+            <table id="customTable" class="termTable afterLogin">
               <tr><th>Custom Terms</th></tr>
               <tr>
-                <th>Romanization : Symbol(s)</th>
+                <th>
+                  <button type="button" onclick="uncheckCustomTerm()">Uncheck Custom Term</button>
+                </th>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>
-                  <input type="radio" id="example">
-                  <label for="example">
+                  <label>
+                    <input type="radio" name="customTermId" value="random">
                     <span class="romaji">aka</span>
                     <span class="symbol">赤</span>
                   </label>
                 </td>
-              </tr>
-
-              
+              </tr> -->
+              <tbody class="customTermsContainer">
+              </tbody>
             </table>
           </div>
         </form>
@@ -613,7 +607,7 @@
               <input id="isKatakanaRandom" type="checkbox" name="isKatakanaRandom"/>  
             </label>
             
-            <label for="isCustomRandom">Custom Terms Random: 
+            <label for="isCustomRandom" class="afterLogin">Custom Terms Random: 
               <input id="isCustomRandom" type="checkbox" name="isCustomRandom"/>
             </label>
           </div>
@@ -644,18 +638,18 @@
                       name="symbol"
                       placeholder="Symbols" required/>
               </div>
-              <div class="field">
+              <!-- <div class="field">
                   <label>Definition: </label>
                   <input
                       id="definition" 
                       type="text" 
                       name="definition"
                       placeholder="Definition (optional)" />
-              </div>
+              </div> -->
           </div>
           <div class="actions">
             <button type="button" onclick="closeModal('customTermModal')" class="cancelbtn">Cancel</button>
-            <button type="button" onclick="createCustomTerm()" >Create Term</button>
+            <button type="button" onclick="addCustomTerm()" >Create Term</button>
           </div>
         </form>
       </div>
@@ -664,9 +658,8 @@
         <h3>Test</h3>
         <div class="actions">
           <button id="toggleTestButton" onclick="toggleTest(this)">Show Answers</button>
-          <!-- <label for="toggleAnswers">Show Answers</label>  -->
         </div>
-        <div id="testDoc">
+        <div id="testDoc" class="testContainer">
           <div id="testTitle">
 
           </div>
@@ -719,27 +712,49 @@
         <h3>Templates</h3>
         <form id="template-form">
           <div class="actions">
-            <button type="button" onclick="openTemplate('genTestModal')">Open Template</button>
-            <button type="button" onclick="deleteTemplate('genTestModal')">Delete Template</button>
+            <button type="button" onclick="openModal('createNewTemplateModal')">Create New Template</button>
+            <button type="button" onclick="openTemplate()">Open Template</button>
+            <button type="button" onclick="deleteTemplate()">Delete Template</button>
+            <!-- <button type="button" onclick="getTemplateStatic()">TemplateByUsername</button> -->
           </div>
-          <div class="tablesContainer">
+
+          <div class="tableContainer">
             <table id="templateList" class="templateTable"> 
               <tr><th>Templates</th></tr>
+              <tbody class="templateContainer">
+
+              </tbody>
             </table>
+          </div>
+        </form>
+      </div>
+
+      <div id="createNewTemplateModal" class="modal">
+        <form id="templateTitleForm" class="modal-content">
+          <h3>New Template: </h3>
+          <div class="container">
+            <label for="templateTitle">New Title:
+              <input id="templateTitle" type="text" name="title" placeholder="title"/>
+            </label>
+          </div>
+          <div class="actions">
+            <button type="button" onclick="closeModal('createNewTemplateModal')" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="addNewTemplate()">Generate</button>
           </div>
         </form>
       </div>
     
       <div id="Account" class="tabcontent">
-        <h3>Account: Settings</h3>
+        <h3>Account Settings: </h3>
+
+        <h4>Log out Account: </h4>
         <form>
           <div class="container">
             <button type="button" onclick="logOutAccount()">Log Out</button>
           </div>
         </form>
-        
 
-        <h3>Delete Account: </h3>
+        <h4>Delete Account: </h4>
         <form id="delete-form">
             <div class="container">
 
@@ -749,6 +764,7 @@
               <button type="button" onclick="deleteAccount()">Delete Account</button>
             </div>
         </form>     
-      </div>      
+      </div>  
+
     </body>
 </html>

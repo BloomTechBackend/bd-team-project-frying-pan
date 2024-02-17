@@ -10,7 +10,6 @@ public class GenerateTestRequest {
     private boolean isHiraganaRandom;
     private boolean isKatakanaRandom;
     private boolean isCustomRandom;
-
     private String title;
 
     public GenerateTestRequest() {}
@@ -63,7 +62,7 @@ public class GenerateTestRequest {
         return this.isHiraganaRandom;
     }
 
-    public void setHiraganaRandom(boolean hiraganaRandom) {
+    public void setIsHiraganaRandom(boolean hiraganaRandom) {
         this.isHiraganaRandom = hiraganaRandom;
     }
 
@@ -71,7 +70,7 @@ public class GenerateTestRequest {
         return this.isKatakanaRandom;
     }
 
-    public void setKatakanaRandom(boolean katakanaRandom) {
+    public void setIsKatakanaRandom(boolean katakanaRandom) {
         this.isKatakanaRandom = katakanaRandom;
     }
 
@@ -79,7 +78,7 @@ public class GenerateTestRequest {
         return this.isCustomRandom;
     }
 
-    public void setCustomRandom(boolean customRandom) {
+    public void setIsCustomRandom(boolean customRandom) {
         this.isCustomRandom = customRandom;
     }
 
@@ -90,21 +89,6 @@ public class GenerateTestRequest {
     public void setTitle(String title) {
         this.title = title;
     }
-
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//        GenerateTestRequest that = (GenerateTestRequest) o;
-//        return isRandomHiragana == that.isRandomHiragana
-//                && isRandomKatakana == that.isRandomKatakana
-//                && isRandomCustom == that.isRandomCustom
-//                && Objects.equals(hiraganaIds, that.hiraganaIds)
-//                && Objects.equals(katakanaIds, that.katakanaIds)
-//                && Objects.equals(customIds, that.customIds)
-//                && Objects.equals(title, that.title);
-//    }
-
 
     @Override
     public boolean equals(Object o) {

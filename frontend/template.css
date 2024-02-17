@@ -1,20 +1,23 @@
 #Templates {
-  .tablesContainer{
+  #template-form {
+    height:100%;
+  }
+
+  .tableContainer{
     margin: 0%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center; /* Align items to the start of the cross axis */
     background-color:lightgreen;
+    height: 100%;
+    padding: 10px;
   }
 
   .templateTable {
-    margin: 5% 10% 10% 10%;
     border-collapse: collapse;
-    padding: 10px;
     font-size: 16px;
     height: auto;
     table-layout: fixed;
     width: 25%;
+    margin: auto;
+    margin-top:5%;
   }
 
   .templateTable th {
@@ -41,8 +44,7 @@
   input[type="radio"] {
     padding: 10px;
   } 
-  p {
+  span {
     padding: 10px;
   } 
-  
 }
