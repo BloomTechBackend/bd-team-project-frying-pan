@@ -117,7 +117,7 @@ For security reasons:
   InvalidAttributeValueException
 
 ## 6.2.2 Login Account Endpoint
-* Accepts the `PUT` request to `/Accounts/::username`
+* Accepts the `POST` request to `/account/::username/status `
 * Accepts a username and password to update the account status to logged in
 * Returns the username and updated log in status
   * If the username is not found, then throw an AccountNotFoundAcception 
@@ -133,7 +133,7 @@ For security reasons:
   InvalidAttributeValueException
 
 ## 6.2.3 Log Out Account Endpoint
-* Accepts the `PUT` request to `/Accounts/::username`
+* Accepts the `PUT` request to `/account/::username/status`
 * Accepts a username to update the account status to logged out
 * Returns the username and updated log out status
   * If the username is not found, then throw an AccountNotFoundAcception 
@@ -159,7 +159,7 @@ For security reasons:
   * If the password contains any invalid characters (`" ' \` and spaces), then throw an 
 
 <!-- ## 6.2.5 Is Logged In Account Endpoint ***
-* Accepts the `GET` request to `/Accounts/::username`
+* Accepts the `GET` request to `/Accounts/::username/status`
 * Accepts a username and verifies the log in status of the user
 * Returns the username and boolean
   * If the username is not found, then throw an AccountNotFoundAcception 
