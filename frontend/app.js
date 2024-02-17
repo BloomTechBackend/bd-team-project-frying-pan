@@ -6,258 +6,10 @@ const editorForm = document.querySelector("#editor-form");
 const templateForm = document.querySelector("#template-form");
 const templateList = document.querySelector("#templateList");
 const testDoc = document.getElementById('testDoc');
-
+const customTable = document.getElementById('customTable');
 
 let currUsername = null;
 let currTemplateId = null;
-
-document.getElementById("editorBTN").click();
-// Open Tab function
-function openTab(evt, tabName) {
-  // Declare all variables
-  let i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
-
-// Toggle menu function
-function toggleMenu(isLoggedIn) {
-  document.getElementById('menu-before-login').style.display = isLoggedIn ? 'none' : 'block';
-  document.getElementById('menu-after-login').style.display = isLoggedIn ? 'block' : 'none';
-}
-
-// Toggle login layouut and features - check if menu needs period or not
-function toggleVisibilityOnLogin(isLoggedIn) {
-  const before = document.querySelectorAll('.beforeLogin')
-  before.forEach(element => {
-    element.style.display = isLoggedIn ? 'none' : 'block';
-  });
-
-  const after = document.querySelectorAll('.afterLogin')
-  after.forEach(element => {
-    element.style.display = isLoggedIn ? 'block' : 'none';
-  });
-}
-
-// there is a change that it's many items that need to be toggled
-/*
-function toggleLoggedIn(isLoggedIn) {
-  document.getElementsByClassName('.beforeLogin').style.display = isLoggedIn ? 'none' : 'block';
-  document.getElementsByClassName('.afterLogin').style.display = isLoggedIn ? 'block' : 'none';
-}
-*/
-
-// get accouunt status 
-function isLoggedIn(username) {
-  try {
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}/status`;
-
-    axios.get(url)
-    .then(response => {
-      // Handle success here
-      console.log('success: ',response.data);
-      return(response.data.isLoggedIn);
-    })
-  } catch(error) {
-    return false;
-  }
-}
-
-// example object format 
-const staticAccount = {
-  username: "Candy",
-  password: "Apples"  
-}
-
-// Register Account Form
-async function registerAccount(){
-  let username = registerForm.querySelector('#username').value;
-  let password = registerForm.querySelector('#password').value;
-  let passwordConfirm = registerForm.querySelector('#passwordConfirm').value;
-  
-  const account = {
-    "username": username,
-    "password": password,
-    "passwordConfirm": passwordConfirm
-  }
-  try {
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account`;
-    axios.post(url, account)
-    .then(response => {
-      if (response.data.errorType != null) {
-        alert(response.data.errorMessage)
-      } else {
-        console.log('success: ',response.data);
-        alert(response.data.logMessage)
-        registerForm.reset();
-        openLogin();
-      }
-    })
-  } catch(error) {
-    if (error.response) {
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      console.log(error.request);
-    } else {
-      console.log('Error', error.message);
-    }
-    alert(error.data)
-    console.log(error.config);
-  };  
-
-}
-
-function openLogin() {
-  document.getElementById("loginBTN").click();
-}
-
-// Login Account Form 
-async function loginAccount(){
-  let username = loginForm.username.value;
-  let password = loginForm.password.value;
-  
-  const account = {
-    "username": username,
-    "password": password
-  }
-  try {
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}/status`;
-    axios.post(url, account)
-    .then(response => {
-      if (response.data.errorType != null) {
-        alert(response.data.errorMessage)
-      } else {
-        // Handle success here
-        console.log('success: ',response.data);
-        alert(response.data.logMessage)
-        currUsername = response.data.username;
-        loginForm.reset();
-        toggleVisibilityOnLogin(true);
-        document.getElementById("accountBTN").click();
-        getTemplatesByUsernameTitle();
-      }
-    })
-  } catch(error) {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
-    }
-    alert(error);
-    console.log(error.config);
-  };  
-
-}
-
-// log out Account button
-async function logOutAccount() {
-  let username = currUsername;
-  
-  try {
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}/status`;
-    axios.put(url)
-    .then(response => {
-      if (response.data.errorType != null) {
-        alert(response.data.errorMessage)
-      } else {
-        // Handle success here
-        console.log('success: ',response.data);
-        alert(response.data.logMessage)
-        currUsername = null;
-        openLogin();
-        toggleVisibilityOnLogin(false);
-      }
-    })
-  } catch(error) {
-    if (error.response) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
-    } else if (error.request) {
-      // The request was made but no response was received
-      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-      // http.ClientRequest in node.js
-      console.log(error.request);
-    } else {
-      // Something happened in setting up the request that triggered an Error
-      console.log('Error', error.message);
-    }
-    alert(error);
-    console.log(error.config);
-  }; 
-}
-
-// Delete Account
-async function deleteAccount() {
-    let password = deleteForm.querySelector('#passcode').value;
-    
-    const account = {
-      "username": currUsername,
-      "password": password
-    }
-    try {
-      const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}`;
-      await axios.delete(url, { data: account })
-      .then(response => {
-        if (response.data.errorType != null) {
-          alert(response.data.errorMessage)
-        } else {
-          // Handle success here
-          console.log('success: ',response.data);
-          alert(response.data.logMessage)
-          currUsername = null;
-          openLogin();
-          toggleVisibilityOnLogin(false);
-        }
-      })
-    } catch(error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
-      } else if (error.request) {
-        // The request was made but no response was received
-        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-        // http.ClientRequest in node.js
-        console.log(error.request);
-      } else {
-        // Something happened in setting up the request that triggered an Error
-        console.log('Error', error.message);
-      }
-      alert(error);
-      console.log(error.config);
-    };  
-}
 
 // Arrays of ids 
 const hiraganaIds = { 
@@ -320,16 +72,252 @@ const katakanaIds = {
   "k26": ["k104", "k105", "k106"]
 };
 
+/* 
+  Display functions
+*/
+document.getElementById("editorBTN").click();
+
+// Open Tab function
+function openTab(evt, tabName) {
+  // Declare all variables
+  let i, tabcontent, tablinks;
+
+  // Get all elements with class="tabcontent" and hide them
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+/* 
+  Account functions
+*/
+
+// get accouunt status 
+function isLoggedIn(username) {
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}/status`;
+
+    axios.get(url)
+    .then(response => {
+      // Handle success here
+      console.log('success: ',response.data);
+      return(response.data.isLoggedIn);
+    })
+  } catch(error) {
+    return false;
+  }
+}
+
+// example object format 
+const staticAccount = {
+  username: "Candy",
+  password: "Apples"  
+}
+
+// Register Account Form
+async function registerAccount(){
+  let username = registerForm.querySelector('#username').value;
+  let password = registerForm.querySelector('#password').value;
+  let passwordConfirm = registerForm.querySelector('#passwordConfirm').value;
+  
+  const account = {
+    "username": username,
+    "password": password,
+    "passwordConfirm": passwordConfirm
+  }
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account`;
+    axios.post(url, account)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        console.log('success: ',response.data);
+        alert(response.data.logMessage);
+        registerForm.reset();
+        openLogin();
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log('Error', error.message);
+    }
+    alert(error.data)
+    console.log(error.config);
+  };  
+
+}
+
+function openLogin() {
+  document.getElementById("loginBTN").click();
+}
+
+// Login Account Form 
+async function loginAccount(){
+  let username = loginForm.username.value;
+  let password = loginForm.password.value;
+  
+  const account = {
+    "username": username,
+    "password": password
+  }
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}/status`;
+    axios.post(url, account)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ',response.data);
+        alert(response.data.logMessage)
+        currUsername = response.data.username;
+        loginForm.reset();
+        afterLogin() 
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+
+}
+
+// log out Account button
+async function logOutAccount() {
+  let username = currUsername;
+  
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${username}/status`;
+    axios.put(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ',response.data);
+        alert(response.data.logMessage)
+        currUsername = null;
+        afterLogOut();
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      // The request was made and the server responded with a status code
+      // that falls out of the range of 2xx
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  }; 
+}
+
+// Delete Account
+async function deleteAccount() {
+    let password = deleteForm.querySelector('#passcode').value;
+    
+    const account = {
+      "username": currUsername,
+      "password": password
+    }
+    try {
+      const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/account/${currUsername}`;
+      await axios.delete(url, {data: account})
+      .then(response => {
+        if (response.data.errorType != null) {
+          alert(response.data.errorMessage);
+          console.log(response.data);
+        } else {
+          // Handle success here
+          console.log('success: ',response.data);
+          alert(response.data.logMessage)
+          currUsername = null;
+          openLogin();
+          toggleVisibilityOnLogin(false);
+        }
+      })
+    } catch(error) {
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(error.response.data);
+        console.log(error.response.status);
+        console.log(error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+        // http.ClientRequest in node.js
+        console.log(error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', error.message);
+      }
+      alert(error);
+      console.log(error.config);
+    };  
+}
+
+/* 
+  Modal functions
+*/ 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
-  let genModal = document.getElementById('genTestModal');
+  const genModal = document.getElementById('genTestModal');
   if (event.target == genModal) {
     genModal.style.display = "none";
   }
-
-  let customModal = document.getElementById('customTermModal');
+  const customModal = document.getElementById('customTermModal');
   if (event.target == customModal) {
     customModal.style.display = "none";
+  }
+  const createNewTemplateModal = document.getElementById('createNewTemplateModal');
+  if (event.target == createNewTemplateModal) {
+    createNewTemplateModal.style.display = "none";
   }
 }
 
@@ -341,6 +329,11 @@ function closeModal(modalId) {
   document.getElementById(modalId).style.display='none';
 }
 
+/*
+  Generate test functions
+*/
+
+// Generate Tests and website events
 function generateTest() {
   closeModal('genTestModal');
   document.getElementById("testTitle").innerHTML = '';
@@ -353,6 +346,9 @@ function generateTest() {
 async function createTest() {
   
   let title = editorForm.querySelector('#title').value;
+  if (title == null) {
+    title == "";
+  }
 
   let checkedHiraganaBox = document.querySelectorAll('input.hiragana.term[type="checkbox"]:checked');
   // Lookup string codes for each checked checkbox
@@ -368,29 +364,33 @@ async function createTest() {
     return katakanaIds[checkboxValue] || []; // Returns the list of string codes or an empty array if not found
   });
 
-  // function to get custom Terms by Id -- or we've stored them 
-  let customTermIds = [];
-  let isRandomHiragana= document.getElementById('isHiraganaRandom').checked;
-  let isRandomKatakana = document.getElementById('isKatakanaRandom').checked;;
-  let isRandomCustom = document.getElementById('isCustomRandom').checked;;
+  let customTermBox = document.querySelectorAll("input[name='customTermId']");
+  // Map over the NodeList to extract values
+  let customTermIds = Array.from(customTermBox).map(box => box.value);
 
-  request = {
+  // function to get custom Terms by Id -- or we've stored them 
+  let isRandomHiragana= document.getElementById('isHiraganaRandom').checked;
+  let isRandomKatakana = document.getElementById('isKatakanaRandom').checked;
+  let isRandomCustom = document.getElementById('isCustomRandom').checked;
+
+  const request = {
     "hiraganaIds": selectedHiraganaIds,
     "katakanaIds": selectedKatakanaIds,
     "customIds": customTermIds,
-    "isRandomHiragana": isRandomHiragana,
-    "isRandomKatakana": isRandomKatakana,
-    "isRandomCustom": isRandomCustom,
+    "isHiraganaRandom": isRandomHiragana,
+    "isKatakanaRandom": isRandomKatakana,
+    "isCustomRandom": isRandomCustom,
     "title": title
   }
 
   console.log('request', request);
   try {
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test/`;
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test`;
     await axios.post(url, request)
     .then(response => {
       if (response.data.errorType != null) {
-        alert(response.data.errorMessage)
+        alert(response.data.errorMessage);
+        console.log(response.data);
       } else {
         // Handle success here
         console.log('success: ',response.data);
@@ -425,9 +425,9 @@ async function testTemplate1() {
     "hiraganaIds": ["h000", "h001", "h002", "h003", "h004"],
     "katakanaIds": ["h000", "h001", "h002", "h003", "h004"],
     "customIds": ["h000", "h001", "h002", "h003", "h004"],
-    "isRandomHiragana": true,
-    "isRandomKatakana": true,
-    "isRandomCustom": true,
+    "isHiraganaRandom": true,
+    "isKatakanaRandom": true,
+    "isCustomRandom": true,
     "title": "hello world"
   }
 
@@ -553,125 +553,453 @@ function toggleTest(event) {
   }
 }
 
-// document.getElementById("toggleTestButton").addEventListener("click", function() {
-//   let questions = document.getElementById("testQuestions");
-//   let answers = document.getElementById("testAnswers");
-  
-//   // Check the current display state of the answers and toggle accordingly
-//   if (answers.style.display === "none") {
-//     answers.style.display = "flex"; // Show answers
-//     questions.style.display = "none"; // Hide questions
-//     this.textContent = "Show Questions"; // Change button text
-//   } else {
-//     answers.style.display = "none"; // Hide answers
-//     questions.style.display = "flex"; // Show questions
-//     this.textContent = "Show Answers"; // Change button text
-//   }
-// });
-
-async function createCustomTerm() {
-
-}
-
-async function deleteCustomTerm() {
-
-}
-
-async function getCustomTermsByTemplateId() {
-
-}
-
-async function populateCustomTerms() {
-
-}
-
-
 /*
-// Query all checked checkboxes with class "hiragana term"
-let checkedHiraganaBoxes = document.querySelectorAll('input.hiragana.term[type="checkbox"]:checked');
-
-// To process the checked checkboxes, you can iterate over the NodeList
-let checkedValues = Array.from(checkedHiraganaBoxes).map(function(checkbox) {
-    return checkbox.value; // Retrieves the value attribute of each checked checkbox
-});
-
-return checkedValues; 
+  Custom Term functions
 */
 
+// Add Custom Term Actions
+async function addCustomTerm() {
+  closeModal('customTermModal');
+  createCustomTerm();
+  document.getElementById("custom-term-form").reset();
+}
 
-// 
-function getTemplateById() {
+// Create Term Request
+async function createCustomTerm() {
+  const customTermForm = document.getElementById('custom-term-form');
+  const romanization = customTermForm.querySelector('#romanization').value;
+  const symbol = customTermForm.querySelector('#symbol').value;
+  
+  const customTerm = {
+    "romanization": romanization,
+    "symbol": symbol,
+    "username": currUsername,
+    "templateId": currTemplateId
+  }
+
   try {
-    const templateId = '000001'; // Example username
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template/${templateId}`;
-
-    axios.get(url)
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/term`;
+    await axios.post(url, customTerm)
     .then(response => {
-      // Handle success here
-      console.log('success: ',response.data);
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage)
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ',response.data);
+        alert('Success: term created');
+        getCustomTermsByTemplateId();
+      }
     })
   } catch(error) {
-    console.log('Error', error.message);
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+
+}
+
+// Delete Term Request
+async function deleteCustomTerm() {
+  const termId = document.querySelector('input[name="customTermId"]:checked').value;
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/term/${termId}`;
+    await axios.delete(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage)
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ',response.data);
+        alert('Success: term deleted');
+        getCustomTermsByTemplateId();
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+
+}
+
+function uncheckCustomTerm() {
+  const radio = document.querySelector('input[name="customTermId"]:checked');
+  if (radio !== null) {
+    radio.checked = false;
+  }
+}
+
+// Get custom terms by Template Id and Date Created Request
+async function getCustomTermsByTemplateId() {
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/term/templateId?templateId=${currTemplateId}`;
+    await axios.get(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage)
+      } else {
+        // Handle success here
+        console.log('success: ',response.data);
+        // call populate test tab 
+        populateCustomTerms(response.data);
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
     console.log(error.config);
   };  
 }
 
-/*
-After logging in we need to
-
-1. change the menu from editor test register and login to editor test templates and accounts
-2. Account needs to be populated with the username 
-3. templates if they exist needs to be populated
-4. Editor needs display custom terms when openning new templates
-5. editor needs allow creating custom terms from a new template 
-
-*/
-
-
-// login Account 
-
-async function afterLogin() {
-  
-} 
-
-// adds username to account button
-function addNametoAccount() {
-  const accountTab = document.getElementById('accountBTN');
-  let text = ": " + currUsername;
-  let span = document.createElement("span");
-
-  span.appendChild(text);
-  accountTab.append(span);
-}
-
-// removes username from account button
-function removeNameFromAccount() {
-  // Assuming the span is the last child of the accountTab element
-  let accountTab = document.getElementById('accountBTN');
-  if (accountTab.lastChild.tagName === 'SPAN') {
-      accountTab.removeChild(accountTab.lastChild);
-  }
-}
-
-async function afterLogouut() {
-  
-}
-
-function populateCustomTerms() {
-
-}
-
-// 2. get the user's templates and display them
-async function getTemplatesByUsernameTitle() {
+// Static data example
+async function getCustomTermsByStaticTemplateId() {
   try {
-    const username = {
-      "username": currUsername
-    }
-    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template/?username=${currUsername}`;
-    await axios.get(url, username)
+    const templateId = 'zekrZy'; // Example username
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/term/templateId?templateId=${templateId}`;
+
+    axios.get(url)
     .then(response => {
       if (response.data.errorType != null) {
         alert(response.data.errorMessage)
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ',response.data);
+
+        // call populate test tab 
+        populateCustomTerms(response.data);
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+}
+ 
+// Display custom terms
+function populateCustomTerms(customTermsData) {
+  console.log('loading custom terms');
+
+  const customTermsContainer = customTable.querySelector('.customTermsContainer');
+  customTermsContainer.innerHTML = '';
+
+  const terms = customTermsData.terms;
+  if (terms == null) {
+    terms = [];
+  }
+  terms.forEach(term => {
+    let tr = document.createElement("tr");
+    let td = document.createElement("td");
+    let spanQuestion = document.createElement("span");
+    let spanAnswer = document.createElement("span");
+    let label = document.createElement("label");
+    
+    // Create text nodes
+    let romanizationText = document.createTextNode(term.romanization); 
+    let symbolText = document.createTextNode(term.symbol); 
+
+    // Create radio button
+    let radioButton = document.createElement("input");
+    radioButton.setAttribute("type", "radio");
+    radioButton.setAttribute("name", "customTermId"); // Ensure all radio buttons share the same 'name'
+    radioButton.setAttribute("value", term.termId);
+
+    spanQuestion.appendChild(romanizationText);
+    spanAnswer.appendChild(symbolText);
+
+    spanQuestion.setAttribute("class", "romaji");
+    spanAnswer.setAttribute("class", "symbol");
+
+    // used to delete later
+    tr.setAttribute('id', term.termId);
+
+    // Append elements
+    label.appendChild(radioButton); 
+    label.appendChild(spanQuestion);
+    label.appendChild(spanAnswer);
+
+    td.appendChild(label);
+    tr.appendChild(td);
+    customTermsContainer.appendChild(tr);
+  });
+}
+/*
+  Template methods
+*/
+// Create new template and display templates in alphabetical order
+function addNewTemplate() {
+  closeModal('createNewTemplateModal');
+  createNewTemplate();
+}
+
+// Create New Template Request 
+async function createNewTemplate() {
+  const title = document.querySelector('#templateTitle').value;
+  try {
+    template = {
+      "title": title,
+      "username": currUsername,
+      "hiraganaIdList": [],
+      "katakanaIdList": []
+    }
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template`;
+    axios.post(url, template)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success New Template:', response.data);
+        getTemplatesByUsernameTitle();
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+} 
+
+// get template data and load into editor form
+async function openTemplate() {
+  await getTemplate();
+  getCustomTermsByTemplateId();
+  document.getElementById("editorBTN").click();
+}
+
+// Get Template Request 
+async function getTemplate() {
+  const templateId = document.querySelector("input[name='templateSelector']:checked").value;
+  currTemplateId = templateId;
+  console.log('request: ',  templateId);
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template/${currTemplateId}`;
+    await axios.get(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ', response.data);
+        loadTemplate(response.data)
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+} 
+
+// loads the template data into the editor
+function loadTemplate(templateData) {
+  const template = templateData.template; // the response contains a template model object
+  editorForm.reset();
+  // // set title
+  document.querySelector('#title').value = template.title;
+
+  // display hiragana
+  const hiraganaIdList = template?.hiraganaIdList || [];
+  hiraganaIdList.forEach(hiraganaId => {
+    let checkbox = document.querySelector(`input[type="checkbox"][value="${hiraganaId}"]`);
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+  })
+
+  // display display katakana
+  const katakanaIdList = template?.katakanaIdList || [];
+  katakanaIdList.forEach(katakanaId => {
+    let checkbox = document.querySelector(`input[type="checkbox"][value="${katakanaId}"]`);
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+  })
+}
+
+// Delete Template Request 
+async function deleteTemplate() {
+  const templateId = document.querySelector("input[name='templateSelector']:checked").value;
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template/${templateId}`;
+    await axios.delete(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success delete: ', response.data);
+        getTemplatesByUsernameTitle();
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+} 
+
+// saves and closes current template
+function closeTemplate() {
+  updateTemplate();
+  const customTermsContainer = customTable.querySelector('.customTermsContainer');
+  customTermsContainer.innerHTML = '';
+  editorForm.reset();
+  currTemplateId=null;
+  document.getElementById("templatesBTN").click();
+}
+
+// Update Template Request 
+async function updateTemplate() {
+  const templateId = document.querySelector("input[name='templateSelector']:checked").value;
+  const title = document.querySelector('#title').value;
+  
+  // Select all checked checkboxes with both 'hiragana' and 'term' classes
+  const hiraganaBoxes = document.querySelectorAll('.hiragana.term:checked');
+  const katakanaBoxes = document.querySelectorAll('.katakana.term:checked');
+
+  // Map over the NodeList to extract values
+  const hiraganaValues = Array.from(hiraganaBoxes).map(box => box.value);
+  const katakanaValues = Array.from(katakanaBoxes).map(box => box.value);
+
+  const template = {
+    "templateId": currTemplateId,
+    "title": title,
+    "username": currUsername, 
+    "hiraganaIdList": hiraganaValues,
+    "katakanaIdList": katakanaValues
+  }
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template/${templateId}`;
+    await axios.put(url, template)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success save: ', response.data);
+        alert("Successful Save");
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+} 
+
+async function getTemplatesByUsernameTitle() {
+  console.log('getting Templates by Username...');
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template?username=${currUsername}`;
+    await axios.get(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
       } else {
         // Handle success here
         console.log('success: ', response.data);
@@ -698,77 +1026,133 @@ async function getTemplatesByUsernameTitle() {
   };  
 }
 
-// helper list of template to display
+// Get static data templates's by username and title
+async function getTemplateStatic() {
+  currUsername = "username";
+  try {
+    const url = `https://rg894mwuek.execute-api.us-west-2.amazonaws.com/app/test_template?username=${currUsername}`;
+    await axios.get(url)
+    .then(response => {
+      if (response.data.errorType != null) {
+        alert(response.data.errorMessage);
+        console.log(response.data);
+      } else {
+        // Handle success here
+        console.log('success: ', response.data);
+        // call populate template tab 
+        populateTemplateList(response.data);
+      }
+    })
+  } catch(error) {
+    if (error.response) {
+      console.log(error.response.data);
+      console.log(error.response.status);
+      console.log(error.response.headers);
+    } else if (error.request) {
+      // The request was made but no response was received
+      // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+      // http.ClientRequest in node.js
+      console.log(error.request);
+    } else {
+      // Something happened in setting up the request that triggered an Error
+      console.log('Error', error.message);
+    }
+    alert(error);
+    console.log(error.config);
+  };  
+}
 
+// display templates in a table
 async function populateTemplateList(templateData){
+  console.log('loading test template table');
+  const templateContainer = templateList.querySelector('.templateContainer');
+  templateContainer.innerHTML = '';
+
   const templates = templateData.templates;
 
   templates.forEach(template => {
     let tr = document.createElement("tr");
     let td = document.createElement("td");
-    let p = document.createElement("p");
-    
+    let spanTitle = document.createElement("span");
+    let label = document.createElement("label");
+
     // Create text nodes
-    let templateId = document.createTextNode(template.templateId);
-    let title = document.createTextNode(template.title); 
+    let titleText = document.createTextNode(template.title); 
 
     // Create radio button
     let radioButton = document.createElement("input");
     radioButton.setAttribute("type", "radio");
-    radioButton.setAttribute("name", "templateSelection"); // Ensure all radio buttons share the same 'name'
+    radioButton.setAttribute("name", "templateSelector"); // Ensure all radio buttons share the same 'name'
     radioButton.setAttribute("value", template.templateId);
 
     // Set 'id' attribute to the string value, not a text node
-    td.setAttribute('id', template.templateId);
+    tr.setAttribute('id', template.templateId);
 
     // Append elements to the table cell
-    td.appendChild(radioButton); 
-    p.appendChild(title);
-    td.appendChild(p);
+    spanTitle.appendChild(titleText);
+    label.appendChild(radioButton);
+    label.appendChild(spanTitle);
+    td.appendChild(label); 
 
     // Append the cell to the row, and the row to the list
     tr.appendChild(td);
-    templateList.appendChild(tr);
+    templateContainer.appendChild(tr);
   });
 }
 
+/*
+After logging in we need to
 
-// post template - no id
-async function createTemplate() {
+1. Change the navigator tabs
+2. Account displays the username 
+3. Templates displays the user's saved templates
+4. Editor displays the additional features and custom terms tabe
+*/
 
+// After Login calls: 
+async function afterLogin() {
+  toggleDisplayOnLogin();
+  toggleAccountUsername(); 
+  document.getElementById("accountBTN").click();
+  getTemplatesByUsernameTitle();
 } 
 
-// get template by Id
-async function openTemplate() {
-
+// Log Out reverts back to before Login: 
+async function afterLogOut() {
+  toggleDisplayOnLogin();
+  toggleAccountUsername(); 
+  document.getElementById("loginBTN").click();
+  templateList.querySelector('.templateContainer').innerHTML = '';
 }
 
-
-// put templateId - by id
-async function saveTemplate() {
-
-} 
-
-// save one more time, remove the curr template Id and reset the editor-form
-function closeTemplate() {
-  currTemplateId=null;
-  editorForm.reset();
-} 
-
-
-// post Term
-async function createCustomTerm() {
-
-} 
-
-// deleteTerm
-async function deleteCustomTerm() {
-
+// Toggle before and after login display
+function toggleDisplayOnLogin() {
+  const before = document.querySelectorAll('.beforeLogin');
+  before.forEach(element => {
+    element.style.display = currUsername ? 'none' : 'block';
+  });
+  const after = document.querySelectorAll('.afterLogin');
+  after.forEach(element => {
+    element.style.display = currUsername ? 'block' : 'none';
+  });
 }
 
-// get Term By TemplateId
-
-async function getTermsByTemplateId() {
-
+// Toggle Account Username Display
+function toggleAccountUsername() {
+  const accountBtn = document.getElementById('accountBTN');
+  if (currUsername) {
+    accountBtn.textContent = "Account: " + currUsername;
+  } else {
+    accountBtn.textContent = "Account"
+  }
 }
 
+// function toggleCurUsername() {
+//   if (currUsername) {
+//     currUsername = null; 
+//     afterLogOut()
+//   } else {
+//     currUsername = "username";
+//     afterLogin() 
+//   }
+// }
