@@ -7,12 +7,12 @@
 The internet provides tons of resources to learn Japanese. Due to the limitations 
 of computer inputs, many online character practice resources are limited to online flash cards, multiple choice Q&A, and typing the Romaji (the romanization of Japanese characters). 
 What about romaji-to-character tests? Most of these tests are still limited to the options above or using the qwerty keyboard to spell out the japanese characters. 
-Customers want to create their own writing tests. 
+Customers want to create their own character-to-writing tests. 
 
 Character Cooker: is a Japanese romaji-to-character writing test generator. Customers
 can access the website to create, edit and save their own test templates based on their individual
-study plan. It is designed to interact with the Amazon Web Service, customers can save their
-work to their account, and generate romaji-to-character tests. 
+study plan. It is designed to interact with the Amazon Web Service where customers can save their
+work to their account and generate romaji-to-character tests. 
 
 Learning symbolic characters takes a lot of memorization and writing is scientifically proven
 to help people learn and memorize. Many romaji-to-characters test are limited to full sentences 
