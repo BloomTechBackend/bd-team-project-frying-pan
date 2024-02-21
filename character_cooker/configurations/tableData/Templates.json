@@ -1,0 +1,40 @@
+{
+  "LBC_TestTemplates": [
+    {
+      "PutRequest": {
+        "Item": {
+          "templateId": {"S": "hjk001"},
+          "title": {"S": "hiragana a section"},
+          "username": {"S": "Andre"},
+          "dateModified": {"S": "2024-01-26T12:01:00"},
+          "hiraganaIdList": {"L": [{"S": "h001"}, {"S": "h002"}, {"S": "h003"}, {"S": "h004"}, {"S": "h005"}]},
+          "katakanaIdList": {"L": []}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "templateId": {"S": "hjk002"},
+          "title": {"S": "hiragana ka section"},
+          "username": {"S": "Andre"},
+          "dateModified": {"S": "2024-01-26T12:02:00"},
+          "hiraganaIdList": {"L": []},
+          "katakanaIdList": {"L": [{"S": "h001"}, {"S": "h002"}, {"S": "h003"}, {"S": "h004"}, {"S": "h005"}]}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "templateId": {"S": "qwerty1"},
+          "title": {"S": "hiragana a section"},
+          "username": {"S": "Bryan"},
+          "dateModified": {"S": "2024-01-26T12:01:00"},
+          "hiraganaIdList": {"L": [{"S": "h001"}, {"S": "h002"}, {"S": "h003"}, {"S": "h004"}, {"S": "h005"}]},
+          "katakanaIdList": {"L": []}
+        }
+      }
+    }
+  ]
+}

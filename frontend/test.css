@@ -1,0 +1,27 @@
+#Test{
+
+  h2 {
+    padding: 10px;
+  }
+
+  .test-content {
+    display:flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+  }
+  
+  .test-content div{
+    width: 33%; /* Ensures each div takes up a third of the container's width */
+    text-align: left; /* Adjust text alignment as needed */
+  }
+
+  pre {
+    padding: 10px;
+    font-size: 18px;
+    line-height: 120%;
+  }  
+  #testAnswers {
+    display: none;
+  }
+}
+

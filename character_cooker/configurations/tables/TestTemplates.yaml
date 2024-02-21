@@ -1,0 +1,37 @@
+Resources:
+  LBCTestTemplatesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "templateId"
+          AttributeType: "S"
+        - AttributeName: "title"
+          AttributeType: "S"
+        - AttributeName: "username"
+          AttributeType: "S"
+        - AttributeName: "dateModified"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "templateId"
+          KeyType: "HASH"
+      TableName: "LBC_TestTemplates"
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "UsernameTitleIndex"
+          KeySchema:
+            - AttributeName: "username"
+              KeyType: "HASH"
+            - AttributeName: "title"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
+        - IndexName: "UsernameDateIndex"
+          KeySchema:
+            - AttributeName: "username"
+              KeyType: "HASH"
+            - AttributeName: "dateModified"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "INCLUDE"
+            NonKeyAttributes:
+              - "title"

@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ==" crossorigin="anonymous" /> -->
+        <link rel="stylesheet" href="app.css" >
+        <link rel="stylesheet" href="editor.css" >
+        <link rel="stylesheet" href="login.css" >
+        <link rel="stylesheet" href="test.css" >
+        <link rel="stylesheet" href="template.css" >
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="app.js" defer></script>
+        <script src="editor.js" defer></script>
+        <title>Character Cooker</title>
+    </head>
+    <body>
+      <header>
+        <h1> Character Cooker</h1>
+      </header>
+
+      <!-- Tab Links -->
+      <nav>
+        <!-- Tabs visible before login -->
+        <div id="menu" class="tab">
+          <button class="tablinks" onclick="openTab(event, 'Editor')" id="editorBTN">Editor</button>
+          <button class="tablinks" onclick="openTab(event, 'Test')" id = "testBTN">Test</button>
+          <button class="tablinks beforeLogin" onclick="openTab(event, 'Register')" id="registerBTN">Register</button>
+          <button class="tablinks beforeLogin" onclick="openTab(event, 'Login')" id="loginBTN">Login</button>
+          <button class="tablinks afterLogin" onclick="openTab(event, 'Templates')" id="templatesBTN">Templates</button>
+          <button class="tablinks afterLogin" onclick="openTab(event, 'Account')" id="accountBTN">Account</button>
+          <!-- <button class="tablinks" onclick="toggleCurUsername()">toggleLogin</button> -->
+        </div>
+      </nav>
+
+      <!-- Tab Content -->
+      <div id="Editor" class="tabcontent"> 
+        <h3>Editor</h3>
+        <form id="editor-form">
+          <div class="actions">
+            <input id="title" itype="text" name="title" placeholder="title" form="template-form"/>
+            <button type="button" onclick="openModal('genTestModal')">Generate Test</button>
+            <button type="button" class="afterLogin" onclick="updateTemplate()">Save Test</button>
+            <button type="button" class="afterLogin" onclick="closeTemplate()">Close Test</button>
+            <button type="button" class="afterLogin" onclick="openModal('customTermModal')">Add Custom Term</button>
+            <button type="button" class="afterLogin" onclick="deleteCustomTerm()">Delete Custom Term</button>
+            <!-- <button type="button" onclick="testTemplate1()">temp Generate</button> -->
+            <!-- <button type="button" onclick="getCustomTermsByStaticTemplateId()">exampleCustomTerms</button> -->
+          </div>
+          <div id="editorTables" class="tablesContainer">
+            <table id="hiraganaTable" class="termTable">
+              <tr>
+                <th>Hiragana</th>
+              </tr>
+              <!-- fast selector -->
+              <tr>
+                <th>
+                  <input type="checkbox" id="allHiragana" class="hiragana" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allHiragana">All</label>
+                  <input type="checkbox" id="allHiraganaExtra" class="hiragana extra" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allHiraganaExtra">All Extras:</label>
+                </th>
+              </tr>
+              <!-- base -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana0" value="h0">
+                    <label for="hiragana0">
+                    <span class="romaji">a · i · u · e · o</span>
+                    <span class="symbol">あ · い · う · え · お</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana1" value="h1">
+                    <label for="hiragana1">
+                    <span class="romaji">ka · ki · ku · ke · ko</span>
+                    <span class="symbol">か · き · く · け · こ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana2" value="h2">
+                    <label for="hiragana2">
+                    <span class="romaji">sa · shi · su · se · so</span>
+                    <span class="symbol">さ · し · す · せ · そ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana3" value="h3">
+                    <label for="hiragana3">
+                    <span class="romaji">ta · chi · tsu · te · to</span>
+                    <span class="symbol">た · ち · つ · て · と</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana4" value="h4">
+                    <label for="hiragana4">
+                    <span class="romaji">na · ni · nu · ne · no</span>
+                    <span class="symbol">な · に · ぬ · ね · の</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana5" value="h5">
+                    <label for="hiragana5">
+                    <span class="romaji">ha · hi · fu · he · ho</span>
+                    <span class="symbol">は · ひ · ふ · へ · ほ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana6" value="h6">
+                    <label for="hiragana6">
+                    <span class="romaji">ma · mi · mu · me · mo</span>
+                    <span class="symbol">ま · み · む · め · も</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana7" value="h7">
+                    <label for="hiragana7">
+                    <span class="romaji">ya · yu · yo</span>
+                    <span class="symbol">や · ゆ · よ</span></label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana8" value="h8">
+                    <label for="hiragana8">
+                    <span class="romaji">ra · ri · ru · re · ro</span>
+                    <span class="symbol">ら · り · る · れ · ろ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term" id="hiragana9" value="h9">
+                    <label class="romaji" for="hiragana9">
+                    <span class="romaji">wa · wo · n</span>
+                    <span class="symbol">わ · を · ん</span></label>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- dakuten -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term extra" id="hiragana10" value="h10">
+                    <label class="romaji" for="hiragana10">
+                    <span class="romaji">ga · gi · gu · ge · go</span>
+                    <span class="symbol">が · ぎ · ぐ · げ · ご</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term extra" id="hiragana11" value="h11">
+                    <label class="romaji" for="hiragana11">
+                    <span class="romaji">za · ji · zu · ze · zo</span>
+                    <span class="symbol">ざ · じ · ず · ぜ · ぞ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term extra" id="hiragana12" value="h12">
+                    <label class="romaji" for="hiragana12">
+                    <span class="romaji">da · ji · zu · de · do</span>
+                    <span class="symbol">だ · ぢ · づ · で · ど</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term extra" id="hiragana13" value="h13">
+                    <label class="romaji" for="hiragana13">
+                    <span class="romaji">ba · bi · bu · be · bo</span>
+                    <span class="symbol">ば · び · ぶ · べ · ぼ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="hiragana term extra" id="hiragana14" value="h14">
+                    <label class="romaji" for="hiragana14">
+                    <span class="romaji">pa · pi · pu · pe · po</span>
+                    <span class="symbol">ぱ · ぴ · ぷ · ぺ · ぽ</span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- yoon -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana15" class="hiragana term extra" value="h15">
+                    <label for="hiragana15">
+                    <span class="romaji">kya · kyu · kyo</span>
+                    <span class="symbol">きゃ · きゅ · きょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana16" class="hiragana term extra" value="h16">
+                    <label for="hiragana16">
+                    <span class="romaji">sha · shu · sho</span>
+                    <span class="symbol">しゃ · しゅ · しょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana17" class="hiragana term extra" value="h17">
+                    <label for="hiragana17">
+                    <span class="romaji">cha · chu · cho</span>
+                    <span class="symbol">ちゃ · ちゅ · ちょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana18" class="hiragana term extra" value="h18">
+                    <label for="hiragana18">
+                    <span class="romaji">nya · nyu · nyo</span>
+                    <span class="symbol">にゃ · にゅ · にょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana19" class="hiragana term extra" value="h19">
+                    <label for="hiragana19">
+                    <span class="romaji">hya · hyu · hyo</span>
+                    <span class="symbol">ひゃ · ひゅ · ひょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana20" class="hiragana term extra" value="h20">
+                    <label for="hiragana20">
+                    <span class="romaji">mya · myu · myo</span>
+                    <span class="symbol">みゃ · みゅ · みょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana21" class="hiragana term extra" value="h21">
+                    <label for="hiragana21">
+                    <span class="romaji">rya · ryu · ryo</span>
+                    <span class="symbol">りゃ · りゅ · りょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana22" class="hiragana term extra" value="22">
+                    <label for="hiragana22">
+                    <span class="romaji">gya · gyu · gyo</span>
+                    <span class="symbol">ぎゃ · ぎゅ · ぎょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana23" class="hiragana term extra" value="h23">
+                    <label for="hiragana23">
+                    <span class="romaji">ja · ju · jo</span>
+                    <span class="symbol">じゃ · じゅ · じょ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana24" class="hiragana term extra" value="h24">  
+                    <label for="hiragana24">  
+                    <span class="romaji">dya · dyu · dyo</span>  
+                    <span class="symbol">ぢゃ · ぢゅ · ぢょ</span>  
+                    </label>  
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana25" class="hiragana term extra" value="h25">  
+                    <label for="hiragana25">  
+                    <span class="romaji">bya · byu · byo</span>  
+                    <span class="symbol">びゃ · びゅ · びょ</span>  
+                    </label>  
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" id="hiragana26" class="hiragana term extra" value="h26">  
+                    <label for="hiragana26">  
+                    <span class="romaji">pya · pyu · pyo</span>  
+                    <span class="symbol">ぴゃ · ぴゅ · ぴょ</span>  
+                    </label>  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="katakanaTable" class="termTable">
+              <tr>
+                <th>Katakana</th>
+              </tr>
+              <!-- fast selector -->
+              <tr>
+                <th>
+                  <input type="checkbox" id="allKatakana" class="katakana" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allKatakana">All</label>
+                  <input type="checkbox" id="allKatakanaExtra" class="katakana extra" onchange="toggleAllCheckboxes(this)" />
+                  <label for="allKatakanaExtra">All Extras:</label>
+                </th>
+              </tr>
+              <!-- base -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana0" value="k0">
+                    <label for="katakana0">
+                    <span class="romaji">a · i · u · e · o</span>
+                    <span class="symbol">ア · イ · ウ · エ · オ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana1" value="k1">
+                    <label for="katakana1">
+                    <span class="romaji">ka · ki · ku · ke · ko</span>
+                    <span class="symbol">カ · キ · ク · ケ · コ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana2" value="k2">
+                    <label for="katakana2">
+                    <span class="romaji">sa · shi · su · se · so</span>
+                    <span class="symbol">サ · シ · ス · セ · ソ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana3" value="k3">
+                    <label for="katakana3">
+                    <span class="romaji">ta · chi · tsu · te · to</span>
+                    <span class="symbol">タ · チ · ツ · テ · ト</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana4" value="k4">
+                    <label for="katakana4">
+                    <span class="romaji">na · ni · nu · ne · no</span>
+                    <span class="symbol">ナ · ニ · ヌ · ネ · ノ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana5" value="k5">
+                    <label for="katakana5">
+                    <span class="romaji">ha · hi · fu · he · ho</span>
+                    <span class="symbol">ハ · ヒ · フ · ヘ · ホ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term" id="katakana6" value="k6">
+                    <label for="katakana6">
+                    <span class="romaji">ma · mi · mu · me · mo</span>
+                    <span class="symbol">マ · ミ · ム · メ · モ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)">
+                    <input type= "checkbox" class= "katakana term" id= "katakana7"  value="k7">
+                    <label for= "katakana7">
+                    <span class= "romaji">ya · yu · yo</span> 
+                    <span class= "symbol">ヤ · ユ · ヨ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" class= "katakana term" id= "katakana8" value="k8"> 
+                    <label for= "katakana8"> 
+                    <span class= "romaji">ra · ri · ru · re · ro</span> 
+                    <span class= "symbol">ラ · リ · ル · レ · ロ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td onclick= "toggleCheckbox(this)"> 
+                    <input type= "checkbox" class= "katakana term" id= "katakana9" value="k9"> 
+                    <label for= "katakana9"> 
+                    <span class= "romaji"> wa · wo · n</span> 
+                    <span class= "symbol">ワ · ヲ · ン</span> 
+                    </label> 
+                  </td>
+                </tr>
+              </tbody>
+              <!-- dakuten -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana10" value="k10">
+                    <label for="katakana10">
+                    <span class="romaji">ga · gi · gu · ge · go</span>
+                    <span class="symbol">ガ · ギ · グ · ゲ · ゴ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana11" value="k11">
+                    <label for="katakana11">
+                    <span class="romaji">za · ji · zu · ze · zo</span>
+                    <span class="symbol">ザ · ジ · ズ · ゼ · ゾ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana12" value="k12">
+                    <label for="katakana12">
+                    <span class="romaji">da · ji · zu · de · do</span>
+                    <span class="symbol">ダ · ヂ · ヅ · デ · ド</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana13" value="k13">
+                    <label for="katakana13">
+                    <span class="romaji">ba · bi · bu · be · bo</span>
+                    <span class="symbol">バ · ビ · ブ · ベ · ボ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana14" value="k14">
+                    <label for="katakana14">
+                    <span class="romaji">pa · pi · pu · pe · po</span>
+                    <span class="symbol">パ · ピ · プ · ペ · ポ</span>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- yoon -->
+              <tbody>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana15" value="k15">
+                    <label for="katakana15">
+                    <span class="romaji">kya · kyu · kyo</span>
+                    <span class="symbol">キャ · キュ · キョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana16" value="k16">
+                    <label for="katakana16">
+                    <span class="romaji">sha · shu · sho</span>
+                    <span class="symbol">シャ · シュ · ショ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana17" value="k17">
+                    <label for="katakana17">
+                    <span class="romaji">cha · chu · cho</span>
+                    <span class="symbol">チャ · チュ · チョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana18" value="k18">
+                    <label for="katakana18">
+                    <span class="romaji">nya · nyu · nyo</span>
+                    <span class="symbol">ニャ · ニュ · ニョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana19" value="k19">
+                    <label for="katakana19">
+                    <span class="romaji">hya · hyu · hyo</span>
+                    <span class="symbol">ヒャ · ヒュ · ヒョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana20" value="k20">
+                    <label for="katakana20">
+                    <span class="romaji">mya · myu · myo</span>
+                    <span class="symbol">ミャ · ミュ · ミョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana21" value="k21">
+                    <label for="katakana21">
+                    <span class="romaji">rya · ryu · ryo</span>
+                    <span class="symbol">リャ · リュ · リョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="checkbox" class="katakana term extra" id="katakana22" value="k22">
+                    <label for="katakana22">
+                    <span class="romaji">gya · gyu · gyo</span>
+                    <span class="symbol">ギャ · ギュ · ギョ</span>
+                    </label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type= "checkbox" id= "katakana23" class= "katakana term extra" value="k23">  
+                    <label for= "katakana23">  
+                    <span class= "romaji">ja · ju · jo</span>  
+                    <span class= "symbol">ジャ · ジュ · ジョ</span>  
+                    </label>  
+                  </td>
+                </tr>
+                <tr>
+                  <td> 
+                    <input type= "checkbox" id= "katakana24" class= "katakana term extra" value="k24"> 
+                    <label for= "katakana24"> 
+                    <span class= "romaji">dya · dyu · dyo</span> 
+                    <span class= "symbol">ヂャ · ヂュ · ヂョ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td> 
+                    <input type= "checkbox" id= "katakana25" class= "katakana term extra" value="k25"> 
+                    <label for= "katakana25"> 
+                    <span class= "romaji">bya · byu · byo</span> 
+                    <span class= "symbol">ビャ · ビュ · ビョ</span> 
+                    </label> 
+                  </td>
+                </tr>
+                <tr>
+                  <td> 
+                    <input type= "checkbox" id= "katakana26" class= "katakana term extra"  value="k26"> 
+                    <label for= "katakana26"> 
+                    <span class= "romaji">pya · pyu · pyo</span> 
+                    <span class= "symbol">ピャ · ピュ · ピョ</span> 
+                    </label> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <table id="customTable" class="termTable afterLogin">
+              <tr><th>Custom Terms</th></tr>
+              <tr>
+                <th>
+                  <button type="button" onclick="uncheckCustomTerm()">Uncheck Custom Term</button>
+                </th>
+              </tr>
+              <!-- <tr>
+                <td>
+                  <label>
+                    <input type="radio" name="customTermId" value="random">
+                    <span class="romaji">aka</span>
+                    <span class="symbol">赤</span>
+                  </label>
+                </td>
+              </tr> -->
+              <tbody class="customTermsContainer">
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+
+      <div id="genTestModal" class="modal">
+        <form id="test-Form" class="modal-content">
+          <h3>Select Order: </h3>
+          <div class="container">
+            <label for="isHiraganaRandom">Hiragana Terms Random:
+              <input id="isHiraganaRandom" type="checkbox" name="isHiraganaRandom"/>
+            </label>
+        
+            <label for="isKatakanaRandom">Katakana Terms Random:
+              <input id="isKatakanaRandom" type="checkbox" name="isKatakanaRandom"/>  
+            </label>
+            
+            <label for="isCustomRandom" class="afterLogin">Custom Terms Random: 
+              <input id="isCustomRandom" type="checkbox" name="isCustomRandom"/>
+            </label>
+          </div>
+          <div class="actions">
+            <button type="button" onclick="closeModal('genTestModal')" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="generateTest()">Generate</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="customTermModal" class="modal">
+        <form id="custom-term-form" class="modal-content">
+          <h3>Select Order: </h3>
+          <div class="container">
+            <div class="field">
+              <label>Romanization: </label>
+              <input 
+                  id="romanization"
+                  type="text" 
+                  name="romanization"
+                  placeholder="Romanization" required/>
+              </div>
+              <div class="field">
+                  <label>Symbols(s): </label>
+                  <input 
+                      id="symbol"
+                      type="text" 
+                      name="symbol"
+                      placeholder="Symbols" required/>
+              </div>
+              <!-- <div class="field">
+                  <label>Definition: </label>
+                  <input
+                      id="definition" 
+                      type="text" 
+                      name="definition"
+                      placeholder="Definition (optional)" />
+              </div> -->
+          </div>
+          <div class="actions">
+            <button type="button" onclick="closeModal('customTermModal')" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="addCustomTerm()" >Create Term</button>
+          </div>
+        </form>
+      </div>
+
+      <div id="Test" class="tabcontent">
+        <h3>Test</h3>
+        <div class="actions">
+          <button id="toggleTestButton" onclick="toggleTest(this)">Show Answers</button>
+        </div>
+        <div id="testDoc" class="testContainer">
+          <div id="testTitle">
+
+          </div>
+          <div id="testQuestions" class="test-content">
+            
+          </div>
+          <div id="testAnswers" class="test-content">
+            
+          </div>
+        </div>
+      </div>
+
+      <div id="Register" class="tabcontent">
+        <h3>Register</h3>
+        <form id="register-form">
+          <div class="container">
+            <label for="username"><b>Username</b></label>
+            <input id="username" type="text" placeholder="Enter Username" name="username" required>
+        
+            <label for="password"><b>Password</b></label>
+            <input id="password" type="password" placeholder="Enter Password" name="password" required>
+            
+            <label for="passwordConfirm"><b>Password Repeat</b></label>
+            <input id="passwordConfirm" type="password" placeholder="Repeat Password" name="passwordConfirm" required>
+
+            <button type="button" onclick="registerAccount()">register</button>
+          </div>
+          <div class="container signin">
+            <p>Already have an account? <span id="sign-in" onclick="openLogin()">Sign In<span>.</p>
+          </div>
+      </form>  
+      </div>
+
+      <div id="Login" class="tabcontent">
+        <h3>Login</h3>
+        <form id="login-form">
+            <div class="container">
+              <label for="username"><b>Username</b></label>
+              <input id="usr" type="text" placeholder="Enter Username" name="username" required>
+          
+              <label for="password"><b>Password</b></label>
+              <input id="psd" type="password" placeholder="Enter Password" name="password" required>
+
+              <button type="button" onclick="loginAccount()">Login</button>
+            </div>
+        </form>      
+      </div>
+
+      <div id="Templates" class="tabcontent">
+        <h3>Templates</h3>
+        <form id="template-form">
+          <div class="actions">
+            <button type="button" onclick="openModal('createNewTemplateModal')">Create New Template</button>
+            <button type="button" onclick="openTemplate()">Open Template</button>
+            <button type="button" onclick="deleteTemplate()">Delete Template</button>
+            <!-- <button type="button" onclick="getTemplateStatic()">TemplateByUsername</button> -->
+          </div>
+
+          <div class="tableContainer">
+            <table id="templateList" class="templateTable"> 
+              <tr><th>Templates</th></tr>
+              <tbody class="templateContainer">
+
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+
+      <div id="createNewTemplateModal" class="modal">
+        <form id="templateTitleForm" class="modal-content">
+          <h3>New Template: </h3>
+          <div class="container">
+            <label for="templateTitle">New Title:
+              <input id="templateTitle" type="text" name="title" placeholder="title"/>
+            </label>
+          </div>
+          <div class="actions">
+            <button type="button" onclick="closeModal('createNewTemplateModal')" class="cancelbtn">Cancel</button>
+            <button type="button" onclick="addNewTemplate()">Generate</button>
+          </div>
+        </form>
+      </div>
+    
+      <div id="Account" class="tabcontent">
+        <h3>Account Settings: </h3>
+
+        <h4>Log out Account: </h4>
+        <form>
+          <div class="container">
+            <button type="button" onclick="logOutAccount()">Log Out</button>
+          </div>
+        </form>
+
+        <h4>Delete Account: </h4>
+        <form id="delete-form">
+            <div class="container">
+
+              <label for="passcode"><b>Password</b></label>
+              <input id="passcode" type="password" placeholder="Enter Password" name="password" required>
+
+              <button type="button" onclick="deleteAccount()">Delete Account</button>
+            </div>
+        </form>     
+      </div>  
+
+    </body>
+</html>

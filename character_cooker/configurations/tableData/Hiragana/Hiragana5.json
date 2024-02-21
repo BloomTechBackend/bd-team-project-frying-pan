@@ -1,0 +1,67 @@
+{
+  "LBC_Terms": [
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h100"},
+          "romanization": {"S": "jo"},
+          "symbol": {"S": "ぢょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h101"},
+          "romanization": {"S": "bya"},
+          "symbol": {"S": "びゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h102"},
+          "romanization": {"S": "byu"},
+          "symbol": {"S": "びゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h103"},
+          "romanization": {"S": "byo"},
+          "symbol": {"S": "びょ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h104"},
+          "romanization": {"S": "pya"},
+          "symbol": {"S": "ぴゃ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h105"},
+          "romanization": {"S": "pyu"},
+          "symbol": {"S": "ぴゅ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "h106"},
+          "romanization": {"S": "pyo"},
+          "symbol": {"S": "ぴょ"}
+        }
+      }
+    }
+  ]
+}

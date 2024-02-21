@@ -1,0 +1,82 @@
+Resources:
+  LBCAccountsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "username"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "username"
+          KeyType: "HASH"
+      TableName: "LBC_Accounts"
+      BillingMode: PAY_PER_REQUEST
+  LBCTermsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "termId"
+          AttributeType: "S"
+        - AttributeName: "templateId"
+          AttributeType: "S"
+        - AttributeName: "dateCreated"
+          AttributeType: "S"
+        - AttributeName: "username"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "termId"
+          KeyType: "HASH"
+      TableName: "LBC_Terms"
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "templateIdDateIndex"
+          KeySchema:
+            - AttributeName: "templateId"
+              KeyType: "HASH"
+            - AttributeName: "dateCreated"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+        - IndexName: "UserDateIndex"
+          KeySchema:
+            - AttributeName: "username"
+              KeyType: "HASH"
+            - AttributeName: "dateCreated"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "ALL"
+  LBCTestTemplatesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "templateId"
+          AttributeType: "S"
+        - AttributeName: "title"
+          AttributeType: "S"
+        - AttributeName: "username"
+          AttributeType: "S"
+        - AttributeName: "dateModified"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "templateId"
+          KeyType: "HASH"
+      TableName: "LBC_TestTemplates"
+      BillingMode: PAY_PER_REQUEST
+      GlobalSecondaryIndexes:
+        - IndexName: "UsernameTitleIndex"
+          KeySchema:
+            - AttributeName: "username"
+              KeyType: "HASH"
+            - AttributeName: "title"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "KEYS_ONLY"
+        - IndexName: "UsernameDateIndex"
+          KeySchema:
+            - AttributeName: "username"
+              KeyType: "HASH"
+            - AttributeName: "dateModified"
+              KeyType: "RANGE"
+          Projection:
+            ProjectionType: "INCLUDE"
+            NonKeyAttributes:
+              - "title"

@@ -1,0 +1,229 @@
+{
+  "LBC_Terms": [
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k000"},
+          "romanization": {"S": "a"},
+          "symbol": {"S": "ア"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k001"},
+          "romanization": {"S": "i"},
+          "symbol": {"S": "イ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k002"},
+          "romanization": {"S": "u"},
+          "symbol": {"S": "ウ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k003"},
+          "romanization": {"S": "e"},
+          "symbol": {"S": "エ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k004"},
+          "romanization": {"S": "o"},
+          "symbol": {"S": "オ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k005"},
+          "romanization": {"S": "ka"},
+          "symbol": {"S": "カ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k006"},
+          "romanization": {"S": "ki"},
+          "symbol": {"S": "キ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k007"},
+          "romanization": {"S": "ku"},
+          "symbol": {"S": "ク"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k008"},
+          "romanization": {"S": "ke"},
+          "symbol": {"S": "ケ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k009"},
+          "romanization": {"S": "ko"},
+          "symbol": {"S": "コ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k010"},
+          "romanization": {"S": "sa"},
+          "symbol": {"S": "サ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k011"},
+          "romanization": {"S": "shi"},
+          "symbol": {"S": "シ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k012"},
+          "romanization": {"S": "su"},
+          "symbol": {"S": "ス"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k013"},
+          "romanization": {"S": "se"},
+          "symbol": {"S": "セ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k014"},
+          "romanization": {"S": "so"},
+          "symbol": {"S": "ソ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k015"},
+          "romanization": {"S": "ta"},
+          "symbol": {"S": "タ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k016"},
+          "romanization": {"S": "chi"},
+          "symbol": {"S": "チ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k017"},
+          "romanization": {"S": "tsu"},
+          "symbol": {"S": "ツ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k018"},
+          "romanization": {"S": "te"},
+          "symbol": {"S": "テ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k019"},
+          "romanization": {"S": "to"},
+          "symbol": {"S": "ト"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k020"},
+          "romanization": {"S": "na"},
+          "symbol": {"S": "ナ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k021"},
+          "romanization": {"S": "ni"},
+          "symbol": {"S": "ニ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k022"},
+          "romanization": {"S": "nu"},
+          "symbol": {"S": "ヌ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k023"},
+          "romanization": {"S": "ne"},
+          "symbol": {"S": "ネ"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "termId": {"S": "k024"},
+          "romanization": {"S": "no"},
+          "symbol": {"S": "ノ"}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+#Editor {   
+
+    /* terms container */
+    .tablesContainer{
+        margin: 0%;
+        display: flex;
+        justify-content:space-evenly;
+        align-items: flex-start; /* Align items to the start of the cross axis */
+        background-color:lightgreen;
+    }
+    
+    .termTable{
+        margin-top: 5%;
+        margin-bottom: 10%;
+        border-collapse: collapse;
+        padding: 10px;
+        font-size: 16px;
+        height: auto;
+        table-layout: fixed;
+        width: 18%;
+    }
+    
+    .termTable th {
+        border: solid 1px black;
+        background-color: skyblue;
+        padding: 10px;
+        font-size: 16px;
+        color: black;
+    }
+
+    .termTable tr {
+        height: 40px;
+    }
+    
+    .termTable td {
+        border: solid 1px black;
+        background-color: whitesmoke;
+        padding: 10px;
+        font-size: 16px;
+        color: blue;
+        height: auto;
+    }
+    
+    td .symbol {
+        display:none;
+    }
+    
+    .termTable td:hover {
+        span.romaji {
+            display:none;
+        }
+        span.symbol {
+            display:inline;
+        }
+        background:lightblue;
+    }
+    
+    .termTable input{
+        transform: scale(1.25);
+    }
+    
+    .termTable label {
+        padding-left: 5px;
+        padding-right: 10px;
+    }
+
+    .customTermsContainer label {
+        padding-left: 0px;
+    }
+
+    .customTermsContainer span {
+        padding-left: 10px;
+    }
+}
+
+.actions {
+    display: flex; /* Enable flex layout */
+    align-items: center; /* Align items vertically in the center */
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    border-top: solid black 1px;
+    border: 3px solid #f1f1f1;
+}
+
+.actions input,
+.actions button {
+  /* Optional: Style your input and buttons */
+  margin: 20px;
+  padding: 8px;
+  font-size: 16px;
+  width: auto;
+}

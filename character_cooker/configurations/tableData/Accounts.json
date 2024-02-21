@@ -1,0 +1,58 @@
+{
+  "LBC_Accounts": [
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "RedApple"},
+          "password": {"S": "Apple12345!"},
+          "status": {"S": "LOGGED_OUT"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "GreenApple"},
+          "password": {"S": "1234567890"},
+          "status": {"S": "LOGGED_OUT"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "Andre"},
+          "password": {"S": "!@#$%^&*()"},
+          "status": {"S": "LOGGED_IN"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "Bryan"},
+          "password": {"S": "EASY_PASSWORD"},
+          "status": {"S": "LOGGED_IN"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "Candy"},
+          "password": {"S": "ApplesAreReallySweet"},
+          "status": {"S": "LOGGED_OUT"}
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "username": {"S": "ToBeDelete"},
+          "password": {"S": "123456"},
+          "status": {"S": "LOGGED_OUT"}
+        }
+      }
+    }
+  ]
+}

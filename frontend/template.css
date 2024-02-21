@@ -1,0 +1,50 @@
+#Templates {
+  #template-form {
+    height:100%;
+  }
+
+  .tableContainer{
+    margin: 0%;
+    background-color:lightgreen;
+    height: 100%;
+    padding: 10px;
+  }
+
+  .templateTable {
+    border-collapse: collapse;
+    font-size: 16px;
+    height: auto;
+    table-layout: fixed;
+    width: 25%;
+    margin: auto;
+    margin-top:5%;
+  }
+
+  .templateTable th {
+    border: solid 1px black;
+    background-color: skyblue;
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+  }
+
+  .templateTable tr {
+    height: 40px;
+  }
+
+  .templateTable td {
+    border: solid 1px black;
+    background-color: whitesmoke;
+    padding: 10px;
+    font-size: 16px;
+    color: blue;
+    height: auto;
+  }
+
+  input[type="radio"] {
+    padding: 10px;
+  } 
+  span {
+    padding: 10px;
+  } 
+}
