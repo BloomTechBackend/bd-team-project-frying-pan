@@ -17,10 +17,10 @@ public class DaoModule {
     @Singleton
     @Provides
     DynamoDBMapper provideDynamoDBMapper() {
-        AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-                .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("", "")))
-                .withRegion(Regions.US_WEST_2)
-                .build();
-        return new DynamoDBMapper(client);
+        return new DynamoDBMapper((AmazonDynamoDB) ((AmazonDynamoDBClientBuilder) ((AmazonDynamoDBClientBuilder)
+                AmazonDynamoDBClientBuilder.standard()
+                    .withCredentials(DefaultAWSCredentialsProviderChain.getInstance()))
+                    .withRegion(Regions.US_WEST_2))
+                    .build());
     }
 }
